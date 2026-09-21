@@ -1,0 +1,552 @@
+[
+  {
+    "action_id": "adjust_load",
+    "fold": 0,
+    "metrics": {
+      "auroc": 0.8698895719489983,
+      "auprc": 0.9254080602763298,
+      "n_pos": 3000,
+      "n_neg": 1464
+    }
+  },
+  {
+    "action_id": "adjust_load",
+    "fold": 1,
+    "metrics": {
+      "auroc": 0.8691052262303067,
+      "auprc": 0.9214701140369203,
+      "n_pos": 2923,
+      "n_neg": 1475
+    }
+  },
+  {
+    "action_id": "adjust_load",
+    "fold": 2,
+    "metrics": {
+      "auroc": 0.8735365891554168,
+      "auprc": 0.9245748094404613,
+      "n_pos": 2909,
+      "n_neg": 1416
+    }
+  },
+  {
+    "action_id": "adjust_load",
+    "fold": 3,
+    "metrics": {
+      "auroc": 0.8718687585890975,
+      "auprc": 0.9216448368743273,
+      "n_pos": 2960,
+      "n_neg": 1475
+    }
+  },
+  {
+    "action_id": "adjust_load",
+    "fold": 4,
+    "metrics": {
+      "auroc": 0.8697027797725703,
+      "auprc": 0.9235790452510042,
+      "n_pos": 3009,
+      "n_neg": 1430
+    }
+  },
+  {
+    "action_id": "buy_cover",
+    "fold": 0,
+    "metrics": {
+      "auroc": 0.9838836477987422,
+      "auprc": 0.9928867084284669,
+      "n_pos": 516,
+      "n_neg": 212
+    }
+  },
+  {
+    "action_id": "buy_cover",
+    "fold": 1,
+    "metrics": {
+      "auroc": 0.9756085799158983,
+      "auprc": 0.9907082415129589,
+      "n_pos": 529,
+      "n_neg": 196
+    }
+  },
+  {
+    "action_id": "buy_cover",
+    "fold": 2,
+    "metrics": {
+      "auroc": 0.9813206274245235,
+      "auprc": 0.9927357553826683,
+      "n_pos": 539,
+      "n_neg": 176
+    }
+  },
+  {
+    "action_id": "buy_cover",
+    "fold": 3,
+    "metrics": {
+      "auroc": 0.9673696818205488,
+      "auprc": 0.9861891901000095,
+      "n_pos": 519,
+      "n_neg": 185
+    }
+  },
+  {
+    "action_id": "buy_cover",
+    "fold": 4,
+    "metrics": {
+      "auroc": 0.9588201928530913,
+      "auprc": 0.9707424756677048,
+      "n_pos": 492,
+      "n_neg": 215
+    }
+  },
+  {
+    "action_id": "defer_cleaning",
+    "fold": 0,
+    "metrics": {
+      "auroc": 0.892602532168401,
+      "auprc": 0.9366401240457287,
+      "n_pos": 1929,
+      "n_neg": 984
+    }
+  },
+  {
+    "action_id": "defer_cleaning",
+    "fold": 1,
+    "metrics": {
+      "auroc": 0.9103692907179082,
+      "auprc": 0.9467318809644956,
+      "n_pos": 1894,
+      "n_neg": 994
+    }
+  },
+  {
+    "action_id": "defer_cleaning",
+    "fold": 2,
+    "metrics": {
+      "auroc": 0.9175519202603029,
+      "auprc": 0.9476211213282553,
+      "n_pos": 1854,
+      "n_neg": 984
+    }
+  },
+  {
+    "action_id": "defer_cleaning",
+    "fold": 3,
+    "metrics": {
+      "auroc": 0.901088390198169,
+      "auprc": 0.9411751162189214,
+      "n_pos": 1844,
+      "n_neg": 944
+    }
+  },
+  {
+    "action_id": "defer_cleaning",
+    "fold": 4,
+    "metrics": {
+      "auroc": 0.9154275778103568,
+      "auprc": 0.9445772883681893,
+      "n_pos": 1812,
+      "n_neg": 1048
+    }
+  },
+  {
+    "action_id": "escalate_to_supervisor",
+    "fold": 0,
+    "metrics": {
+      "auroc": 0.9137593640116191,
+      "auprc": 0.8911968769756832,
+      "n_pos": 310,
+      "n_neg": 422
+    }
+  },
+  {
+    "action_id": "escalate_to_supervisor",
+    "fold": 1,
+    "metrics": {
+      "auroc": 0.9371079470292875,
+      "auprc": 0.9078437325747726,
+      "n_pos": 307,
+      "n_neg": 458
+    }
+  },
+  {
+    "action_id": "escalate_to_supervisor",
+    "fold": 2,
+    "metrics": {
+      "auroc": 0.9377579599056605,
+      "auprc": 0.9214976687854523,
+      "n_pos": 320,
+      "n_neg": 424
+    }
+  },
+  {
+    "action_id": "escalate_to_supervisor",
+    "fold": 3,
+    "metrics": {
+      "auroc": 0.9348241408337298,
+      "auprc": 0.916539762532352,
+      "n_pos": 307,
+      "n_neg": 445
+    }
+  },
+  {
+    "action_id": "escalate_to_supervisor",
+    "fold": 4,
+    "metrics": {
+      "auroc": 0.9094842363653817,
+      "auprc": 0.8908412884331048,
+      "n_pos": 327,
+      "n_neg": 446
+    }
+  },
+  {
+    "action_id": "hold",
+    "fold": 0,
+    "metrics": {
+      "auroc": 0.8825159322736157,
+      "auprc": 0.9609013707188181,
+      "n_pos": 9274,
+      "n_neg": 2540
+    }
+  },
+  {
+    "action_id": "hold",
+    "fold": 1,
+    "metrics": {
+      "auroc": 0.8900514394170816,
+      "auprc": 0.961727859069915,
+      "n_pos": 9049,
+      "n_neg": 2630
+    }
+  },
+  {
+    "action_id": "hold",
+    "fold": 2,
+    "metrics": {
+      "auroc": 0.8894335372433915,
+      "auprc": 0.9624281282934318,
+      "n_pos": 9304,
+      "n_neg": 2517
+    }
+  },
+  {
+    "action_id": "hold",
+    "fold": 3,
+    "metrics": {
+      "auroc": 0.8836143582880027,
+      "auprc": 0.9583964687573223,
+      "n_pos": 9189,
+      "n_neg": 2613
+    }
+  },
+  {
+    "action_id": "hold",
+    "fold": 4,
+    "metrics": {
+      "auroc": 0.8895556799167801,
+      "auprc": 0.9597120670995538,
+      "n_pos": 8971,
+      "n_neg": 2647
+    }
+  },
+  {
+    "action_id": "reject_delivery",
+    "fold": 0,
+    "metrics": {
+      "auroc": 0.8581453459046289,
+      "auprc": 0.9285336126795823,
+      "n_pos": 1815,
+      "n_neg": 710
+    }
+  },
+  {
+    "action_id": "reject_delivery",
+    "fold": 1,
+    "metrics": {
+      "auroc": 0.8823985956399449,
+      "auprc": 0.9395542169370563,
+      "n_pos": 1727,
+      "n_neg": 758
+    }
+  },
+  {
+    "action_id": "reject_delivery",
+    "fold": 2,
+    "metrics": {
+      "auroc": 0.8632340390612178,
+      "auprc": 0.9299635195434938,
+      "n_pos": 1800,
+      "n_neg": 677
+    }
+  },
+  {
+    "action_id": "reject_delivery",
+    "fold": 3,
+    "metrics": {
+      "auroc": 0.8609303211369534,
+      "auprc": 0.9307028253348842,
+      "n_pos": 1765,
+      "n_neg": 714
+    }
+  },
+  {
+    "action_id": "reject_delivery",
+    "fold": 4,
+    "metrics": {
+      "auroc": 0.8553614835352653,
+      "auprc": 0.9279652557980348,
+      "n_pos": 1808,
+      "n_neg": 699
+    }
+  },
+  {
+    "action_id": "request_lab_analysis",
+    "fold": 0,
+    "metrics": {
+      "auroc": 0.8576956018125498,
+      "auprc": 0.9355596819965692,
+      "n_pos": 2404,
+      "n_neg": 882
+    }
+  },
+  {
+    "action_id": "request_lab_analysis",
+    "fold": 1,
+    "metrics": {
+      "auroc": 0.8781394964545528,
+      "auprc": 0.9439151002326407,
+      "n_pos": 2439,
+      "n_neg": 923
+    }
+  },
+  {
+    "action_id": "request_lab_analysis",
+    "fold": 2,
+    "metrics": {
+      "auroc": 0.8613456028799352,
+      "auprc": 0.9395470882165364,
+      "n_pos": 2380,
+      "n_neg": 789
+    }
+  },
+  {
+    "action_id": "request_lab_analysis",
+    "fold": 3,
+    "metrics": {
+      "auroc": 0.861589927458599,
+      "auprc": 0.9313368538202415,
+      "n_pos": 2371,
+      "n_neg": 922
+    }
+  },
+  {
+    "action_id": "request_lab_analysis",
+    "fold": 4,
+    "metrics": {
+      "auroc": 0.8528560568876973,
+      "auprc": 0.9343036142973524,
+      "n_pos": 2472,
+      "n_neg": 811
+    }
+  },
+  {
+    "action_id": "route_delivery",
+    "fold": 0,
+    "metrics": {
+      "auroc": 0.8183222349475461,
+      "auprc": 0.9114175849961607,
+      "n_pos": 9379,
+      "n_neg": 3560
+    }
+  },
+  {
+    "action_id": "route_delivery",
+    "fold": 1,
+    "metrics": {
+      "auroc": 0.8348495919061267,
+      "auprc": 0.9223442627471572,
+      "n_pos": 9295,
+      "n_neg": 3539
+    }
+  },
+  {
+    "action_id": "route_delivery",
+    "fold": 2,
+    "metrics": {
+      "auroc": 0.8253365425717312,
+      "auprc": 0.9121934470965943,
+      "n_pos": 9469,
+      "n_neg": 3549
+    }
+  },
+  {
+    "action_id": "route_delivery",
+    "fold": 3,
+    "metrics": {
+      "auroc": 0.8222025460392179,
+      "auprc": 0.9152524005674026,
+      "n_pos": 9416,
+      "n_neg": 3412
+    }
+  },
+  {
+    "action_id": "route_delivery",
+    "fold": 4,
+    "metrics": {
+      "auroc": 0.8380080720865525,
+      "auprc": 0.9185580201483954,
+      "n_pos": 9296,
+      "n_neg": 3568
+    }
+  },
+  {
+    "action_id": "schedule_cleaning",
+    "fold": 0,
+    "metrics": {
+      "auroc": 0.9523700887198986,
+      "auprc": 0.9727080592224091,
+      "n_pos": 526,
+      "n_neg": 300
+    }
+  },
+  {
+    "action_id": "schedule_cleaning",
+    "fold": 1,
+    "metrics": {
+      "auroc": 0.9579325140072803,
+      "auprc": 0.9749619119263058,
+      "n_pos": 546,
+      "n_neg": 321
+    }
+  },
+  {
+    "action_id": "schedule_cleaning",
+    "fold": 2,
+    "metrics": {
+      "auroc": 0.9672132237559509,
+      "auprc": 0.9794840213908895,
+      "n_pos": 498,
+      "n_neg": 302
+    }
+  },
+  {
+    "action_id": "schedule_cleaning",
+    "fold": 3,
+    "metrics": {
+      "auroc": 0.9577946175195683,
+      "auprc": 0.9730359037679721,
+      "n_pos": 509,
+      "n_neg": 315
+    }
+  },
+  {
+    "action_id": "schedule_cleaning",
+    "fold": 4,
+    "metrics": {
+      "auroc": 0.9376797583081571,
+      "auprc": 0.950411519797531,
+      "n_pos": 500,
+      "n_neg": 331
+    }
+  },
+  {
+    "action_id": "sell_spot",
+    "fold": 0,
+    "metrics": {
+      "auroc": 0.8026315789473685,
+      "auprc": 0.960094656675196,
+      "n_pos": 468,
+      "n_neg": 76
+    }
+  },
+  {
+    "action_id": "sell_spot",
+    "fold": 1,
+    "metrics": {
+      "auroc": 0.8103469834323227,
+      "auprc": 0.9596546690564693,
+      "n_pos": 457,
+      "n_neg": 70
+    }
+  },
+  {
+    "action_id": "sell_spot",
+    "fold": 2,
+    "metrics": {
+      "auroc": 0.7750263657456233,
+      "auprc": 0.9545728475805995,
+      "n_pos": 431,
+      "n_neg": 55
+    }
+  },
+  {
+    "action_id": "sell_spot",
+    "fold": 3,
+    "metrics": {
+      "auroc": 0.6974121006603605,
+      "auprc": 0.9246396095036391,
+      "n_pos": 431,
+      "n_neg": 65
+    }
+  },
+  {
+    "action_id": "sell_spot",
+    "fold": 4,
+    "metrics": {
+      "auroc": 0.768427085170164,
+      "auprc": 0.9576731681699706,
+      "n_pos": 428,
+      "n_neg": 53
+    }
+  },
+  {
+    "action_id": "set_blend",
+    "fold": 0,
+    "metrics": {
+      "auroc": 0.8726812204054455,
+      "auprc": 0.9406277684047473,
+      "n_pos": 3379,
+      "n_neg": 1280
+    }
+  },
+  {
+    "action_id": "set_blend",
+    "fold": 1,
+    "metrics": {
+      "auroc": 0.8882874746431366,
+      "auprc": 0.9437238653452195,
+      "n_pos": 3282,
+      "n_neg": 1338
+    }
+  },
+  {
+    "action_id": "set_blend",
+    "fold": 2,
+    "metrics": {
+      "auroc": 0.8832247648462727,
+      "auprc": 0.9450903169926933,
+      "n_pos": 3400,
+      "n_neg": 1257
+    }
+  },
+  {
+    "action_id": "set_blend",
+    "fold": 3,
+    "metrics": {
+      "auroc": 0.8746594992481325,
+      "auprc": 0.9350771610963532,
+      "n_pos": 3377,
+      "n_neg": 1357
+    }
+  },
+  {
+    "action_id": "set_blend",
+    "fold": 4,
+    "metrics": {
+      "auroc": 0.8756036138733301,
+      "auprc": 0.9343311297752259,
+      "n_pos": 3189,
+      "n_neg": 1327
+    }
+  }
+]

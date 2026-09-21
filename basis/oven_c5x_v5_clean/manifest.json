@@ -1,0 +1,1271 @@
+{
+  "basis_id": "oven_c5x_v5_clean-starter",
+  "built_at": "2026-08-24T09:24:45.561160Z",
+  "dataset_fingerprint": "dab8f142446d814572ce64c9319059e41d0dad05d44463a3a0a31597f2a28786",
+  "tokenizer": {
+    "tokenizer_id": "oven_observation_v5_clean",
+    "version": "0.5.0",
+    "kind": "algorithm",
+    "features": [
+      {
+        "name": "obs_tick",
+        "dtype": "float",
+        "unit": null,
+        "description": "observation field obs_tick",
+        "categories": null,
+        "valid_range": null,
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_tick"
+        ]
+      },
+      {
+        "name": "obs_fouling",
+        "dtype": "float",
+        "unit": null,
+        "description": "observation field obs_fouling",
+        "categories": null,
+        "valid_range": null,
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_fouling"
+        ]
+      },
+      {
+        "name": "obs_line_down_ticks",
+        "dtype": "float",
+        "unit": null,
+        "description": "observation field obs_line_down_ticks",
+        "categories": null,
+        "valid_range": null,
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_line_down_ticks"
+        ]
+      },
+      {
+        "name": "obs_feed_tph",
+        "dtype": "float",
+        "unit": null,
+        "description": "observation field obs_feed_tph",
+        "categories": null,
+        "valid_range": null,
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_feed_tph"
+        ]
+      },
+      {
+        "name": "obs_output_mw",
+        "dtype": "float",
+        "unit": null,
+        "description": "observation field obs_output_mw",
+        "categories": null,
+        "valid_range": null,
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_output_mw"
+        ]
+      },
+      {
+        "name": "obs_delivered_mwh",
+        "dtype": "float",
+        "unit": null,
+        "description": "observation field obs_delivered_mwh",
+        "categories": null,
+        "valid_range": null,
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_delivered_mwh"
+        ]
+      },
+      {
+        "name": "obs_contract_mwh",
+        "dtype": "float",
+        "unit": null,
+        "description": "observation field obs_contract_mwh",
+        "categories": null,
+        "valid_range": null,
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_contract_mwh"
+        ]
+      },
+      {
+        "name": "obs_pace_deficit_mwh",
+        "dtype": "float",
+        "unit": null,
+        "description": "observation field obs_pace_deficit_mwh",
+        "categories": null,
+        "valid_range": null,
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_pace_deficit_mwh"
+        ]
+      },
+      {
+        "name": "obs_projected_surplus_mwh",
+        "dtype": "float",
+        "unit": null,
+        "description": "observation field obs_projected_surplus_mwh",
+        "categories": null,
+        "valid_range": null,
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_projected_surplus_mwh"
+        ]
+      },
+      {
+        "name": "obs_price",
+        "dtype": "float",
+        "unit": null,
+        "description": "observation field obs_price",
+        "categories": null,
+        "valid_range": null,
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_price"
+        ]
+      },
+      {
+        "name": "obs_net_cost",
+        "dtype": "float",
+        "unit": null,
+        "description": "observation field obs_net_cost",
+        "categories": null,
+        "valid_range": null,
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_net_cost"
+        ]
+      },
+      {
+        "name": "obs_queue_len",
+        "dtype": "float",
+        "unit": null,
+        "description": "observation field obs_queue_len",
+        "categories": null,
+        "valid_range": null,
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_queue_len"
+        ]
+      },
+      {
+        "name": "obs_lab_pending_count",
+        "dtype": "float",
+        "unit": null,
+        "description": "observation field obs_lab_pending_count",
+        "categories": null,
+        "valid_range": null,
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_lab_pending_count"
+        ]
+      },
+      {
+        "name": "obs_efficiency_est",
+        "dtype": "float",
+        "unit": null,
+        "description": "observation field obs_efficiency_est",
+        "categories": null,
+        "valid_range": null,
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_efficiency_est"
+        ]
+      },
+      {
+        "name": "obs_escalate_hold",
+        "dtype": "float",
+        "unit": null,
+        "description": "observation field obs_escalate_hold",
+        "categories": null,
+        "valid_range": null,
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_escalate_hold"
+        ]
+      },
+      {
+        "name": "obs_bunker0_mass_t",
+        "dtype": "float",
+        "unit": null,
+        "description": "observation field obs_bunker0_mass_t",
+        "categories": null,
+        "valid_range": null,
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_bunker0_mass_t"
+        ]
+      },
+      {
+        "name": "obs_bunker0_free_t",
+        "dtype": "float",
+        "unit": null,
+        "description": "observation field obs_bunker0_free_t",
+        "categories": null,
+        "valid_range": null,
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_bunker0_free_t"
+        ]
+      },
+      {
+        "name": "obs_bunker0_cv",
+        "dtype": "float",
+        "unit": null,
+        "description": "observation field obs_bunker0_cv",
+        "categories": null,
+        "valid_range": null,
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_bunker0_cv"
+        ]
+      },
+      {
+        "name": "obs_bunker0_moist",
+        "dtype": "float",
+        "unit": null,
+        "description": "observation field obs_bunker0_moist",
+        "categories": null,
+        "valid_range": null,
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_bunker0_moist"
+        ]
+      },
+      {
+        "name": "obs_bunker0_contam",
+        "dtype": "float",
+        "unit": null,
+        "description": "observation field obs_bunker0_contam",
+        "categories": null,
+        "valid_range": null,
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_bunker0_contam"
+        ]
+      },
+      {
+        "name": "obs_bunker1_mass_t",
+        "dtype": "float",
+        "unit": null,
+        "description": "observation field obs_bunker1_mass_t",
+        "categories": null,
+        "valid_range": null,
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_bunker1_mass_t"
+        ]
+      },
+      {
+        "name": "obs_bunker1_free_t",
+        "dtype": "float",
+        "unit": null,
+        "description": "observation field obs_bunker1_free_t",
+        "categories": null,
+        "valid_range": null,
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_bunker1_free_t"
+        ]
+      },
+      {
+        "name": "obs_bunker1_cv",
+        "dtype": "float",
+        "unit": null,
+        "description": "observation field obs_bunker1_cv",
+        "categories": null,
+        "valid_range": null,
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_bunker1_cv"
+        ]
+      },
+      {
+        "name": "obs_bunker1_moist",
+        "dtype": "float",
+        "unit": null,
+        "description": "observation field obs_bunker1_moist",
+        "categories": null,
+        "valid_range": null,
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_bunker1_moist"
+        ]
+      },
+      {
+        "name": "obs_bunker1_contam",
+        "dtype": "float",
+        "unit": null,
+        "description": "observation field obs_bunker1_contam",
+        "categories": null,
+        "valid_range": null,
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_bunker1_contam"
+        ]
+      },
+      {
+        "name": "obs_bunker2_mass_t",
+        "dtype": "float",
+        "unit": null,
+        "description": "observation field obs_bunker2_mass_t",
+        "categories": null,
+        "valid_range": null,
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_bunker2_mass_t"
+        ]
+      },
+      {
+        "name": "obs_bunker2_free_t",
+        "dtype": "float",
+        "unit": null,
+        "description": "observation field obs_bunker2_free_t",
+        "categories": null,
+        "valid_range": null,
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_bunker2_free_t"
+        ]
+      },
+      {
+        "name": "obs_bunker2_cv",
+        "dtype": "float",
+        "unit": null,
+        "description": "observation field obs_bunker2_cv",
+        "categories": null,
+        "valid_range": null,
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_bunker2_cv"
+        ]
+      },
+      {
+        "name": "obs_bunker2_moist",
+        "dtype": "float",
+        "unit": null,
+        "description": "observation field obs_bunker2_moist",
+        "categories": null,
+        "valid_range": null,
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_bunker2_moist"
+        ]
+      },
+      {
+        "name": "obs_bunker2_contam",
+        "dtype": "float",
+        "unit": null,
+        "description": "observation field obs_bunker2_contam",
+        "categories": null,
+        "valid_range": null,
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_bunker2_contam"
+        ]
+      },
+      {
+        "name": "obs_ratio_0",
+        "dtype": "float",
+        "unit": null,
+        "description": "observation field obs_ratio_0",
+        "categories": null,
+        "valid_range": null,
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_ratio_0"
+        ]
+      },
+      {
+        "name": "obs_ratio_1",
+        "dtype": "float",
+        "unit": null,
+        "description": "observation field obs_ratio_1",
+        "categories": null,
+        "valid_range": null,
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_ratio_1"
+        ]
+      },
+      {
+        "name": "obs_ratio_2",
+        "dtype": "float",
+        "unit": null,
+        "description": "observation field obs_ratio_2",
+        "categories": null,
+        "valid_range": null,
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_ratio_2"
+        ]
+      },
+      {
+        "name": "obs_queue_head_declared_cv",
+        "dtype": "float",
+        "unit": null,
+        "description": "observation field obs_queue_head_declared_cv",
+        "categories": null,
+        "valid_range": null,
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_queue_head_declared_cv"
+        ]
+      },
+      {
+        "name": "obs_queue_head_declared_moist",
+        "dtype": "float",
+        "unit": null,
+        "description": "observation field obs_queue_head_declared_moist",
+        "categories": null,
+        "valid_range": null,
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_queue_head_declared_moist"
+        ]
+      },
+      {
+        "name": "obs_queue_head_declared_contam",
+        "dtype": "float",
+        "unit": null,
+        "description": "observation field obs_queue_head_declared_contam",
+        "categories": null,
+        "valid_range": null,
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_queue_head_declared_contam"
+        ]
+      },
+      {
+        "name": "obs_queue_head_tonnage",
+        "dtype": "float",
+        "unit": null,
+        "description": "observation field obs_queue_head_tonnage",
+        "categories": null,
+        "valid_range": null,
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_queue_head_tonnage"
+        ]
+      },
+      {
+        "name": "obs_queue_head_wait_ticks",
+        "dtype": "float",
+        "unit": null,
+        "description": "observation field obs_queue_head_wait_ticks",
+        "categories": null,
+        "valid_range": null,
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_queue_head_wait_ticks"
+        ]
+      },
+      {
+        "name": "obs_queue_head_lab_cv",
+        "dtype": "float",
+        "unit": null,
+        "description": "observation field obs_queue_head_lab_cv",
+        "categories": null,
+        "valid_range": null,
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_queue_head_lab_cv"
+        ]
+      },
+      {
+        "name": "obs_queue_head_lab_moist",
+        "dtype": "float",
+        "unit": null,
+        "description": "observation field obs_queue_head_lab_moist",
+        "categories": null,
+        "valid_range": null,
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_queue_head_lab_moist"
+        ]
+      },
+      {
+        "name": "obs_queue_head_lab_contam",
+        "dtype": "float",
+        "unit": null,
+        "description": "observation field obs_queue_head_lab_contam",
+        "categories": null,
+        "valid_range": null,
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_queue_head_lab_contam"
+        ]
+      },
+      {
+        "name": "obs_cleaning_due",
+        "dtype": "bool",
+        "unit": null,
+        "description": "observation flag obs_cleaning_due",
+        "categories": null,
+        "valid_range": null,
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_cleaning_due"
+        ]
+      },
+      {
+        "name": "obs_peak",
+        "dtype": "bool",
+        "unit": null,
+        "description": "observation flag obs_peak",
+        "categories": null,
+        "valid_range": null,
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_peak"
+        ]
+      },
+      {
+        "name": "obs_queue_head_present",
+        "dtype": "bool",
+        "unit": null,
+        "description": "observation flag obs_queue_head_present",
+        "categories": null,
+        "valid_range": null,
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_queue_head_present"
+        ]
+      },
+      {
+        "name": "obs_grid_alert",
+        "dtype": "bool",
+        "unit": null,
+        "description": "observation flag obs_grid_alert",
+        "categories": null,
+        "valid_range": null,
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_grid_alert"
+        ]
+      },
+      {
+        "name": "trace_temp_c",
+        "dtype": "float",
+        "unit": null,
+        "description": "prior-tick sensor trace summary trace_temp_c",
+        "categories": null,
+        "valid_range": null,
+        "missing_policy": "constant",
+        "history": {
+          "lookback_states": 1,
+          "aggregation": "last"
+        },
+        "source_columns": [
+          "trace_temp_c"
+        ]
+      },
+      {
+        "name": "trace_emissions",
+        "dtype": "float",
+        "unit": null,
+        "description": "prior-tick sensor trace summary trace_emissions",
+        "categories": null,
+        "valid_range": null,
+        "missing_policy": "constant",
+        "history": {
+          "lookback_states": 1,
+          "aggregation": "last"
+        },
+        "source_columns": [
+          "trace_emissions"
+        ]
+      },
+      {
+        "name": "trace_o2",
+        "dtype": "float",
+        "unit": null,
+        "description": "prior-tick sensor trace summary trace_o2",
+        "categories": null,
+        "valid_range": null,
+        "missing_policy": "constant",
+        "history": {
+          "lookback_states": 1,
+          "aggregation": "last"
+        },
+        "source_columns": [
+          "trace_o2"
+        ]
+      },
+      {
+        "name": "trace_feed_tph",
+        "dtype": "float",
+        "unit": null,
+        "description": "prior-tick sensor trace summary trace_feed_tph",
+        "categories": null,
+        "valid_range": null,
+        "missing_policy": "constant",
+        "history": {
+          "lookback_states": 1,
+          "aggregation": "last"
+        },
+        "source_columns": [
+          "trace_feed_tph"
+        ]
+      },
+      {
+        "name": "obs_queue_head_supplier",
+        "dtype": "category",
+        "unit": null,
+        "description": "categorical observation obs_queue_head_supplier",
+        "categories": [
+          "none",
+          "S01",
+          "S02",
+          "S03",
+          "S04",
+          "S05",
+          "S06",
+          "S07",
+          "S08",
+          "S09",
+          "S10",
+          "S11",
+          "X99"
+        ],
+        "valid_range": null,
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_queue_head_supplier"
+        ]
+      },
+      {
+        "name": "obs_queue_head_class",
+        "dtype": "category",
+        "unit": null,
+        "description": "categorical observation obs_queue_head_class",
+        "categories": [
+          "none",
+          "household",
+          "commercial",
+          "industrial",
+          "construction",
+          "biomass"
+        ],
+        "valid_range": null,
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_queue_head_class"
+        ]
+      },
+      {
+        "name": "obs_queue_head_lab_status",
+        "dtype": "category",
+        "unit": null,
+        "description": "categorical observation obs_queue_head_lab_status",
+        "categories": [
+          "none",
+          "pending",
+          "known"
+        ],
+        "valid_range": null,
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_queue_head_lab_status"
+        ]
+      },
+      {
+        "name": "persona",
+        "dtype": "category",
+        "unit": null,
+        "description": "categorical observation persona",
+        "categories": [
+          "cautious",
+          "aggressive",
+          "sloppy"
+        ],
+        "valid_range": null,
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "persona"
+        ]
+      },
+      {
+        "name": "derived_emissions_frac",
+        "dtype": "float",
+        "unit": null,
+        "description": "prior-tick emissions as a fraction of the hard limit (28)",
+        "categories": null,
+        "valid_range": null,
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "trace_emissions"
+        ]
+      },
+      {
+        "name": "derived_blend_contam",
+        "dtype": "float",
+        "unit": null,
+        "description": "believed contaminant of the current blend: sum_i ratio_i * bunker_i believed contaminant",
+        "categories": null,
+        "valid_range": null,
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_ratio_0",
+          "obs_bunker0_contam",
+          "obs_ratio_1",
+          "obs_bunker1_contam",
+          "obs_ratio_2",
+          "obs_bunker2_contam"
+        ]
+      },
+      {
+        "name": "derived_pace_ratio",
+        "dtype": "float",
+        "unit": null,
+        "description": "pace deficit normalised by the contract",
+        "categories": null,
+        "valid_range": null,
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_pace_deficit_mwh",
+          "obs_contract_mwh"
+        ]
+      },
+      {
+        "name": "directive_type",
+        "dtype": "category",
+        "unit": null,
+        "description": "pinned keyword extraction of the supervisor's pre-shift directive (semantic channel)",
+        "categories": [
+          "balanced",
+          "maximize_output",
+          "conserve_budget",
+          "safety_first"
+        ],
+        "valid_range": null,
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "directive_text"
+        ]
+      },
+      {
+        "name": "radio_present",
+        "dtype": "bool",
+        "unit": null,
+        "description": "a crew radio remark exists at this tick",
+        "categories": null,
+        "valid_range": null,
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "radio_text"
+        ]
+      },
+      {
+        "name": "radio_hint",
+        "dtype": "bool",
+        "unit": null,
+        "description": "pinned regex: the radio remark flags a suspicious load",
+        "categories": null,
+        "valid_range": null,
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "radio_text"
+        ]
+      },
+      {
+        "name": "derived_pred_emissions",
+        "dtype": "float",
+        "unit": null,
+        "description": "predicted next-burn emissions from believed bunker composition",
+        "categories": null,
+        "valid_range": [
+          0.0,
+          60.0
+        ],
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_bunker0_contam",
+          "obs_bunker0_mass_t",
+          "obs_bunker1_contam",
+          "obs_bunker1_mass_t",
+          "obs_bunker2_contam",
+          "obs_bunker2_mass_t",
+          "obs_feed_tph",
+          "obs_ratio_0",
+          "obs_ratio_1",
+          "obs_ratio_2",
+          "obs_tick_hours"
+        ]
+      },
+      {
+        "name": "derived_pred_temp_c",
+        "dtype": "float",
+        "unit": null,
+        "description": "predicted next-burn temperature from blend CV, feed and fouling",
+        "categories": null,
+        "valid_range": [
+          500.0,
+          1300.0
+        ],
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_bunker0_cv",
+          "obs_bunker1_cv",
+          "obs_bunker2_cv",
+          "obs_cv_band_hi",
+          "obs_cv_band_lo",
+          "obs_feed_tph",
+          "obs_fouling",
+          "obs_ratio_0",
+          "obs_ratio_1",
+          "obs_ratio_2",
+          "obs_tick_hours"
+        ]
+      },
+      {
+        "name": "derived_meas_blend_contam",
+        "dtype": "float",
+        "unit": null,
+        "description": "stack-inferred contamination of the mixture that actually burned",
+        "categories": null,
+        "valid_range": [
+          0.0,
+          1.5
+        ],
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_bunker0_mass_t",
+          "obs_bunker1_mass_t",
+          "obs_bunker2_mass_t",
+          "obs_feed_tph",
+          "obs_ratio_0",
+          "obs_ratio_1",
+          "obs_ratio_2",
+          "obs_tick_hours",
+          "trace_emissions"
+        ]
+      },
+      {
+        "name": "derived_belief_gap_x",
+        "dtype": "float",
+        "unit": null,
+        "description": "observed stack emissions divided by belief-predicted emissions",
+        "categories": null,
+        "valid_range": [
+          0.0,
+          20.0
+        ],
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_bunker0_contam",
+          "obs_bunker0_mass_t",
+          "obs_bunker1_contam",
+          "obs_bunker1_mass_t",
+          "obs_bunker2_contam",
+          "obs_bunker2_mass_t",
+          "obs_feed_tph",
+          "obs_ratio_0",
+          "obs_ratio_1",
+          "obs_ratio_2",
+          "obs_tick_hours",
+          "trace_emissions"
+        ]
+      },
+      {
+        "name": "derived_head_declared_lab_gap",
+        "dtype": "float",
+        "unit": null,
+        "description": "queue-head lab contamination minus declared contamination",
+        "categories": null,
+        "valid_range": [
+          -1.0,
+          1.0
+        ],
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_queue_head_declared_contam",
+          "obs_queue_head_lab_contam"
+        ]
+      },
+      {
+        "name": "derived_headroom_bunker0_t",
+        "dtype": "float",
+        "unit": null,
+        "description": "bunker 0 free tonnes minus queue-head delivery tonnage",
+        "categories": null,
+        "valid_range": [
+          -100.0,
+          200.0
+        ],
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_bunker0_free_t",
+          "obs_queue_head_present",
+          "obs_queue_head_tonnage"
+        ]
+      },
+      {
+        "name": "derived_headroom_bunker1_t",
+        "dtype": "float",
+        "unit": null,
+        "description": "bunker 1 free tonnes minus queue-head delivery tonnage",
+        "categories": null,
+        "valid_range": [
+          -100.0,
+          200.0
+        ],
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_bunker1_free_t",
+          "obs_queue_head_present",
+          "obs_queue_head_tonnage"
+        ]
+      },
+      {
+        "name": "derived_headroom_bunker2_t",
+        "dtype": "float",
+        "unit": null,
+        "description": "bunker 2 free tonnes minus queue-head delivery tonnage",
+        "categories": null,
+        "valid_range": [
+          -100.0,
+          200.0
+        ],
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_bunker2_free_t",
+          "obs_queue_head_present",
+          "obs_queue_head_tonnage"
+        ]
+      },
+      {
+        "name": "derived_producing_ticks_left",
+        "dtype": "float",
+        "unit": null,
+        "description": "remaining ticks able to produce after known downtime and holds",
+        "categories": null,
+        "valid_range": [
+          1.0,
+          24.0
+        ],
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_escalate_hold",
+          "obs_line_down_ticks",
+          "obs_tick",
+          "obs_ticks_total"
+        ]
+      },
+      {
+        "name": "derived_avg_mw_needed_to_band",
+        "dtype": "float",
+        "unit": null,
+        "description": "average remaining output needed to reach the contract band floor",
+        "categories": null,
+        "valid_range": [
+          0.0,
+          600.0
+        ],
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_contract_mwh",
+          "obs_delivered_mwh",
+          "obs_escalate_hold",
+          "obs_line_down_ticks",
+          "obs_tick",
+          "obs_tick_hours",
+          "obs_ticks_total"
+        ]
+      },
+      {
+        "name": "derived_mw_per_tph",
+        "dtype": "float",
+        "unit": null,
+        "description": "observed output conversion in MW per tonne/hour of feed",
+        "categories": null,
+        "valid_range": [
+          0.0,
+          10.0
+        ],
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_feed_tph",
+          "obs_output_mw"
+        ]
+      },
+      {
+        "name": "derived_pace_error_mwh",
+        "dtype": "float",
+        "unit": null,
+        "description": "pessimistic delivery-trajectory error in MWh",
+        "categories": null,
+        "valid_range": [
+          -500.0,
+          500.0
+        ],
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_pace_deficit_mwh",
+          "obs_projected_surplus_mwh"
+        ]
+      },
+      {
+        "name": "derived_gap_to_band_floor_mwh",
+        "dtype": "float",
+        "unit": null,
+        "description": "projected MWh shortfall below the contract band floor",
+        "categories": null,
+        "valid_range": [
+          0.0,
+          500.0
+        ],
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_contract_mwh",
+          "obs_projected_surplus_mwh"
+        ]
+      },
+      {
+        "name": "derived_cover_affordable_mwh",
+        "dtype": "float",
+        "unit": null,
+        "description": "cover energy affordable after current cost and operating reserve",
+        "categories": null,
+        "valid_range": [
+          0.0,
+          1000.0
+        ],
+        "missing_policy": "constant",
+        "history": null,
+        "source_columns": [
+          "obs_budget",
+          "obs_net_cost",
+          "obs_price"
+        ]
+      }
+    ],
+    "pin": {
+      "code_sha256": "366b62f63acce2217019f902b7135e6a6f93cb2aa5255853da1b5355b275d34e",
+      "seeds": {},
+      "llm": null
+    }
+  },
+  "action_map_version": "oven-0.1.0",
+  "swarm_config_sha256": "e08b9be64f30088e4c3b46a1316fb64e9068ee7ba22ddb59cabaa934ecba2115",
+  "calibrators": [
+    {
+      "action_id": "adjust_load",
+      "method": "isotonic",
+      "artefact_uri": "basis/oven_c5x_v5_clean/artefacts/calibrator_adjust_load.joblib"
+    },
+    {
+      "action_id": "buy_cover",
+      "method": "isotonic",
+      "artefact_uri": "basis/oven_c5x_v5_clean/artefacts/calibrator_buy_cover.joblib"
+    },
+    {
+      "action_id": "defer_cleaning",
+      "method": "isotonic",
+      "artefact_uri": "basis/oven_c5x_v5_clean/artefacts/calibrator_defer_cleaning.joblib"
+    },
+    {
+      "action_id": "escalate_to_supervisor",
+      "method": "isotonic",
+      "artefact_uri": "basis/oven_c5x_v5_clean/artefacts/calibrator_escalate_to_supervisor.joblib"
+    },
+    {
+      "action_id": "hold",
+      "method": "isotonic",
+      "artefact_uri": "basis/oven_c5x_v5_clean/artefacts/calibrator_hold.joblib"
+    },
+    {
+      "action_id": "reject_delivery",
+      "method": "isotonic",
+      "artefact_uri": "basis/oven_c5x_v5_clean/artefacts/calibrator_reject_delivery.joblib"
+    },
+    {
+      "action_id": "request_lab_analysis",
+      "method": "isotonic",
+      "artefact_uri": "basis/oven_c5x_v5_clean/artefacts/calibrator_request_lab_analysis.joblib"
+    },
+    {
+      "action_id": "route_delivery",
+      "method": "isotonic",
+      "artefact_uri": "basis/oven_c5x_v5_clean/artefacts/calibrator_route_delivery.joblib"
+    },
+    {
+      "action_id": "schedule_cleaning",
+      "method": "isotonic",
+      "artefact_uri": "basis/oven_c5x_v5_clean/artefacts/calibrator_schedule_cleaning.joblib"
+    },
+    {
+      "action_id": "sell_spot",
+      "method": "isotonic",
+      "artefact_uri": "basis/oven_c5x_v5_clean/artefacts/calibrator_sell_spot.joblib"
+    },
+    {
+      "action_id": "set_blend",
+      "method": "isotonic",
+      "artefact_uri": "basis/oven_c5x_v5_clean/artefacts/calibrator_set_blend.joblib"
+    }
+  ],
+  "index": {
+    "metric": "euclidean",
+    "scaler_uri": "basis/oven_c5x_v5_clean/artefacts/index_scaler.joblib",
+    "index_uri": "basis/oven_c5x_v5_clean/artefacts/index_nn.joblib"
+  },
+  "coverage": {
+    "states_total": 225644,
+    "counts": {
+      "reject_delivery": 12473,
+      "request_lab_analysis": 16393,
+      "adjust_load": 22061,
+      "route_delivery": 64483,
+      "set_blend": 23186,
+      "hold": 58734,
+      "buy_cover": 3579,
+      "sell_spot": 2534,
+      "defer_cleaning": 14287,
+      "schedule_cleaning": 4148,
+      "escalate_to_supervisor": 3766
+    },
+    "min_states_per_action": 100,
+    "violations": [],
+    "dropped": {}
+  },
+  "metrics": {
+    "route_delivery": {
+      "auroc": 0.8281733857455605,
+      "auprc": 0.9135798109862682,
+      "n_pos": 46855,
+      "n_neg": 17628
+    },
+    "reject_delivery": {
+      "auroc": 0.8652183336659357,
+      "auprc": 0.9275989922130476,
+      "n_pos": 8915,
+      "n_neg": 3558
+    },
+    "request_lab_analysis": {
+      "auroc": 0.8638723060452773,
+      "auprc": 0.9340407615779629,
+      "n_pos": 12066,
+      "n_neg": 4327
+    },
+    "set_blend": {
+      "auroc": 0.8797762367069697,
+      "auprc": 0.9374341340818461,
+      "n_pos": 16627,
+      "n_neg": 6559
+    },
+    "adjust_load": {
+      "auroc": 0.8717382099303469,
+      "auprc": 0.9201917691686634,
+      "n_pos": 14801,
+      "n_neg": 7260
+    },
+    "schedule_cleaning": {
+      "auroc": 0.9555110144667512,
+      "auprc": 0.9676603715942356,
+      "n_pos": 2579,
+      "n_neg": 1569
+    },
+    "defer_cleaning": {
+      "auroc": 0.9082064583799154,
+      "auprc": 0.9396220758408,
+      "n_pos": 9333,
+      "n_neg": 4954
+    },
+    "sell_spot": {
+      "auroc": 0.7811508877205149,
+      "auprc": 0.9495513605823787,
+      "n_pos": 2215,
+      "n_neg": 319
+    },
+    "buy_cover": {
+      "auroc": 0.9744129580024125,
+      "auprc": 0.9866965522431707,
+      "n_pos": 2595,
+      "n_neg": 984
+    },
+    "hold": {
+      "auroc": 0.8875201306109307,
+      "auprc": 0.9590260937864796,
+      "n_pos": 45787,
+      "n_neg": 12947
+    },
+    "escalate_to_supervisor": {
+      "auroc": 0.9287311739399625,
+      "auprc": 0.9010100006451621,
+      "n_pos": 1571,
+      "n_neg": 2195
+    }
+  }
+}

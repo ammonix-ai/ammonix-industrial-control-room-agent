@@ -1,0 +1,14 @@
+# Pinned to the environment the shipped artefacts were built and verified in
+# (Python 3.13). scikit-learn and xgboost must match exactly: the basis ships
+# pickled calibrators, scalers and swarm classifiers.
+fastapi==0.139.0
+uvicorn==0.50.2
+pydantic==2.13.4
+numpy==2.4.6
+polars==1.42.1
+scikit-learn==1.9.0
+scipy==1.18.0
+xgboost==3.4.1
+joblib==1.5.3
+jsonschema==4.26.0
+pytest==9.1.1

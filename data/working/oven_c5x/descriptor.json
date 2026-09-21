@@ -1,0 +1,25 @@
+{
+  "dataset_id": "oven-c5",
+  "root_uri": "data/working/oven_c5",
+  "example_table": "examples.parquet",
+  "state_table": "states.parquet",
+  "id_fields": {
+    "example_id": "example_id",
+    "state_id": "state_id",
+    "seq": "seq"
+  },
+  "action_field": "action_raw",
+  "outcome_field": "success",
+  "outcome_positive": true,
+  "modality_map": {
+    "obs_*": "tabular",
+    "trace_*": "signal",
+    "manifest_text|radio_text": "text"
+  },
+  "notes": "oven_c4 kept entirely (master_seed 20260715, gen 0.4.0) + rare-enriched additions (master_seed 20260728, gen 0.5.0, prefix 'c'). Forced shifts are NOT bare-replayable: route through provenance.parquet. Plan docs/final_training_plan_c5.md v0.3; approvals 2026-07-27 (amendment + D1-D4).",
+  "corpus_version": "c5",
+  "date_range": null,
+  "master_seed": 20260728,
+  "generator_version": "0.5.0",
+  "segment_map": {}
+}

@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "If you use this software in published research, please cite both the software and the Industrial Control Room Agent paper (see preferred-citation)."
+title: "Ammonix Industrial Control Room Agent"
+type: software
+authors:
+  - name: "Ammonix, Inc., Wilmington (USA), branch Blonay - Saint-Légier"
+version: "1.0.0"
+date-released: "2026-09-22"
+url: "https://github.com/ammonix-ai/ammonix-industrial-control-room-agent"
+license-url: "https://github.com/ammonix-ai/ammonix-industrial-control-room-agent/blob/main/LICENSE.md"
+preferred-citation:
+  type: article
+  title: "The Ammonix Industrial Control Room Agent: Learning to Operate Industrial Plants from Logged Experience"
+  authors:
+    - family-names: Glauser
+      given-names: Adele
+    - family-names: Todorov
+      given-names: Matthew
+    - family-names: Grieder
+      given-names: Lea
+    - family-names: Ruppersberg
+      given-names: Peter
+    - family-names: Glauser
+      given-names: Duangjai
+    - family-names: Stingele
+      given-names: Francesca
+  year: 2026
+  journal: "Zenodo"
+  doi: "10.5281/zenodo.22871228"
+  url: "https://doi.org/10.5281/zenodo.22871228"

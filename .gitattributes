@@ -1,0 +1,19 @@
+# Code: identical line endings in every checkout.
+*.py text eol=lf
+*.md text eol=lf
+*.html text eol=lf
+*.js text eol=lf
+*.cff text eol=lf
+*.toml text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+requirements.txt text eol=lf
+
+# Hash-pinned artefacts (runs/manifests/release_files.json): never converted,
+# so a fresh clone carries the exact bytes that were verified.
+basis/** -text
+data/** -text
+runs/** -text
+harness/prompts/** -text
+*.parquet binary
+*.joblib binary

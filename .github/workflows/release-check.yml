@@ -1,0 +1,21 @@
+name: Nightly release check
+
+on:
+  schedule:
+    - cron: "0 3 * * *"
+  workflow_dispatch:
+
+jobs:
+  release-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Install
+        run: pip install -r requirements.txt
+      - name: Re-verify every pinned artefact hash and replay the 200 sealed shifts
+        run: python scripts/check_release.py
+      - name: Recompute the 570-shift crisis table from the shipped rows
+        run: python scripts/bench_summary.py

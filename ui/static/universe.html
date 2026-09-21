@@ -1,0 +1,1091 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ammonix Knowledge Universe — 3D explorer</title>
+<style>
+  /* Blueprint dark palette, matching the team's ECG viewer */
+  :root {
+    --bg: #10161a; --card: #182026; --card2: #202b33; --lineb: #2f343c;
+    --ink-1: #f5f8fa; --ink-2: #bfccd6; --muted: #8a9ba8;
+    --blue: #4c90f0; --orange: #ffa940; --green: #3dcc91; --red: #ff6b6b;
+    --violet: #9179f2;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body { background: var(--bg); color: var(--ink-2);
+         font: 13px/1.5 "Segoe UI", system-ui, sans-serif;
+         height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+  #wrap { padding: 14px 18px; display: flex; flex-direction: column;
+          gap: 12px; height: 100%; min-height: 0; }
+  h2 { color: var(--ink-1); font-size: 18px; font-weight: 600; }
+  .sub { color: var(--muted); font-size: 13px; }
+  .card { background: var(--card); border-radius: 6px; padding: 14px 16px;
+          box-shadow: 0 1px 1px rgba(0,0,0,.4), 0 0 0 1px rgba(0,0,0,.2); }
+  .controls { display: flex; gap: 26px; flex-wrap: wrap; align-items: flex-start; }
+  .ctl > strong { display: block; margin-bottom: 7px; color: var(--ink-1);
+                  font-size: 12px; }
+  .bgroup { display: inline-flex; border-radius: 4px; overflow: hidden;
+            box-shadow: 0 0 0 1px rgba(0,0,0,.4); }
+  .bgroup button { background: #2f343c; color: var(--ink-2); border: 0;
+                   padding: 6px 13px; cursor: pointer; font-size: 13px; }
+  .bgroup button + button { border-left: 1px solid rgba(0,0,0,.4); }
+  .bgroup button.active { background: var(--blue); color: #fff; }
+  .bgroup button:disabled { color: #5c7080; cursor: not-allowed; }
+  label.cb { display: inline-flex; gap: 7px; align-items: center;
+             margin-right: 14px; cursor: pointer; font-size: 13px; }
+  .swatch { width: 12px; height: 12px; border-radius: 2px; display: inline-block; }
+  .tag { display: inline-block; padding: 2px 10px; border-radius: 3px;
+         font-size: 12px; font-weight: 600; background: #2f343c;
+         color: var(--ink-2); }
+  .tag.primary { background: #1a3f66; color: #8abbff; }
+  .tag.success { background: #1b3d2f; color: #72e2ae; }
+  .tag.danger  { background: #4a2020; color: #ff9b9b; }
+  .tag.warning { background: #4a3417; color: #ffd08a; }
+  .tag.interactive { cursor: pointer; }
+  .tag.interactive:hover { outline: 1px solid var(--blue); }
+  #stats { margin-left: auto; display: flex; gap: 8px; align-items: center; }
+  #tribepanel { border-top: 1px solid var(--lineb); margin-top: 12px;
+                padding-top: 12px; display: none; }
+  #tribepanel input { width: 320px; background: var(--card2); border: 0;
+                      box-shadow: 0 0 0 1px rgba(0,0,0,.4); border-radius: 4px;
+                      color: var(--ink-1); padding: 6px 10px; margin-bottom: 8px; }
+  #tribelist { max-height: 140px; overflow-y: auto; display: grid;
+               grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+               gap: 3px; font-size: 12px; }
+  main { flex: 1; display: flex; gap: 12px; min-height: 0; }
+  #scene { flex: 1; min-width: 0; position: relative; background: var(--card);
+           border-radius: 6px; overflow: hidden;
+           box-shadow: 0 1px 1px rgba(0,0,0,.4), 0 0 0 1px rgba(0,0,0,.2); }
+  #scene canvas { display: block; }
+  #hint { position: absolute; bottom: 14px; left: 14px;
+          background: rgba(16,22,26,.92); color: #fff; padding: 10px 12px;
+          border-radius: 4px; font: 11px/1.6 Consolas, monospace;
+          pointer-events: none; }
+  #side { width: 380px; overflow-y: auto; }
+  #side h3 { color: var(--ink-1); font-size: 15px; margin-bottom: 10px;
+             display: flex; justify-content: space-between; align-items: center; }
+  #side h3 button { background: none; border: 0; color: var(--muted);
+                    cursor: pointer; font-size: 12px; }
+  #side h3 button:hover { color: var(--ink-1); }
+  table.detail { width: 100%; border-collapse: collapse; font-size: 13px;
+                 margin-bottom: 12px; }
+  table.detail td { padding: 5px 8px; }
+  table.detail tr:nth-child(odd) { background: rgba(255,255,255,.03); }
+  table.detail td:first-child { color: var(--ink-1); font-weight: 600;
+                                white-space: nowrap; }
+  .mono { font-family: Consolas, monospace; font-size: 11px; color: var(--muted); }
+  .bar { display: flex; gap: 6px; align-items: center; margin: 2px 0; }
+  .bar span:first-child { width: 120px; overflow: hidden; white-space: nowrap;
+                          text-overflow: ellipsis; }
+  .bar .track { flex: 1; height: 7px; background: var(--bg); border-radius: 4px; }
+  .bar .fill { height: 7px; background: var(--blue); border-radius: 4px; }
+  .minicard { background: var(--card2); border-radius: 4px; padding: 8px 10px;
+              margin-bottom: 6px; cursor: pointer; font-size: 12px;
+              display: flex; justify-content: space-between; align-items: center; }
+  .minicard:hover { outline: 1px solid var(--blue); }
+  .nis { text-align: center; color: var(--muted); padding: 48px 10px; }
+  .nis .glyph { font-size: 34px; margin-bottom: 10px; }
+  .callout { background: #1a3f66; border-radius: 6px; padding: 12px 16px;
+             font-size: 13px; color: #d3e3f7; }
+  .callout b { color: #fff; }
+  section.block { margin-bottom: 14px; }
+  section.block > strong { color: var(--ink-1); display: block; margin-bottom: 6px; }
+</style>
+</head>
+<body>
+<div id="wrap">
+  <div>
+    <h2>Knowledge Universe — 3D State Space Explorer</h2>
+    <div class="sub">Interactive visualization of <b id="nrec">…</b> recorded states
+      in <b>calibrated P(success | state, action)</b> space · basis <b id="basisName">…</b></div>
+  </div>
+
+  <div class="card">
+    <div class="controls">
+      <div class="ctl"><strong>Projection Method:</strong>
+        <div class="bgroup" id="gMethod">
+          <button data-v="pca" class="active">PCA</button>
+          <button data-v="tsneinv" id="btnTsneInv">t-SNE 1/p</button>
+          <button data-v="tsneinvparam" id="btnTsneInvParam" title="parametric openTSNE: live states are transformed exactly into the map (the ATC method), not snapped">t-SNE 1/p ✦</button>
+        </div>
+        <div class="sub" id="methodNote" style="margin-top:4px;font-size:11px"></div>
+      </div>
+      <div class="ctl"><strong>Color By:</strong>
+        <div class="bgroup" id="gColor">
+          <button data-v="teacher" class="active">Teacher</button>
+          <button data-v="outcome">Outcome</button>
+          <button data-v="action">Action</button>
+          <button data-v="avoid" id="btnAvoid">Most Avoided</button>
+        </div>
+      </div>
+      <div class="ctl"><strong>Show Teachers:</strong><div id="cohorts"></div></div>
+      <div class="ctl"><strong>Show Outcomes:</strong>
+        <div class="bgroup" id="gOutcome">
+          <button data-v="all" class="active">All</button>
+          <button data-v="1">Successful</button>
+          <button data-v="0">Failed</button>
+        </div>
+      </div>
+      <div class="ctl"><strong>Ether Surface:</strong>
+        <div class="bgroup" id="gEther">
+          <button id="btnEther" class="active">Ether: On</button>
+        </div>
+      </div>
+      <div class="ctl"><strong>Tribe Filter:</strong>
+        <button class="tag interactive" id="tribeToggle">show panel</button>
+        <div style="margin-top:5px"><span class="tag primary" id="tribeCount"
+          style="display:none"></span></div>
+      </div>
+      <div id="stats">
+        <span class="tag primary" id="ptcount"></span>
+        <span class="tag success" id="selcount" style="display:none"></span>
+      </div>
+    </div>
+    <div id="tribepanel">
+      <strong style="color:var(--ink-1);display:block;margin-bottom:7px">
+        Filter by Tribes (<span id="ntribes"></span> available):</strong>
+      <input id="tribesearch" placeholder="Search tribes (e.g. adjust_load-t0, escalate…)">
+      <div id="tribelist"></div>
+    </div>
+  </div>
+
+  <main>
+    <div id="scene">
+      <div id="hint"><b>Controls:</b><br>• Left drag: Rotate<br>• Right drag: Pan<br>• Scroll: Zoom<br>• Click: Select<br>• Ctrl+Click: Multi-select</div>
+      <div id="actionLegend" style="position:absolute;top:12px;right:12px;
+        background:rgba(16,22,26,.9);border-radius:6px;padding:8px 10px;
+        font-size:11px;max-height:calc(100% - 24px);overflow:auto;display:none">
+      </div>
+    </div>
+    <div class="card" id="side">
+      <div class="nis"><div class="glyph">🖐</div><b style="color:var(--ink-1)">No Selection</b>
+        <div style="margin-top:6px">Click a point to select a recorded state.<br>
+        Hold Ctrl/Cmd to select multiple.</div></div>
+    </div>
+  </main>
+
+  <div class="callout"><b>Context:</b> every point is one historical control-room
+    state from the working corpus — its position is the state's calibrated
+    action-success coordinate, its record holds the teacher's action and the
+    adjudicated outcome. The relief surface below is the <b>Ether field</b>:
+    the outcome-success gradient the agent navigates.
+    <b>Projections:</b> PCA (linear, interpretable axes) · t-SNE (local clusters).</div>
+</div>
+
+<script type="importmap">
+  { "imports": { "three": "/vendor/three.module.js" } }
+</script>
+<script type="module">
+import * as THREE from "three";
+import { OrbitControls } from "/vendor/OrbitControls.js";
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"]/g,
+  c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+// Blueprint-bright palette (the ECG viewer's colours)
+const P_COHORT = ["#4c90f0", "#ffa940", "#9179f2"];   // cautious/aggressive/sloppy
+const C_OK = new THREE.Color("#3dcc91"), C_BAD = new THREE.Color("#ff6b6b");
+const C_DIM = new THREE.Color("#2c333a");
+// Most-avoided ("veto") categories: bright action hue = confirmed island,
+// faint fog = unknown (veto asserted but the action was never tried nearby),
+// neutral grey = no veto, near-black = doomed (all actions fail here)
+const C_GREY = new THREE.Color("#464c55");
+const C_FOG = new THREE.Color("#5b6672");
+const C_DOOM = new THREE.Color("#141619");
+// a curated maximally-distinct categorical palette: eleven separate hue
+// families (not evenly-spaced hues, which crowd in the green-yellow band),
+// each bright enough to read on the dark surface. Assigned by action index
+// in the artefact's fixed order, so every action owns one stable colour.
+const ACTION_HEX = [
+  "#4c90f0", "#ff8c42", "#2ecc71", "#e6c020", "#a86be0", "#ff5fa2",
+  "#22d3ee", "#ef4444", "#a3e635", "#c08457", "#e8edf2",
+];
+const ACTION_PAL = ACTION_HEX.map(h => new THREE.Color(h));
+let actionColorByIdx = i => ACTION_PAL[i % ACTION_PAL.length];
+
+// no-store: the artefact is rebuilt in place (scores_q was added to it);
+// a cached stale copy silently disables the P(success) mode
+const m = await (await fetch("/universe/map3d", { cache: "no-store" })).json();
+$("nrec").textContent = m.n_records.toLocaleString();
+$("basisName").textContent = m.basis || (m.corpus ? `oven_${m.corpus}` : "unknown");
+$("ntribes").textContent = m.tribes.length;
+
+// state
+let method = "pca", colorMode = "teacher", etherOn = true;
+const visibleTeachers = new Set([0, 1, 2]);
+const selectedTribes = new Set();
+const selected = new Set();          // point indices
+let tsne = null;                     // lazy-loaded second projection
+let tsneInv = null;                  // lazy-loaded inverse (1/p) t-SNE
+let tsneInvParam = null;             // parametric (openTSNE) inverse t-SNE
+let actionFilter = null;             // legend: isolate one action (index)
+
+// teacher checkboxes -- labels come from the map artefact (m.personas), so
+// this one frontend serves every domain (OVEN cautious/aggressive/sloppy,
+// GRID aligned/efficiency/trusting, ...) without a code change
+const TEACHERS = m.personas || ["cautious", "aggressive", "sloppy"];
+TEACHERS.forEach((p, i) => {
+  $("cohorts").insertAdjacentHTML("beforeend",
+    `<label class="cb"><input type="checkbox" checked data-i="${i}">
+     <span class="swatch" style="background:${P_COHORT[i % P_COHORT.length]}"></span>${esc(p)}</label>`);
+});
+$("cohorts").querySelectorAll("input").forEach(cb => cb.onchange = () => {
+  const i = +cb.dataset.i;
+  cb.checked ? visibleTeachers.add(i) : visibleTeachers.delete(i);
+  repaint();
+});
+
+// tribe filter panel
+$("tribeToggle").onclick = () => {
+  const p = $("tribepanel");
+  const open = p.style.display !== "block";
+  p.style.display = open ? "block" : "none";
+  $("tribeToggle").textContent = open ? "hide panel" : "show panel";
+};
+function renderTribeList() {
+  const q = $("tribesearch").value.toLowerCase();
+  $("tribelist").innerHTML = m.tribes
+    .filter(t => t.id.toLowerCase().includes(q)).slice(0, 60)
+    .map(t => `<label class="cb"><input type="checkbox" data-t="${esc(t.id)}"
+      ${selectedTribes.has(t.id) ? "checked" : ""}>
+      ${esc(t.id)} <span class="sub">(${t.n})</span></label>`).join("");
+  $("tribelist").querySelectorAll("input").forEach(cb => cb.onchange = () => {
+    cb.checked ? selectedTribes.add(cb.dataset.t)
+               : selectedTribes.delete(cb.dataset.t);
+    updateTribeCount(); repaint();
+  });
+}
+function updateTribeCount() {
+  const el = $("tribeCount");
+  el.style.display = selectedTribes.size ? "inline-block" : "none";
+  el.textContent = selectedTribes.size + " selected";
+}
+$("tribesearch").oninput = renderTribeList;
+renderTribeList();
+
+// ---- three.js scene
+const el = $("scene");
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x10161a);
+const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 400);
+camera.position.set(22, 20, 24);
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+el.appendChild(renderer.domElement);
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true; controls.dampingFactor = 0.05;
+controls.minDistance = 4; controls.maxDistance = 90;
+
+// ---- smooth wheel zoom -------------------------------------------------
+// The bundled OrbitControls dollies INSTANTLY (its `scale` is applied and
+// reset every frame), so on a notched wheel -- or whenever one frame is
+// dropped -- zoom reads as a jump in and out. Take over the wheel: clamp a
+// single event's magnitude (whatever its deltaMode), and ease the camera
+// toward a target distance every frame, so zooming stays smooth. Pan and
+// rotate preserve distance and nothing else moves the camera, so a single
+// absolute target stays in sync.
+controls.enableZoom = false;
+let zoomTarget = camera.position.distanceTo(controls.target);
+let trajGroup = null;   // shift trajectory overlay (from the shift theatre)
+renderer.domElement.addEventListener("wheel", e => {
+  e.preventDefault();
+  let d = e.deltaY;
+  if (e.deltaMode === 1) d *= 33;        // lines  -> ~pixels
+  else if (e.deltaMode === 2) d *= 400;  // pages  -> ~pixels
+  d = Math.max(-100, Math.min(100, d));  // one notch, never a big jump
+  zoomTarget = Math.min(controls.maxDistance, Math.max(controls.minDistance,
+    zoomTarget * Math.exp((d / 100) * 0.18)));
+}, { passive: false });
+function easeZoom() {
+  const off = camera.position.clone().sub(controls.target);
+  const cur = off.length();
+  if (Math.abs(zoomTarget - cur) < 1e-3) return;
+  off.multiplyScalar((cur + (zoomTarget - cur) * 0.2) / cur);
+  camera.position.copy(controls.target).add(off);
+}
+
+scene.add(new THREE.AmbientLight(0xffffff, 0.75));
+for (const [x, y, z, i] of [[15,15,15,1.0], [-15,-15,-15,0.5], [0,15,0,0.5]]) {
+  const L = new THREE.PointLight(0xffffff, i * 60); L.position.set(x, y, z);
+  scene.add(L);
+}
+scene.add(new THREE.GridHelper(40, 40, 0x5c7080, 0x394b59)).position.y = -14;
+scene.add(new THREE.AxesHelper(9));
+
+function extent(a) { let lo = a[0], hi = a[0];
+  for (const v of a) { if (v < lo) lo = v; if (v > hi) hi = v; } return [lo, hi]; }
+
+// build normalised positions for a projection's flat array
+function normalise(flat) {
+  const xs = [], ys = [], zs = [];
+  for (let i = 0; i < m.n_records; i++) {
+    xs.push(flat[3*i]); ys.push(flat[3*i+1]); zs.push(flat[3*i+2]);
+  }
+  const [x0, x1] = extent(xs), [y0, y1] = extent(ys), [z0, z1] = extent(zs);
+  const S = 30 / Math.max(x1 - x0, y1 - y0, z1 - z0);
+  const pos = new Float32Array(m.n_records * 3);
+  for (let i = 0; i < m.n_records; i++) {
+    pos[3*i]   = (xs[i] - (x0 + x1) / 2) * S;
+    pos[3*i+1] = (zs[i] - (z0 + z1) / 2) * S;
+    pos[3*i+2] = -(ys[i] - (y0 + y1) / 2) * S;
+  }
+  return { pos, S, x0, x1, y0, y1, z0, z1 };
+}
+const proj = { pca: normalise(m.positions) };
+// the 1/p ("inverse") projection: same PCA on the inverted coordinate,
+// baked into the artefact. Present only on rebuilt maps.
+if (m.positions_inv) proj.inv = normalise(m.positions_inv);
+
+const geo = new THREE.BufferGeometry();
+geo.setAttribute("position", new THREE.BufferAttribute(proj.pca.pos, 3));
+const col = new Float32Array(m.n_records * 3);
+geo.setAttribute("color", new THREE.BufferAttribute(col, 3));
+const cloud = new THREE.Points(geo, new THREE.PointsMaterial({
+  size: 0.17, vertexColors: true, transparent: true, opacity: 0.88 }));
+scene.add(cloud);
+
+// ether surface: one mesh per projection that carries an ether grid
+// (PCA from the map artefact; t-SNE views from their own artefacts --
+// empty/sparse cells stay dim via the -1 sentinel, no interpolation)
+function buildEther(p, e) {
+  const { nx: gx, ny: gy, mean } = e;
+  const dx = (e.x1 - e.x0) / (gx - 1);
+  const dy = (e.y1 - e.y0) / (gy - 1);
+  const FLOOR = (p.z0 - (p.z0 + p.z1) / 2) * p.S - 4;
+  const vpos = new Float32Array(gx * gy * 3), vcol = new Float32Array(gx * gy * 3);
+  const dim = new THREE.Color(0x1d262c);
+  for (let i = 0; i < gx; i++) for (let j = 0; j < gy; j++) {
+    const vi = i * gy + j, s = mean[i * gy + j];
+    vpos[3*vi]   = ((e.x0 + i * dx) - (p.x0 + p.x1) / 2) * p.S;
+    vpos[3*vi+1] = FLOOR + (s < 0 ? 0 : s * 2.2);
+    vpos[3*vi+2] = -(((e.y0 + j * dy)) - (p.y0 + p.y1) / 2) * p.S;
+    const c = s < 0 ? dim
+      : new THREE.Color().setHSL(150 * s / 360, 0.55, 0.16 + 0.15 * s);
+    vcol[3*vi] = c.r; vcol[3*vi+1] = c.g; vcol[3*vi+2] = c.b;
+  }
+  const idx = [];
+  for (let i = 0; i < gx - 1; i++) for (let j = 0; j < gy - 1; j++) {
+    const a = i * gy + j, b = (i + 1) * gy + j, c2 = i * gy + j + 1,
+          d = (i + 1) * gy + j + 1;
+    idx.push(a, b, c2, b, d, c2);
+  }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute("position", new THREE.BufferAttribute(vpos, 3));
+  g.setAttribute("color", new THREE.BufferAttribute(vcol, 3));
+  g.setIndex(idx); g.computeVertexNormals();
+  const mesh = new THREE.Mesh(g, new THREE.MeshLambertMaterial({
+    vertexColors: true, transparent: true, opacity: 0.85,
+    side: THREE.DoubleSide }));
+  mesh.visible = false;   // born hidden; updateEther() is the only switch
+  return mesh;
+}
+const etherMeshes = { pca: buildEther(proj.pca, m.ether) };
+scene.add(etherMeshes.pca);
+etherMeshes.pca.visible = true;   // initial view is PCA with ether shown
+function updateEther() {
+  for (const [k, mesh] of Object.entries(etherMeshes))
+    mesh.visible = etherOn && method === k;
+}
+
+// tribe centroids (PCA space): real geometric landmarks -- an octahedron
+// per tribe, edge length growing with tribe population (log scale) and
+// face colour = the tribe's empirical success rate (the Ether scale), so
+// the cluster skeleton of the manifold is visible at a glance
+const tribesLayer = new THREE.Group();
+const maxN = Math.max(...m.tribes.map(t => t.n));
+m.tribes.forEach((t, i) => {
+  const size = 0.35 + 0.55 * Math.log1p(t.n) / Math.log1p(maxN);
+  const c = new THREE.Color().setHSL(150 * t.success_rate / 360, 0.6,
+                                     0.30 + 0.25 * t.success_rate);
+  const mesh = new THREE.Mesh(new THREE.OctahedronGeometry(size),
+    new THREE.MeshStandardMaterial({ color: c, emissive: c,
+      emissiveIntensity: 0.35, metalness: 0.4, roughness: 0.4,
+      transparent: true, opacity: 0.92 }));
+  mesh.position.set(
+    (t.x - (proj.pca.x0 + proj.pca.x1) / 2) * proj.pca.S,
+    (t.z - (proj.pca.z0 + proj.pca.z1) / 2) * proj.pca.S,
+    -(t.y - (proj.pca.y0 + proj.pca.y1) / 2) * proj.pca.S);
+  mesh.userData.tribeIndex = i;
+  mesh.userData.pcaPos = mesh.position.clone();
+  tribesLayer.add(mesh);
+});
+scene.add(tribesLayer);
+
+// tribe landmarks per projection: in PCA every glyph sits at its stored
+// label-space centroid; in the t-SNE views a SELECTED tribe's glyph moves
+// to the mean of its member points in the active layout (computed lazily,
+// one O(n) pass per projection, cached) so the landmark follows the view.
+// Unselected glyphs stay PCA-only -- a mean is an honest locator for a
+// tribe you asked about, not a skeleton for all 132 (t-SNE can split a
+// tribe into islands; the lifted member points carry the true shape).
+const tribeMeanCache = {};
+function tribeMeans() {
+  if (tribeMeanCache[method]) return tribeMeanCache[method];
+  const pos = geo.attributes.position.array;
+  const sums = m.tribes.map(() => [0, 0, 0, 0]);
+  for (let i = 0; i < m.n_records; i++) {
+    const s = sums[m.tribe_idx[i]];
+    s[0] += pos[3*i]; s[1] += pos[3*i+1]; s[2] += pos[3*i+2]; s[3]++;
+  }
+  return (tribeMeanCache[method] =
+    sums.map(s => s[3] ? [s[0]/s[3], s[1]/s[3], s[2]/s[3]] : null));
+}
+function updateTribeGlyphs() {
+  const filtered = selectedTribes.size > 0;
+  const means = method === "pca" ? null : tribeMeans();
+  for (const mesh of tribesLayer.children) {
+    const t = m.tribes[mesh.userData.tribeIndex];
+    const on = !filtered || selectedTribes.has(t.id);
+    if (method === "pca") {
+      mesh.position.copy(mesh.userData.pcaPos);
+      mesh.visible = true;
+    } else {
+      const mn = means[mesh.userData.tribeIndex];
+      mesh.visible = filtered && on && !!mn;
+      if (mesh.visible) mesh.position.set(mn[0], mn[1], mn[2]);
+    }
+    mesh.material.opacity = filtered ? (on ? 1.0 : 0.10) : 0.92;
+    mesh.material.emissiveIntensity = filtered ? (on ? 0.9 : 0.05) : 0.35;
+  }
+}
+
+// glowing spheres for selected points (the ECG viewer's selection style)
+const selGroup = new THREE.Group();
+scene.add(selGroup);
+
+let outcomeFilter = null;  // null = all, 1 = successful only, 0 = failed only
+function passesFilter(i) {
+  return visibleTeachers.has(m.persona_idx[i])
+      && (selectedTribes.size === 0
+          || selectedTribes.has(m.tribes[m.tribe_idx[i]].id))
+      && (actionFilter === null || m.action_idx[i] === actionFilter)
+      && (outcomeFilter === null || m.success[i] === outcomeFilter);
+}
+let scoreAction = null;   // action whose P(success) colours the cloud
+let avoidFilter = null;   // in Most Avoided mode, isolate one avoided action
+function baseColor(i) {
+  if (colorMode === "teacher")
+    return new THREE.Color(P_COHORT[m.persona_idx[i]] || "#a0b4c2");
+  if (colorMode === "outcome") return m.success[i] ? C_OK : C_BAD;
+  if (colorMode === "score" && scoreAction && m.scores_q) {
+    const v = (m.scores_q[scoreAction][i] || 0) / 99;   // 0..1 (see scores_q_kind)
+    if (m.actions[m.action_idx[i]] === scoreAction)
+      // the action's OWN states: full sequential ramp, dark -> bright blue
+      return new THREE.Color().setHSL(210 / 360, 0.75, 0.12 + 0.55 * v);
+    // other states recede but keep the gradient faintly readable
+    return new THREE.Color().setHSL(210 / 360, 0.25, 0.08 + 0.20 * v);
+  }
+  if (colorMode === "avoid" && m.avoid) {
+    const st = m.avoid.state[i];
+    if (st === -1) return C_DOOM;                 // doomed: all actions fail
+    const a = m.avoid.action[i];
+    if (avoidFilter !== null && a !== avoidFilter) return C_GREY;
+    if (st === 2) {                               // confirmed veto island
+      const g = (m.avoid.gap_q[i] || 0) / 99;     // bigger gap -> brighter
+      return actionColorByIdx(a).clone().multiplyScalar(0.55 + 0.45 * g);
+    }
+    if (st === 1)                                 // unknown: fog + faint hue
+      return actionColorByIdx(a).clone().lerp(C_FOG, 0.82);
+    return C_GREY;                                // no veto here
+  }
+  return actionColorByIdx(m.action_idx[i]);
+}
+// emphasis overlay: a subset of states redrawn with larger points so a shape
+// reads clearly instead of drowning among the 100k. Score mode lifts the
+// chosen action's own states; Most Avoided lifts the confirmed veto islands.
+let ownLayer = null;
+function rebuildOwnLayer() {
+  if (ownLayer) { scene.remove(ownLayer); ownLayer.geometry.dispose();
+                  ownLayer.material.dispose(); ownLayer = null; }
+  const src = geo.attributes.position.array;
+  const idxs = [], cols = [];
+  if (colorMode === "score" && scoreAction && m.scores_q) {
+    const aIdx = m.actions.indexOf(scoreAction);
+    for (let i = 0; i < m.n_records; i++)
+      if (m.action_idx[i] === aIdx && passesFilter(i)) {
+        idxs.push(i);
+        const v = (m.scores_q[scoreAction][i] || 0) / 99;
+        cols.push(new THREE.Color().setHSL(210 / 360, 0.85, 0.18 + 0.55 * v));
+      }
+  } else if (colorMode === "avoid" && m.avoid) {
+    for (let i = 0; i < m.n_records; i++) {
+      if (m.avoid.state[i] !== 2 || !passesFilter(i)) continue;
+      const a = m.avoid.action[i];
+      if (avoidFilter !== null && a !== avoidFilter) continue;
+      idxs.push(i);
+      const g = (m.avoid.gap_q[i] || 0) / 99;
+      cols.push(actionColorByIdx(a).clone().multiplyScalar(0.6 + 0.4 * g));
+    }
+  } else if (selectedTribes.size > 0) {
+    // tribe filter active in a plain colour mode: lift the members, same
+    // emphasis idiom as Score/Most Avoided -- a 1-2k-state tribe otherwise
+    // drowns among the 225k dimmed points at base point size
+    for (let i = 0; i < m.n_records; i++)
+      if (passesFilter(i)) { idxs.push(i); cols.push(baseColor(i)); }
+  } else return;
+  if (!idxs.length) return;
+  const p = new Float32Array(idxs.length * 3);
+  const c = new Float32Array(idxs.length * 3);
+  idxs.forEach((i, k) => {
+    p[3*k] = src[3*i]; p[3*k+1] = src[3*i+1]; p[3*k+2] = src[3*i+2];
+    c[3*k] = cols[k].r; c[3*k+1] = cols[k].g; c[3*k+2] = cols[k].b;
+  });
+  const g = new THREE.BufferGeometry();
+  g.setAttribute("position", new THREE.BufferAttribute(p, 3));
+  g.setAttribute("color", new THREE.BufferAttribute(c, 3));
+  ownLayer = new THREE.Points(g, new THREE.PointsMaterial({
+    size: 0.42, vertexColors: true, transparent: true, opacity: 0.95 }));
+  scene.add(ownLayer);
+}
+
+let visibleCount = 0;
+function repaint() {
+  visibleCount = 0;
+  for (let i = 0; i < m.n_records; i++) {
+    const ok = passesFilter(i);
+    if (ok) visibleCount++;
+    const c = ok ? baseColor(i) : C_DIM;
+    col[3*i] = c.r; col[3*i+1] = c.g; col[3*i+2] = c.b;
+  }
+  geo.attributes.color.needsUpdate = true;
+  // with a tribe filter active the emphasis overlay carries the members;
+  // the base cloud recedes so the tribe's shape reads against the fog
+  cloud.material.opacity = selectedTribes.size ? 0.35 : 0.88;
+  // centroid glyphs follow the filter and the active projection
+  updateTribeGlyphs();
+  rebuildOwnLayer();
+  $("ptcount").textContent =
+    `${visibleCount.toLocaleString()} / ${m.n_records.toLocaleString()} points`;
+  redrawSelection();
+}
+// deterministic verification hook (testing only; not part of the UI)
+window.__uni = { m, colorAt: i => baseColor(i).getHexString(),
+                 ownCount: () => ownLayer ? ownLayer.geometry.attributes.position.count : 0,
+                 camDist: () => camera.position.distanceTo(controls.target),
+                 zoomTarget: () => zoomTarget,
+                 stepZoom: () => { easeZoom(); return camera.position.distanceTo(controls.target); },
+                 cloudOpacity: () => cloud.material.opacity,
+                 posAt: i => Array.from(
+                   geo.attributes.position.array.slice(3*i, 3*i+3)),
+                 ownFirst: () => ownLayer ? Array.from(
+                   ownLayer.geometry.attributes.position.array.slice(0, 3))
+                   : null,
+                 glyphState: () => tribesLayer.children
+                   .filter(g => g.visible && g.material.opacity > 0.5)
+                   .map(g => ({ id: m.tribes[g.userData.tribeIndex].id,
+                                pos: g.position.toArray() })),
+                 glyphOpacities: () => {
+                   const lit = [], ghost = [];
+                   for (const g of tribesLayer.children)
+                     (g.material.opacity > 0.5 ? lit : ghost)
+                       .push(m.tribes[g.userData.tribeIndex].id);
+                   return { lit: lit.length, ghost: ghost.length,
+                            litIds: lit.slice(0, 5) };
+                 } };
+function redrawSelection() {
+  selGroup.clear();
+  const pos = geo.attributes.position.array;
+  for (const i of selected) {
+    const c = baseColor(i);
+    const s = new THREE.Mesh(new THREE.SphereGeometry(0.32, 16, 16),
+      new THREE.MeshStandardMaterial({ color: c, emissive: c,
+        emissiveIntensity: 0.9, metalness: 0.5, roughness: 0.3 }));
+    s.position.set(pos[3*i], pos[3*i+1], pos[3*i+2]);
+    selGroup.add(s);
+  }
+  const el2 = $("selcount");
+  el2.style.display = selected.size ? "inline-block" : "none";
+  el2.textContent = selected.size + " selected";
+}
+repaint();
+// updateLegend is defined below (hoisted function); show the initial legend
+updateLegend();
+
+// ---- projection switching
+$("methodNote").textContent = "PCA of the 11-dim calibrated score vectors";
+let methodReq = 0;   // last-click-wins: stale async loads must not apply
+async function setMethod(v) {
+  const req = ++methodReq;
+  if (v === "tsneinv" && !tsneInv) {
+    $("methodNote").textContent = "loading inverse t-SNE projection…";
+    const r = await fetch("/universe/map3d/tsne_inv", { cache: "no-store" });
+    if (!r.ok) { $("methodNote").textContent =
+      "inverse t-SNE not built yet — run build_universe_tsne oven_c4 inverse";
+      return; }
+    const art = await r.json();
+    tsneInv = normalise(art.positions);
+    if (art.ether) { etherMeshes.tsneinv = buildEther(tsneInv, art.ether);
+                     scene.add(etherMeshes.tsneinv); }
+  }
+  if (v === "tsneinvparam" && !tsneInvParam) {
+    $("methodNote").textContent = "loading parametric t-SNE 1/p…";
+    const r = await fetch("/universe/map3d/tsne_inv_param", { cache: "no-store" });
+    if (!r.ok) { $("methodNote").textContent =
+      "parametric t-SNE 1/p not built — run build_universe_tsne_param"; return; }
+    const art = await r.json();
+    tsneInvParam = normalise(art.positions);
+    if (art.ether) { etherMeshes.tsneinvparam =
+                       buildEther(tsneInvParam, art.ether);
+                     scene.add(etherMeshes.tsneinvparam); }
+  }
+  if (req !== methodReq) return;   // a newer click superseded this load
+  const p = v === "pca" ? proj.pca
+          : v === "tsneinv" ? tsneInv : tsneInvParam;
+  if (!p) { $("methodNote").textContent =
+    "projection unavailable — rebuild the map"; return; }
+  method = v;   // commit ONLY on success: an early return must never leave
+                // `method` pointing at a view whose cloud never loaded (the
+                // async ether add would then surface over the wrong scene)
+  geo.attributes.position.array.set(p.pos);
+  geo.attributes.position.needsUpdate = true;
+  updateEther();
+  // glyphs and the emphasis overlay both live in projection coordinates:
+  // reposition the landmarks and rebuild the lifted subset at the new
+  // geometry (a stale overlay would draw tribe members at PCA positions)
+  updateTribeGlyphs();
+  rebuildOwnLayer();
+  if (trajIdxs) buildTraj();   // reposition the shift path at the new geometry
+  $("methodNote").textContent = v === "pca"
+    ? "PCA of the 11-dim calibrated score vectors"
+    : v === "inv"
+    ? "PCA of the INVERSE coordinate (1/p): safe states collapse to a core,"
+      + " vetoes splay into per-action arms · ether/tribes shown in PCA only"
+    : v === "tsne"
+    ? "t-SNE (local neighbourhood structure) · tribes shown in PCA only"
+    : v === "tsneinv"
+    ? "t-SNE of the INVERSE coordinate (1/p): neighbourhoods driven by the"
+      + " veto structure · tribe skeleton in PCA; selected tribes shown here"
+    : "PARAMETRIC t-SNE 1/p (openTSNE): a shift's live states are transformed"
+      + " EXACTLY into this frozen map (the ATC method), not snapped";
+  document.querySelectorAll("#gMethod button").forEach(b =>
+    b.classList.toggle("active", b.dataset.v === v));
+  redrawSelection();
+}
+$("gMethod").querySelectorAll("button").forEach(b =>
+  b.onclick = () => setMethod(b.dataset.v));
+// parametric openTSNE projection: preload if its artefact exists, else hide
+// the button (so deleting the artefact fully reverts to the current methods)
+fetch("/universe/map3d/tsne_inv_param", { cache: "no-store" }).then(async r => {
+  if (r.ok) {
+    const art = await r.json();
+    tsneInvParam = normalise(art.positions);
+    if (art.ether) { etherMeshes.tsneinvparam =
+                       buildEther(tsneInvParam, art.ether);
+                     scene.add(etherMeshes.tsneinvparam);
+                     updateEther(); }
+  } else $("btnTsneInvParam").style.display = "none";
+}).catch(() => { $("btnTsneInvParam").style.display = "none"; });
+// (the P(success)/Classifier-P colour channel was removed from the demo
+// UI, 2026-08-16: the score data stays in the artefact for the API)
+// Most Avoided mode needs the avoidance classification in the artefact
+if (!m.avoid) $("btnAvoid").style.display = "none";
+$("gColor").querySelectorAll("button").forEach(b => b.onclick = () => {
+  colorMode = b.dataset.v;
+  actionFilter = null;   // isolation is an action-mode affordance only
+  avoidFilter = null;
+  document.querySelectorAll("#gColor button").forEach(x =>
+    x.classList.toggle("active", x === b));
+  updateLegend();
+  repaint();
+});
+// legend: the key to which colour is which action (or teacher), so the
+// groups are readable; clicking a row filters the cloud to that action
+function updateLegend() {
+  const L = $("actionLegend");
+  if (colorMode === "action") {
+    L.style.display = "block";
+    L.innerHTML = `<div style="color:var(--muted);margin-bottom:4px;
+      text-transform:uppercase;letter-spacing:.06em">action</div>` +
+      m.actions.map((a, i) => {
+        const on = actionFilter === null || actionFilter === i;
+        return `<div class="legrow" data-i="${i}" style="display:flex;gap:7px;
+          align-items:center;cursor:pointer;padding:1px 0;opacity:${on ? 1 : 0.35}">
+          <span style="width:11px;height:11px;border-radius:3px;flex:none;
+            background:#${ACTION_PAL[i % ACTION_PAL.length].getHexString()}"></span>
+          <span>${esc(a)}</span></div>`;
+      }).join("") +
+      (actionFilter !== null ? `<div class="sub" style="margin-top:5px;
+        cursor:pointer;color:var(--blue)" id="legClear">show all</div>` : "");
+    L.querySelectorAll(".legrow").forEach(r => r.onclick = () => {
+      const i = +r.dataset.i;
+      actionFilter = actionFilter === i ? null : i;
+      updateLegend(); repaint();
+    });
+    if ($("legClear")) $("legClear").onclick = () => {
+      actionFilter = null; updateLegend(); repaint(); };
+  } else if (colorMode === "teacher") {
+    L.style.display = "block";
+    L.innerHTML = `<div style="color:var(--muted);margin-bottom:4px;
+      text-transform:uppercase;letter-spacing:.06em">teacher</div>` +
+      TEACHERS.map((p, i) => `<div style="display:flex;gap:7px;align-items:center">
+        <span style="width:11px;height:11px;border-radius:3px;
+          background:${P_COHORT[i % P_COHORT.length]}"></span>${esc(p)}</div>`).join("");
+  } else if (colorMode === "avoid" && m.avoid) {
+    L.style.display = "block";
+    const av = m.avoid, S = av.summary;
+    const isl = S.reduce((s, r) => s + r.islands, 0);
+    const unk = S.reduce((s, r) => s + r.unknown, 0);
+    const rows = S.map(r => {
+      const ai = m.actions.indexOf(r.action);
+      const on = avoidFilter === null || avoidFilter === ai;
+      return `<div class="legrow" data-ai="${ai}" style="display:flex;gap:7px;
+        align-items:center;cursor:pointer;padding:1px 0;opacity:${on ? 1 : 0.35}">
+        <span style="width:11px;height:11px;border-radius:3px;flex:none;
+          background:#${ACTION_PAL[ai % ACTION_PAL.length].getHexString()}"></span>
+        <span style="flex:1">${esc(r.action)}</span>
+        <b style="color:var(--ink-1)" title="confirmed veto states">${r.islands}</b>
+        <span class="sub" title="unknown: asserted, no local data">+${r.unknown}</span>
+        </div>`;
+    }).join("");
+    L.innerHTML = `<div style="color:var(--muted);margin-bottom:4px;
+        text-transform:uppercase;letter-spacing:.06em">most avoided action</div>
+      <div class="sub" style="margin-bottom:6px">island
+        <b style="color:var(--ink-1)">${isl.toLocaleString()}</b> ·
+        unknown ${unk.toLocaleString()} ·
+        grey ${(m.n_records - isl - unk).toLocaleString()}</div>
+      ${rows}
+      <div class="sub" style="margin-top:7px;font-size:10.5px;line-height:1.45">
+        <b style="color:var(--ink-1)">confirmed</b> + unknown columns · bright =
+        veto confirmed (action fails where locally tried), faint = asserted but
+        never tried nearby, grey = no veto. click to isolate.
+        ${avoidFilter !== null ? '<br><span style="color:var(--blue);'
+          + 'cursor:pointer" id="avClear">show all actions</span>' : ''}
+        <br>validation: of ${av.validation.failed_states.toLocaleString()}
+        failed states, ${(av.validation.veto_flagged_frac * 100).toFixed(1)}%
+        took a flagged action (chance ~${(100 / m.actions.length).toFixed(0)}%).
+        </div>`;
+    L.querySelectorAll(".legrow").forEach(r => r.onclick = () => {
+      const ai = +r.dataset.ai;
+      avoidFilter = avoidFilter === ai ? null : ai;
+      updateLegend(); repaint();
+    });
+    if ($("avClear")) $("avClear").onclick = () => {
+      avoidFilter = null; updateLegend(); repaint(); };
+  } else {
+    L.style.display = "none";
+  }
+}
+$("btnEther").onclick = () => {
+  etherOn = !etherOn;
+  updateEther();
+  $("btnEther").textContent = etherOn ? "Ether: On" : "Ether: Off";
+  $("btnEther").classList.toggle("active", etherOn);
+};
+$("gOutcome").querySelectorAll("button").forEach(b => b.onclick = () => {
+  outcomeFilter = b.dataset.v === "all" ? null : +b.dataset.v;
+  document.querySelectorAll("#gOutcome button").forEach(x =>
+    x.classList.toggle("active", x === b));
+  repaint();
+});
+
+// ---- render loop / resize
+function resize() {
+  const w = el.clientWidth, h = el.clientHeight;
+  if (w === 0 || h === 0) return;   // element has no box yet: skip (NaN aspect
+  //                                   would blank the projection)
+  renderer.setSize(w, h); renderer.setPixelRatio(devicePixelRatio);
+  camera.aspect = w / h; camera.updateProjectionMatrix();
+}
+addEventListener("resize", resize);
+// a ResizeObserver fires the instant #scene actually gets its box, so the
+// canvas is sized correctly regardless of flex-layout / tab-backgrounding
+// timing (the two-timer approach could still miss on a slow first layout,
+// leaving a blank canvas over the control chrome -- the "shows the UI
+// instead of the universe" symptom)
+new ResizeObserver(resize).observe(el);
+resize();
+(function loop() { requestAnimationFrame(loop); easeZoom(); controls.update();
+                   renderer.render(scene, camera); })();
+
+// ---- selection (click / ctrl+click), ECG-viewer semantics
+const ray = new THREE.Raycaster();
+ray.params.Points.threshold = 0.26;
+renderer.domElement.addEventListener("click", async e => {
+  const r = renderer.domElement.getBoundingClientRect();
+  ray.setFromCamera(new THREE.Vector2(
+    ((e.clientX - r.left) / r.width) * 2 - 1,
+    -((e.clientY - r.top) / r.height) * 2 + 1), camera);
+  const hits = ray.intersectObject(cloud);
+  const hit = hits.find(h => passesFilter(h.index));
+  // tribe glyphs are solid geometry: when one is hit closer than any point,
+  // show the tribe card instead of selecting a state
+  const hitT = tribesLayer.visible
+    ? ray.intersectObject(tribesLayer, true)
+        .filter(h => h.object.visible)[0] : null;
+  if (hitT && (!hit || hitT.distance < hit.distance)) {
+    const t = m.tribes[hitT.object.userData.tribeIndex];
+    $("side").innerHTML = `<h3>Tribe</h3><div class="card" style="background:var(--card2);padding:10px 12px;border-radius:6px;font-size:13px">` +
+      `<b style="color:var(--ink-1)">${esc(t.id)}</b><br>action ${esc(t.action)}` +
+      `<br>${t.n.toLocaleString()} states · empirical success ` +
+      `<b style="color:var(--ink-1)">${(t.success_rate * 100).toFixed(0)}%</b>` +
+      `<br><span class="tag interactive" id="tribeFilterTag" style="margin-top:6px">filter to this tribe</span></div>`;
+    $("tribeFilterTag").onclick = () => {
+      selectedTribes.clear(); selectedTribes.add(t.id);
+      updateTribeCount(); renderTribeList(); repaint();
+    };
+    return;
+  }
+  if (!hit) return;
+  const i = hit.index;
+  if (e.ctrlKey || e.metaKey) {
+    selected.has(i) ? selected.delete(i) : selected.add(i);
+  } else {
+    selected.clear(); selected.add(i);
+  }
+  redrawSelection();
+  renderSide();
+});
+
+// ---- shift trajectory overlay: the shift theatre opens this explorer with
+// ?traj=<idx,idx,...>&ftick=<index>&shift=<n> -- each of a shift's states
+// snapped to its nearest RECORDED universe point (indices). Because those are
+// real points, they have coordinates in every projection, so the trajectory
+// is rebuilt at the active projection's positions and follows PCA / 1/p /
+// t-SNE / t-SNE 1/p alike. buildTraj() re-reads geo positions on each switch.
+let trajIdxs = null, trajFocus = 0, trajTicks = null, trajTimer = null;
+let trajTinv = null;   // exact parametric coords (raw), aligned with trajIdxs
+let updateNav = () => {};
+// scene position of trajectory state k: the EXACT transformed coord when the
+// parametric openTSNE projection is active (the ATC method), else the snapped
+// recorded point's position in the active projection.
+function trajPos(k) {
+  if (method === "tsneinvparam" && trajTinv && tsneInvParam &&
+      trajTinv.length === trajIdxs.length) {
+    const P = tsneInvParam, c = trajTinv[k];
+    return new THREE.Vector3(
+      (c[0] - (P.x0 + P.x1) / 2) * P.S,
+      (c[2] - (P.z0 + P.z1) / 2) * P.S,
+      -(c[1] - (P.y0 + P.y1) / 2) * P.S);
+  }
+  const arr = geo.attributes.position.array, gi = trajIdxs[k];
+  return new THREE.Vector3(arr[3*gi], arr[3*gi + 1], arr[3*gi + 2]);
+}
+function buildTraj() {
+  if (trajGroup) {
+    scene.remove(trajGroup);
+    trajGroup.traverse(o => { if (o.geometry) o.geometry.dispose();
+                              if (o.material) o.material.dispose(); });
+    trajGroup = null;
+  }
+  if (!trajIdxs || !trajIdxs.length) return null;
+  const pts = trajIdxs.map((_v, k) => trajPos(k));
+  trajGroup = new THREE.Group();
+  // bright WHITE path -- a neutral highlight not used by any action / veto /
+  // teacher colour, so the shift reads as an overlay over the coloured cloud.
+  // The current state is a larger sphere wrapped in an additive glow beacon.
+  trajGroup.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),
+    new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.9 })));
+  pts.forEach((p, i) => {
+    const f = i === trajFocus;
+    const mesh = new THREE.Mesh(new THREE.SphereGeometry(f ? 0.5 : 0.24, 16, 16),
+      new THREE.MeshStandardMaterial({ color: 0xffffff, emissive: 0xffffff,
+        emissiveIntensity: f ? 1.0 : 0.5 }));
+    mesh.position.copy(p);
+    trajGroup.add(mesh);
+    if (f) {
+      const halo = new THREE.Mesh(new THREE.SphereGeometry(1.25, 20, 20),
+        new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true,
+          opacity: 0.22, blending: THREE.AdditiveBlending, depthWrite: false }));
+      halo.position.copy(p);
+      trajGroup.add(halo);
+    }
+  });
+  scene.add(trajGroup);
+  return pts;
+}
+// move the focus to state i: rebuild the beacon, pan the camera to follow
+// (keeping the user's angle + zoom), select it so its record opens.
+function focusState(i) {
+  if (!trajIdxs) return;
+  trajFocus = Math.max(0, Math.min(trajIdxs.length - 1, i));
+  buildTraj();
+  const f = trajPos(trajFocus);            // exact marker (or snapped) position
+  const off = camera.position.clone().sub(controls.target);  // keep view
+  controls.target.copy(f);
+  camera.position.copy(f).add(off);
+  zoomTarget = off.length();
+  // select the nearest recorded point so its record opens (the exact live
+  // state isn't a recorded universe member)
+  selected.clear(); selected.add(trajIdxs[trajFocus]); redrawSelection(); renderSide();
+  updateNav();
+}
+function trajPlay() {
+  const btn = document.getElementById("tPlay");
+  if (trajTimer) {
+    clearInterval(trajTimer); trajTimer = null;
+    if (btn) btn.textContent = "▶ play"; return;
+  }
+  if (trajFocus >= trajIdxs.length - 1) focusState(0);
+  if (btn) btn.textContent = "⏸ pause";
+  trajTimer = setInterval(() => {
+    if (trajFocus >= trajIdxs.length - 1) {
+      clearInterval(trajTimer); trajTimer = null;
+      if (btn) btn.textContent = "▶ play"; return;
+    }
+    focusState(trajFocus + 1);
+  }, 900);
+}
+function showTrajectory() {
+  const q = new URLSearchParams(location.search);
+  if (!q.get("traj")) return;
+  trajIdxs = q.get("traj").split(",").map(Number)
+    .filter(i => Number.isInteger(i) && i >= 0 && i < m.n_records);
+  if (!trajIdxs.length) { trajIdxs = null; return; }
+  const tk = (q.get("ticks") || "").split(",").map(Number);
+  trajTicks = tk.length === trajIdxs.length ? tk : null;
+  // exact parametric coords (used only in the tsneinvparam projection)
+  const tinv = q.get("tinv");
+  trajTinv = tinv ? tinv.split(";").map(s => s.split(",").map(Number))
+    .filter(a => a.length === 3 && a.every(Number.isFinite)) : null;
+  if (trajTinv && trajTinv.length !== trajIdxs.length) trajTinv = null;
+  trajFocus = Math.max(0, Math.min(trajIdxs.length - 1,
+    parseInt(q.get("ftick") || "0", 10)));
+  buildTraj();
+  const f = trajPos(trajFocus);
+  controls.target.copy(f);
+  camera.position.copy(f).add(new THREE.Vector3(13, 10, 15));
+  zoomTarget = camera.position.distanceTo(controls.target);
+  selected.clear(); selected.add(trajIdxs[trajFocus]); redrawSelection(); renderSide();
+  // navigation panel: step through the shift's states along the path
+  const bs = "background:#2f343c;color:#e8edf2;border:0;border-radius:5px;" +
+    "padding:5px 9px;cursor:pointer;font-size:13px";
+  const nav = document.createElement("div");
+  nav.style.cssText = "position:absolute;bottom:18px;left:50%;transform:translateX(-50%);" +
+    "display:flex;gap:9px;align-items:center;background:rgba(26,30,36,.95);color:#e8edf2;" +
+    "padding:8px 14px;border-radius:9px;font-size:13px;z-index:25;border:1px solid #ffffff33;" +
+    "box-shadow:0 4px 20px rgba(0,0,0,.55)";
+  nav.title = "step through the shift's states (◀ ▶ or the ← → arrow keys)";
+  nav.innerHTML =
+    `<b style="color:#fff">shift ${esc(q.get("shift") ?? "")}</b>` +
+    `<button id="tPrev" style="${bs}">◀ prev</button>` +
+    `<button id="tPlay" style="${bs}">▶ play</button>` +
+    `<button id="tNext" style="${bs}">next ▶</button>` +
+    `<span id="tLabel" style="min-width:118px;text-align:center;color:#cfe6ff"></span>` +
+    `<input id="tSlider" type="range" min="0" max="${trajIdxs.length - 1}" ` +
+    `value="${trajFocus}" style="width:150px">` +
+    `<button id="tClose" style="${bs}" title="remove the trajectory">✕</button>`;
+  document.body.appendChild(nav);
+  updateNav = () => {
+    $("tLabel").textContent = `state ${trajFocus + 1} / ${trajIdxs.length}` +
+      (trajTicks ? ` · tick ${trajTicks[trajFocus]}` : "");
+    $("tSlider").value = trajFocus;
+  };
+  $("tPrev").onclick = () => focusState(trajFocus - 1);
+  $("tNext").onclick = () => focusState(trajFocus + 1);
+  $("tSlider").oninput = e => focusState(+e.target.value);
+  $("tPlay").onclick = trajPlay;
+  $("tClose").onclick = () => {
+    if (trajTimer) { clearInterval(trajTimer); trajTimer = null; }
+    trajIdxs = null; buildTraj(); nav.remove();
+  };
+  updateNav();
+  addEventListener("keydown", e => {
+    if (!trajIdxs || /input|textarea|select/i.test(e.target.tagName)) return;
+    if (e.key === "ArrowRight") { focusState(trajFocus + 1); e.preventDefault(); }
+    else if (e.key === "ArrowLeft") { focusState(trajFocus - 1); e.preventDefault(); }
+  });
+}
+showTrajectory();
+
+async function fetchDetail(i) {
+  return await (await fetch("/universe/state/" + i)).json();
+}
+
+async function renderSide() {
+  const side = $("side");
+  if (selected.size === 0) {
+    side.innerHTML = `<div class="nis"><div class="glyph">🖐</div>
+      <b style="color:var(--ink-1)">No Selection</b>
+      <div style="margin-top:6px">Click a point to select a recorded state.<br>
+      Hold Ctrl/Cmd to select multiple.</div></div>`;
+    return;
+  }
+  if (selected.size === 1) {
+    const i = [...selected][0];
+    side.innerHTML = `<h3>Selected State <button id="clearSel">✕ Clear</button></h3>
+      <div class="sub">loading record…</div>`;
+    $("clearSel").onclick = () => { selected.clear(); redrawSelection(); renderSide(); };
+    const d = await fetchDetail(i);
+    const sh = d.shift || {};
+    const bars = d.scores_top.map(([a, p]) =>
+      `<div class="bar"><span>${esc(a)}</span><div class="track">
+       <div class="fill" style="width:${(p*100).toFixed(0)}%"></div></div>
+       <span class="sub">${(p*100).toFixed(0)}%</span></div>`).join("");
+    const audit = Array.isArray(d.audit_top_features)
+      ? d.audit_top_features.slice(0, 6).map(f => Array.isArray(f)
+          ? `<div class="sub">${esc(f[0])} <b style="color:var(--ink-1)">${esc(
+              typeof f[1] === "number" ? f[1].toFixed(3) : f[1])}</b></div>`
+          : "").join("")
+      : `<div class="sub">${esc(String(d.audit_top_features)).slice(0, 200)}</div>`;
+    side.innerHTML = `<h3>Selected State <button id="clearSel">✕ Clear</button></h3>
+      <table class="detail">
+        <tr><td>State ID:</td><td>${esc(d.state_id)}</td></tr>
+        <tr><td>Shift:</td><td>${esc(d.example_id)} · tick ${d.tick}</td></tr>
+        <tr><td>Teacher:</td><td><span class="tag" style="background:${
+          P_COHORT[TEACHERS.indexOf(sh.persona)] ?? "#2f343c"}22;color:${
+          P_COHORT[TEACHERS.indexOf(sh.persona)] ?? "var(--ink-2)"}">${esc(sh.persona ?? "?")}</span></td></tr>
+        <tr><td>Action Taken:</td><td><b style="color:var(--ink-1)">${esc(d.action_taken)}</b></td></tr>
+        <tr><td>Outcome:</td><td><span class="tag ${d.outcome_success ? "success" : "danger"}">
+          ${d.outcome_success ? "Success" : "Failed"}</span>
+          <span class="sub"> score ${(d.outcome_score ?? 0).toFixed(2)}${
+            (sh.violation || sh.enders) ? " · " + esc(sh.violation || sh.enders) : ""}</span></td></tr>
+        ${
+          // domain-adaptive Example context: every remaining scalar field
+          // (OVEN shows directive/delivered; GRID shows regime/family/...)
+          Object.entries(sh).filter(([k, v]) =>
+            !["example_id", "persona", "success", "outcome_score",
+              "violation", "enders"].includes(k) && v !== null && v !== "")
+            .map(([k, v]) => `<tr><td>${esc(k.replace(/_/g, " "))}:</td><td>${esc(v)}</td></tr>`).join("")
+        }
+        <tr><td>Fold:</td><td>${d.fold}</td></tr>
+      </table>
+      <section class="block"><strong>Position</strong>
+        <div class="mono">x: ${geo.attributes.position.array[3*i].toFixed(3)}<br>
+        y: ${geo.attributes.position.array[3*i+1].toFixed(3)}<br>
+        z: ${geo.attributes.position.array[3*i+2].toFixed(3)}</div></section>
+      <section class="block"><strong>Coordinate — calibrated P(success | s, a)</strong>${bars}</section>
+      ${m.avoid ? `<section class="block"><strong>Most avoided action</strong><br>
+        <span class="tag" style="background:#${ACTION_PAL[m.avoid.action[i] %
+          ACTION_PAL.length].getHexString()}33;color:var(--ink-1)">${
+          esc(m.actions[m.avoid.action[i]])}</span>
+        <span class="sub"> ${({"-1": "doomed (all actions fail)",
+          "0": "no veto here", "1": "unknown — asserted, never tried nearby",
+          "2": "confirmed veto island"})[m.avoid.state[i]] || "no veto"} ·
+          gap ${((m.avoid.gap_q[i] || 0) / 99).toFixed(2)}</span></section>` : ""}
+      <section class="block"><strong>Tribe</strong><br>
+        <span class="tag interactive" id="tribeTag">${esc(d.tribe_id)}</span></section>
+      <section class="block"><strong>Audit — top features</strong>${audit}</section>`;
+    $("clearSel").onclick = () => { selected.clear(); redrawSelection(); renderSide(); };
+    $("tribeTag").onclick = () => {
+      selectedTribes.clear(); selectedTribes.add(d.tribe_id);
+      updateTribeCount(); renderTribeList(); repaint();
+    };
+    return;
+  }
+  // multi-select summary, like the ECG viewer
+  const idxs = [...selected];
+  side.innerHTML = `<h3>Selected States (${idxs.length})
+    <button id="clearSel">✕ Clear</button></h3>
+    <div class="sub" style="margin-bottom:10px">
+      ${idxs.filter(i => m.success[i]).length} successful,
+      ${idxs.filter(i => !m.success[i]).length} failed</div>
+    <div id="minis"></div>`;
+  $("clearSel").onclick = () => { selected.clear(); redrawSelection(); renderSide(); };
+  for (const i of idxs.slice(0, 30)) {
+    const a = m.actions[m.action_idx[i]];
+    $("minis").insertAdjacentHTML("beforeend",
+      `<div class="minicard" data-i="${i}"><div>
+        <b style="color:var(--ink-1)">#${i}</b>
+        <span class="sub"> ${esc(a)} · ${esc(m.tribes[m.tribe_idx[i]].id)}</span></div>
+        <span class="tag ${m.success[i] ? "success" : "danger"}">${m.success[i] ? "✓" : "✗"}</span>
+      </div>`);
+  }
+  $("minis").querySelectorAll(".minicard").forEach(c => c.onclick = () => {
+    selected.clear(); selected.add(+c.dataset.i);
+    redrawSelection(); renderSide();
+  });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+build/
+dist/
+
+# The neighbour index is a 132 MB pickled matrix, above GitHub's file limit.
+# It is rebuilt bit-identically on first start from the shipped scaler and
+# features (ui/nn_index.py); runs/manifests/release_files.json pins its hash.
+basis/oven_c5x_v5_clean/artefacts/index_nn.joblib
+basis/oven_c5x_v5_clean/artefacts/*.tmp
+
+# OS / editor
+.DS_Store
+Thumbs.db
+
+# local server logs
+ui_server*.log
+
+# per-machine Claude Code settings
+.claude/settings.local.json

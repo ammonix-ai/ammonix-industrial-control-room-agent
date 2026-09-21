@@ -1,0 +1,57 @@
+{
+  "dataset_id": "oven-c5",
+  "tables": {
+    "examples": {
+      "file": "examples.parquet",
+      "rows": 9870,
+      "sha256": "d0b6c0a302653a8cc66feaf9b35f91af129e27426085048126b30f586a1f9fa1"
+    },
+    "states": {
+      "file": "states.parquet",
+      "rows": 225644,
+      "sha256": "87f0c5c1efc60fddd91ef02bd4a46cdd5ba5e812e7268228bafd48ce9d8bcca5"
+    }
+  },
+  "provenance_sidecar": {
+    "file": "provenance.parquet",
+    "rows": 5437,
+    "sha256": "1fca16e83bd98512ca2cd5b8006fd2444e567d0e03fee9d1379118f32363528f"
+  },
+  "additions_hidden": {
+    "file": "data\\raw_c5\\hidden.parquet",
+    "sha256": "d59c7c033cb1431cb946161f8d030631815a5c63772d6db372724975dff8d3de"
+  },
+  "draw": {
+    "parent": "oven_c4",
+    "master_seed": 20260728,
+    "id_prefix": "c",
+    "generator_version_additions": "0.5.0",
+    "parent_master_seed": 20260715,
+    "parent_generator_version": "0.4.0",
+    "parent_examples_sha256": "c0b51f4ae41931170c9133c21b97840a312bfd4bc69ee0dafa72a856bd424feb",
+    "parent_states_sha256": "e7f4b596979371ae002d682128d991161fc33bfcc503d3a8d6aeaa665432a948",
+    "index_ranges": {
+      "scanA": [
+        0,
+        400000
+      ],
+      "pairs": [
+        1000000,
+        1030000
+      ],
+      "singles": [
+        2000000,
+        2030000
+      ],
+      "topup": [
+        3000000,
+        3450000
+      ]
+    }
+  },
+  "env": {
+    "polars": "1.42.1",
+    "pyarrow": "24.0.0",
+    "python": "3.13.13"
+  }
+}

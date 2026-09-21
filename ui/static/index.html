@@ -1,0 +1,754 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ammonix control-room agent — shift theatre</title>
+<style>
+  :root {
+    --surface-0: #121211; --surface-1: #1a1a19; --surface-2: #232322;
+    --line: #34342f;
+    --ink-1: #ffffff; --ink-2: #c3c2b7; --ink-3: #8a897f;
+    --s-blue: #3987e5; --s-aqua: #199e70; --s-yellow: #c98500;
+    --s-violet: #9085e9; --s-red: #e66767; --s-orange: #d95926;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body { background: var(--surface-0); color: var(--ink-2);
+         font: 13px/1.45 "Segoe UI", system-ui, sans-serif; height: 100vh;
+         display: flex; flex-direction: column; overflow: hidden; }
+  header { display: flex; gap: 12px; align-items: center; padding: 10px 16px;
+           background: var(--surface-1); border-bottom: 1px solid var(--line);
+           flex-wrap: wrap; }
+  header h1 { font-size: 15px; color: var(--ink-1); letter-spacing: .04em; }
+  header h1 span { color: var(--s-blue); }
+  select { background: var(--surface-2); color: var(--ink-1);
+           border: 1px solid var(--line); border-radius: 6px; padding: 4px 8px; }
+  .chip { padding: 2px 10px; border-radius: 10px; font-size: 11px;
+          font-weight: 600; letter-spacing: .03em; }
+  .chip.ok   { background: #0f2c0f; color: #7ed67e; border: 1px solid #1d4d1d; }
+  .chip.fail { background: #351616; color: var(--s-red); border: 1px solid #5a2626; }
+  #directive { flex-basis: 100%; padding: 6px 12px; border-radius: 8px;
+               background: var(--surface-2); border-left: 3px solid var(--s-violet);
+               color: var(--ink-2); font-style: italic; display: none; }
+  main { flex: 1; display: grid; grid-template-columns: minmax(430px, 46%) 1fr;
+         gap: 0; min-height: 0; }
+  #left { padding: 10px 14px; display: flex; flex-direction: column; gap: 10px;
+          min-height: 0; overflow-y: auto; }
+  #plant { background: var(--surface-1); border: 1px solid var(--line);
+           border-radius: 10px; }
+  .charts { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .panel { background: var(--surface-1); border: 1px solid var(--line);
+           border-radius: 10px; padding: 8px 10px; }
+  .panel h3 { font-size: 11px; color: var(--ink-3); text-transform: uppercase;
+              letter-spacing: .08em; margin-bottom: 4px; }
+  #feedwrap { border-left: 1px solid var(--line); min-height: 0;
+              display: flex; flex-direction: column; }
+  #feedhead { padding: 8px 14px; color: var(--ink-3); font-size: 11px;
+              text-transform: uppercase; letter-spacing: .08em;
+              border-bottom: 1px solid var(--line); }
+  #feed { flex: 1; overflow-y: auto; padding: 6px 10px; }
+  .tickrow { border: 1px solid var(--line); border-radius: 8px; margin: 6px 0;
+             padding: 7px 10px; background: var(--surface-1);
+             border-left-width: 4px; }
+  .tickrow.current { background: #17202c; }
+  .tickrow.L-m1 { border-left-color: var(--s-blue); }
+  .tickrow.L-controller { border-left-color: var(--s-aqua); }
+  .tickrow.L-intake { border-left-color: var(--s-yellow); }
+  .tickrow.L-guard { border-left-color: var(--s-red); }
+  .tickrow.L-landing { border-left-color: var(--s-yellow); }
+  .tickrow.L-ladder { border-left-color: var(--s-violet); }
+  .tickrow.L-fallback_hold { border-left-color: var(--ink-3); }
+  .rowtop { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .tno { color: var(--ink-3); font-variant-numeric: tabular-nums; width: 34px; }
+  .act { font-weight: 700; color: var(--ink-1); }
+  .layer { font-size: 10px; padding: 1px 8px; border-radius: 8px;
+           font-weight: 700; letter-spacing: .04em; }
+  .layer.m1 { background: #14263d; color: var(--s-blue); }
+  .layer.controller { background: #0f2a20; color: var(--s-aqua); }
+  .layer.intake { background: #2c1f0a; color: var(--s-yellow); }
+  .layer.guard { background: #351616; color: var(--s-red); }
+  .layer.landing { background: #2c1f0a; color: var(--s-yellow); }
+  .layer.ladder { background: #221e33; color: var(--s-violet); }
+  .layer.fallback_hold { background: var(--surface-2); color: var(--ink-3); }
+  .badge { font-size: 10px; padding: 1px 7px; border-radius: 8px;
+           border: 1px solid var(--line); color: var(--ink-2); }
+  .badge.escalate { border-color: var(--s-red); color: var(--s-red); }
+  .reason { margin-top: 3px; font-size: 11px; color: var(--ink-2); }
+  .why { margin-top: 2px; font-size: 11px; color: var(--ink-3); }
+  .payload { color: var(--ink-3); font-size: 11px; margin-top: 2px;
+             font-family: Consolas, monospace; }
+  .radio { margin: 6px 0; padding: 6px 10px; border-radius: 8px; font-size: 12px;
+           background: #241f14; border: 1px dashed var(--s-yellow);
+           color: #e8c47a; }
+  .radio::before { content: "📻 "; }
+  .event { margin: 6px 0; padding: 7px 10px; border-radius: 8px; font-size: 12px;
+           font-weight: 700; background: #351616; border: 1px solid var(--s-red);
+           color: var(--s-red); }
+  #mix .seg { height: 14px; display: inline-block; }
+  .legend { display: flex; gap: 12px; font-size: 10px; color: var(--ink-3);
+            margin-top: 4px; flex-wrap: wrap; }
+  .legend i { display: inline-block; width: 10px; height: 8px; margin-right: 4px;
+              vertical-align: middle; border-radius: 2px; }
+  #chat { border-top: 1px solid var(--line); display: flex;
+          flex-direction: column; max-height: 42%; background: var(--surface-1); }
+  #chathead { padding: 6px 14px; font-size: 11px; color: var(--ink-3);
+              text-transform: uppercase; letter-spacing: .08em;
+              display: flex; gap: 8px; align-items: center; }
+  #chathead b { color: var(--s-aqua); }
+  #chatlog { overflow-y: auto; padding: 4px 12px; flex: 1; min-height: 0; }
+  .msg { margin: 6px 0; padding: 7px 10px; border-radius: 9px; font-size: 12px;
+         max-width: 92%; white-space: pre-wrap; }
+  .msg.q { background: #14263d; color: var(--ink-1); margin-left: auto; }
+  .msg.a { background: var(--surface-2); border: 1px solid var(--line); }
+  .msg .tickchip { font-size: 10px; color: var(--s-aqua); margin-right: 6px; }
+  .msg.pending { color: var(--ink-3); font-style: italic; }
+  #chatrow { display: flex; gap: 8px; padding: 8px 12px;
+             border-top: 1px solid var(--line); }
+  #chatrow input { flex: 1; background: var(--surface-2); color: var(--ink-1);
+                   border: 1px solid var(--line); border-radius: 6px;
+                   padding: 6px 10px; font-size: 12px; }
+  footer { display: flex; gap: 12px; align-items: center; padding: 8px 16px;
+           background: var(--surface-1); border-top: 1px solid var(--line); }
+  button { background: var(--surface-2); border: 1px solid var(--line);
+           color: var(--ink-1); border-radius: 6px; padding: 5px 14px;
+           cursor: pointer; font-size: 13px; }
+  button:hover { border-color: var(--s-blue); }
+  input[type=range] { flex: 1; accent-color: var(--s-blue); }
+  #tlabel { min-width: 84px; color: var(--ink-1);
+            font-variant-numeric: tabular-nums; }
+  /* ---- first-visit welcome overlay */
+  #welcome { position: fixed; inset: 0; z-index: 50; display: flex; align-items: center;
+             justify-content: center; padding: 24px; background: rgba(8, 8, 7, .78);
+             backdrop-filter: blur(3px); }
+  #welcome[hidden] { display: none; }
+  .welcome-card { background: var(--surface-1); border: 1px solid var(--line);
+                  border-radius: 14px; max-width: 900px; width: 100%; max-height: 92vh;
+                  overflow-y: auto; padding: 26px 30px 22px; color: var(--ink-2);
+                  box-shadow: 0 24px 60px rgba(0,0,0,.55); font-size: 13.5px; line-height: 1.5; }
+  .welcome-card h2 { font-size: 20px; color: var(--ink-1); letter-spacing: .02em; }
+  .welcome-card h2 span { color: var(--s-blue); }
+  .welcome-tagline { margin: 6px 0 16px; color: var(--ink-2); font-size: 14px; }
+  .welcome-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 22px; }
+  .welcome-grid section h3 { font-size: 11px; color: var(--ink-3); text-transform: uppercase;
+                             letter-spacing: .08em; margin-bottom: 4px; }
+  .welcome-grid section p { margin: 0; }
+  .welcome-grid section.wide { grid-column: 1 / -1; }
+  .rules { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin: 4px 0 2px; }
+  .rule { background: var(--surface-2); border: 1px solid var(--line); border-radius: 9px;
+          padding: 8px 10px; }
+  .rule b { display: block; color: var(--ink-1); font-size: 12.5px; }
+  .rule span { font-size: 11.5px; color: var(--ink-2); }
+  .rule i { display: block; font-style: normal; color: var(--s-blue); font-size: 11px;
+            margin-top: 2px; font-variant-numeric: tabular-nums; }
+  .welcome-glossary { margin-top: 14px; border-top: 1px solid var(--line); padding-top: 10px; }
+  .welcome-glossary summary { cursor: pointer; color: var(--ink-1); font-size: 12.5px; }
+  .welcome-glossary dl { display: grid; grid-template-columns: max-content 1fr; gap: 4px 14px;
+                         margin: 10px 0 0; font-size: 12.5px; }
+  .welcome-glossary dt { color: var(--s-aqua); font-weight: 600; }
+  .welcome-glossary dd { margin: 0; }
+  .welcome-actions { display: flex; gap: 14px; align-items: center; justify-content: flex-end;
+                     margin-top: 18px; }
+  .welcome-actions label { font-size: 12px; color: var(--ink-3); display: flex; gap: 6px;
+                           align-items: center; cursor: pointer; }
+  .welcome-actions button { background: var(--s-blue); border-color: var(--s-blue);
+                            color: #fff; font-weight: 600; padding: 7px 18px; }
+  .welcome-actions button:hover { filter: brightness(1.12); }
+  #about { font-size: 12px; padding: 3px 10px; }
+  @media (max-width: 860px) {
+    .welcome-grid { grid-template-columns: 1fr; }
+    .rules { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+<!-- welcome:start -->
+<div id="welcome" hidden>
+  <div class="welcome-card" role="dialog" aria-modal="true" aria-labelledby="welcome-title">
+    <h2 id="welcome-title">Welcome to the <span>Ammonix shift theatre</span></h2>
+    <p class="welcome-tagline">A replay of 200 simulated shifts at a waste-to-energy plant, worked by
+      <b>Ammonix</b>: our harness deciding from recorded past shifts, with a local fine-tuned 9B model
+      (Ornith) as its only language model.</p>
+    <div class="welcome-grid">
+      <section class="wide"><h3>The plant</h3>
+        <p>Ammonix runs a simulated waste-to-energy plant: it burns waste to make electricity.
+        Trucks deliver waste into <b>three bunkers</b>, which feed the furnace. The picture at the
+        top left shows the queue, the bunkers, the furnace temperature reading and the emissions
+        column. A supervisor's directive (the day's orders) scales the delivery contract and sets
+        the budget.</p></section>
+      <section class="wide"><h3>Five rules of a shift</h3>
+        <div class="rules">
+          <div class="rule"><b>Delivery contract</b><span>each shift must deliver a set amount of electricity (MWh)</span><i>within 15% of the contract</i></div>
+          <div class="rule"><b>Emissions</b><span>never above the limit</span><i>28</i></div>
+          <div class="rule"><b>Furnace</b><span>temperature never above</span><i>1050 °C</i></div>
+          <div class="rule"><b>Budget</b><span>net spending within the directive's cap</span><i>10,000 EUR normally · 12,000 for maximum output · 7,000 when money is tight</i></div>
+          <div class="rule"><b>Bunkers</b><span>three bunkers, none overfilled</span><i>120 t each</i></div>
+        </div>
+        <p>Break one and the shift fails; emissions, furnace and bunker breaches end it on the spot.
+        A safety-first directive also adds a minimum safety margin.</p></section>
+      <section class="wide"><h3>One tick, one decision</h3>
+        <p>A shift is 24 ticks of 15 minutes. Every tick, the Ammonix system takes exactly one
+        action, for example routing or rejecting a truck, adjusting the furnace load, cleaning the
+        boiler or escalating to the supervisor. The feed on the right names the layer that chose it,
+        the action and its reason.</p></section>
+      <section class="wide"><h3>Try this first</h3>
+        <p>Press <b>play</b> and watch delivered energy chase the contract pace. Filter
+        <b>outcome: failure</b> and read in the Shift panel which rule broke. Scrub to a
+        <b>SAFETY GUARD</b> tick and read its reason; ask why if the dialog model is online.</p></section>
+    </div>
+    <details class="welcome-glossary">
+      <summary>What is on the screen (17 items)</summary>
+      <dl>
+        <dt>Shift picker and filters (top bar)</dt><dd>Choose any of the 200 sealed shifts, or narrow the list by directive, rare event (a grid emergency, a truck nobody ordered, or a spill into a bunker) or outcome.</dd>
+        <dt>Outcome chip (top bar, green or red)</dt><dd>SUCCESS with the shift's score, or FAILED naming the rule that broke; the Shift panel always shows the full verdict.</dd>
+        <dt>Supervisor directive (italic line under the top bar)</dt><dd>The day's orders: normal operations (balanced), maximise output, conserve budget or safety first. It scales the contract and sets the budget and safety floor.</dd>
+        <dt>Queue (top left of the picture)</dt><dd>The truck at the head of the queue, waiting to be routed, tested or rejected: its declared waste class, tonnage and lab status. A red border marks an unscheduled truck.</dd>
+        <dt>Bunkers B0, B1, B2 (middle of the picture)</dt><dd>Height is tonnes stored, out of 120; colour is how dirty the plant believes the waste is.</dd>
+        <dt>Furnace (below the bunkers)</dt><dd>The temperature reading in °C, the feed rate in t/h and the fouling bar (how dirty the boiler is). A cleaning takes the line down for 3 ticks and costs 3,000 EUR.</dd>
+        <dt>Emissions column (right of the picture)</dt><dd>This tick's emissions against the limit of 28: green, amber above 60% of the limit, red above 80%.</dd>
+        <dt>Delivered vs contract (left, under the picture)</dt><dd>Delivered energy so far against the dashed contract pace. The contract is set per shift, scaled by the directive and raised further by a grid emergency.</dd>
+        <dt>Budget spent (beside it)</dt><dd>Cumulative net cost (spending minus revenue from sold surplus) against the directive's cap; the line turns red once it crosses.</dd>
+        <dt>Who decided this shift (left, middle)</dt><dd>Share of ticks taken by each layer: learned judgment (the M1 writer with the M2 verifier), pace controller, intake gate, safety guard, landing controller, experience ladder or hold.</dd>
+        <dt>Shift panel (bottom left)</dt><dd>The per-rule verdict: delivered, budget, emissions, furnace, bunkers (and a safety row if the directive's floor was missed), the reported cause of a failure and the escalation count.</dd>
+        <dt>Decision feed (right)</dt><dd>One row per tick: the layer, the action and its payload, the logged reason and what similar recorded shifts did. Crew radio, grid-emergency and escalation banners appear inline.</dd>
+        <dt>Shift terminated (end of the feed)</dt><dd>A hard violation (emissions, furnace temperature, bunker overflow) ends the shift on the spot; the feed says so and no further ticks exist.</dd>
+        <dt>Ask why (bottom right)</dt><dd>The chat: ask about the tick on screen and it answers from that tick's recorded decision and plant state. Delivery-status questions are answered from the replay ledger without a model call; free questions need the dialog model online.</dd>
+        <dt>Tick (bottom bar)</dt><dd>One 15-minute step, numbered 0 to 23, 24 per shift; exactly one action by the Ammonix system per tick.</dd>
+        <dt>Play, speed, scrub (bottom bar)</dt><dd>Step through the ticks at slow, normal or fast, or drag the slider to any tick.</dd>
+        <dt>Locate in universe (bottom right)</dt><dd>Opens this shift's path in the 3-D Knowledge Universe explorer.</dd>
+      </dl>
+    </details>
+    <div class="welcome-actions">
+      <label><input type="checkbox" id="welcome-skip"> don't show this again</label>
+      <button id="welcome-go">Open the shift theatre</button>
+    </div>
+  </div>
+</div>
+<!-- welcome:end -->
+<header>
+  <h1>AMMONIX <span>control-room agent</span> · <span id="hl-label">sealed 200-shift evaluation</span></h1>
+  <select id="fDirective"><option value="">directive: all</option></select>
+  <select id="fEvent"><option value="">event: all</option></select>
+  <select id="fOutcome">
+    <option value="">outcome: all</option>
+    <option value="1">success</option><option value="0">failure</option>
+  </select>
+  <select id="shiftSel" style="min-width:230px"></select>
+  <span id="outcomeChip" class="chip"></span>
+  <button id="about" title="what am I looking at?">? about</button>
+  <div id="directive"></div>
+</header>
+<main>
+  <div id="left">
+    <svg id="plant" viewBox="0 0 460 300" aria-label="plant schematic"></svg>
+    <div class="charts">
+      <div class="panel"><h3>Delivered vs contract (MWh)</h3>
+        <svg id="chartOut" viewBox="0 0 210 92"></svg>
+        <div class="legend"><span><i style="background:var(--s-blue)"></i>delivered</span>
+        <span><i style="background:var(--ink-3)"></i>contract pace</span></div></div>
+      <div class="panel"><h3>Budget spent (EUR)</h3>
+        <svg id="chartBudget" viewBox="0 0 210 92"></svg>
+        <div class="legend"><span><i style="background:var(--s-yellow)"></i>net cost</span>
+        <span><i style="background:var(--s-red)"></i>budget cap</span></div></div>
+    </div>
+    <div class="panel"><h3>Who decided this shift</h3>
+      <div id="mix" style="border-radius:7px;overflow:hidden;white-space:nowrap"></div>
+      <div class="legend" id="mixlegend"></div></div>
+    <div class="panel"><h3>Shift</h3><div id="meta" style="font-size:12px"></div></div>
+  </div>
+  <div id="feedwrap">
+    <div id="feedhead">Ammonix decision feed — every tick: which layer acted, what it saw, why</div>
+    <div id="feed"></div>
+    <div id="chat">
+      <div id="chathead">ask why — <b id="chatmodel">the operator dialog model</b> ·
+        answers from the recorded decision at <span id="chattick">tick 0</span></div>
+      <div id="chatnote" style="display:none;padding:0 14px 6px;font-size:11px;color:var(--ink-3)"></div>
+      <div id="chatlog"></div>
+      <div id="chatrow">
+        <input id="chatq" placeholder="why did it take this action?"
+               maxlength="500" autocomplete="off">
+        <button id="chatsend">ask</button>
+      </div>
+    </div>
+  </div>
+</main>
+<footer>
+  <button id="play">▶ play</button>
+  <select id="speed"><option value="1200">slow</option>
+    <option value="700" selected>normal</option><option value="300">fast</option></select>
+  <input type="range" id="scrub" min="0" max="23" value="0">
+  <span id="tlabel">tick 0 / 23</span>
+  <button id="locate" title="open this state and the whole shift's path in the 3D Knowledge Universe explorer">🔭 locate in universe</button>
+</footer>
+<script>
+const $ = id => document.getElementById(id);
+let shifts = [], shift = null, t = 0, timer = null, META = {policy: "", headline: ""};
+
+const LAYERS = {
+  m1:            { name: "LEARNED JUDGMENT + M1", color: "var(--s-blue)" },
+  controller:    { name: "PACE CONTROLLER",       color: "var(--s-aqua)" },
+  intake:        { name: "INTAKE GATE",           color: "var(--s-yellow)" },
+  guard:         { name: "SAFETY GUARD",          color: "var(--s-red)" },
+  landing:       { name: "LANDING CONTROLLER",    color: "var(--s-yellow)" },
+  ladder:        { name: "EXPERIENCE LADDER",     color: "var(--s-violet)" },
+  fallback_hold: { name: "HOLD",                  color: "var(--ink-3)" },
+};
+const REASONS = {
+  raise_toward_required: "behind pace — raising output toward the requirement",
+  lower_toward_required: "ahead of pace — lowering output toward the requirement",
+  sell_overshoot: "projected overshoot — selling the surplus",
+  cover_shortfall: "late shortfall — buying cover within budget",
+  blend_steer: "predicted emissions high — steering the blend clean",
+  fouling_clean: "fouling-driven heat — scheduling a cleaning",
+  belief_discrepancy: "stack contradicts believed blend — calling the supervisor",
+  throttle: "no clean blend feasible — throttling down one step",
+  lab_shows_dirty: "lab result shows contamination — rejecting the load",
+  route_lab_cleared: "lab-cleared — routing before the truck departs",
+  declared_unroutable: "manifest declares an unroutable load — rejecting",
+  no_bunker_fits: "no bunker fits the cleared load — rejecting",
+};
+const reasonText = r => {
+  if (!r) return "";
+  if (r.startsWith("suspicion:"))
+    return "suspicious truck (" + r.slice(10).replaceAll("_", " ") + ") — ordering a lab test";
+  return REASONS[r] || r;
+};
+const contamColor = c => {
+  const x = Math.max(0, Math.min(1, (c - 0.05) / 0.55));
+  const h = 150 - 150 * x;
+  return `hsl(${h} 55% ${38 - 8 * x}%)`;
+};
+const esc = s => String(s ?? "").replace(/[&<>"]/g,
+  c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+async function boot() {
+  try {
+    META = await (await fetch("/ammonix/meta")).json();
+    const hl = $("hl-label"); if (hl) hl.textContent = META.headline;
+    const cm = $("chatmodel"); if (cm) cm.textContent = META.explainer_model;
+    const locate = $("locate");
+    if (locate && META.universe_url)
+      locate.title = "open this shift in the 3D Knowledge Universe explorer (" + META.universe_url + ")";
+  } catch (e) { /* older server without /meta: keep default labels */ }
+  // the operator dialog: say what answers it, and whether it is reachable.
+  // Hosted stock Qwen is not the pinned model that operated the shifts, so
+  // a remote backend is disclosed to the visitor (same rule as the RCM demo).
+  try {
+    const h = await (await fetch("/ammonix/llm_health")).json();
+    const note = $("chatnote");
+    if (!h.available) {
+      note.textContent = "dialog model offline — only delivery-status questions are " +
+        "answered (from the replay ledger, no model call). Start or configure the " +
+        "dialog backend to enable free questions.";
+      note.style.display = "block";
+    } else if (h.remote) {
+      note.textContent = "Live answers come from stock " + (h.model || "Qwen") +
+        " via a hosted API; it reads the recorded decision and plant state of the " +
+        "tick on screen. The recorded shifts themselves were operated by the " +
+        "fine-tuned local writer named in the header.";
+      note.style.display = "block";
+    }
+  } catch (e) { /* no health endpoint: leave the chat as is */ }
+  shifts = await (await fetch("/ammonix/shifts")).json();
+  const fill = (id, key) => {
+    const vals = [...new Set(shifts.map(s => s[key]))].sort();
+    for (const v of vals) $(id).insertAdjacentHTML("beforeend",
+      `<option value="${esc(v)}">${esc(v)}</option>`);
+  };
+  fill("fDirective", "directive_type");
+  // world v0.4 amendment: compound rare_event labels split into constituents
+  const evs = [...new Set(shifts.flatMap(s => s.rare_event.split("+")))].sort();
+  for (const v of evs) $("fEvent").insertAdjacentHTML("beforeend",
+    `<option value="${esc(v)}">${esc(v)}</option>`);
+  for (const id of ["fDirective","fEvent","fOutcome"])
+    $(id).onchange = refreshList;
+  $("shiftSel").onchange = () => loadShift($("shiftSel").value);
+  refreshList();
+}
+
+function refreshList() {
+  const f = k => $(k).value;
+  const match = s =>
+    (!f("fDirective") || s.directive_type === f("fDirective")) &&
+    (!f("fEvent") || s.rare_event.split("+").includes(f("fEvent"))) &&
+    (f("fOutcome") === "" || String(+s.success) === f("fOutcome"));
+  const list = shifts.filter(match);
+  $("shiftSel").innerHTML = list.map(s =>
+    `<option value="${s.shift_index}">shift ${String(s.shift_index).padStart(3, "0")}` +
+    ` · ${s.directive_type}${s.rare_event !== "none" ? " · " + s.rare_event : ""}` +
+    ` · ${s.success ? "✓" : "✗ " + (s.violation ?? "criteria")}</option>`
+  ).join("");
+  if (list.length) loadShift(list[0].shift_index);
+}
+
+async function loadShift(idx) {
+  shift = await (await fetch("/ammonix/shift/" + idx)).json();
+  t = 0; stop();
+  $("scrub").max = shift.ticks.length - 1; $("scrub").value = 0;
+  const s = shift.summary;
+  $("outcomeChip").className = "chip " + (s.success ? "ok" : "fail");
+  $("outcomeChip").textContent = s.success
+    ? `SUCCESS · score ${s.score.toFixed(2)}`
+    : `FAILED · ${s.violation ?? "criteria"}`;
+  $("directive").style.display = "block";
+  $("directive").textContent =
+    `Supervisor (${s.directive_type}): ${shift.directive_text}`;
+  const rp = s.repr;
+  // Per-constraint outcome from the backend, scored on the TRUE post-action
+  // trajectory (so a final-tick spike the displayed ticks miss is still
+  // counted). Every breached constraint shows red; the recorded `violation`
+  // is marked as the priority cause. Silent numeric fallback if the server
+  // predates this field.
+  const od = shift.outcome_detail;
+  if (!od) {
+    const dv = (s.delivered_mwh - s.contract_mwh).toFixed(1);
+    $("meta").innerHTML =
+      `<b style="color:var(--ink-1)">shift ${s.shift_index}</b> — Ammonix operating (${META.policy})` +
+      `<div style="margin-top:8px">delivered ${s.delivered_mwh} / ${s.contract_mwh} MWh ` +
+      `(${dv >= 0 ? "+" : ""}${dv}) · net cost €${Math.round(s.net_cost).toLocaleString()} ` +
+      `· escalations ${s.escalations}</div>`;
+    renderMix(s); resetChat(); render(); return;
+  }
+  const dvn = od.delivered - od.contract;
+  const row = (label, text, good, cause) =>
+    `<div style="display:flex;gap:7px;align-items:baseline;margin:3px 0">` +
+    `<span style="width:11px;color:${good ? "#7ed67e" : "var(--s-red)"}">${good ? "✓" : "✗"}</span>` +
+    `<span style="color:var(--ink-3);width:74px">${label}</span>` +
+    `<b style="color:${good ? "var(--ink-1)" : "var(--s-red)"}">${text}</b>` +
+    (cause ? ` <span style="color:var(--s-red);font-size:11px">← reported cause</span>` : "") +
+    `</div>`;
+  $("meta").innerHTML =
+    `<b style="color:var(--ink-1)">shift ${s.shift_index}</b> — Ammonix operating (${META.policy})` +
+    (s.rare_event !== "none" ? `, rare event <b style="color:var(--s-red)">${esc(s.rare_event)}</b>` : "") +
+    `<div style="margin-top:8px">` +
+      row("delivered", `${od.delivered} / ${od.contract} MWh (${dvn >= 0 ? "+" : ""}${dvn.toFixed(1)})`,
+        od.delivery_ok, od.violation === "delivery_miss") +
+      row("budget", `€${Math.round(od.net_cost).toLocaleString()} / €${Math.round(od.budget).toLocaleString()} spent`,
+        od.budget_ok, !od.budget_ok && !od.violation) +
+      row("emissions", od.emissions_ok ? `stayed under ${od.emissions_limit} (peak ${od.peak_emissions})`
+        : `hit ${od.peak_emissions} — over the ${od.emissions_limit} limit`, od.emissions_ok, od.violation === "emissions") +
+      row("furnace", od.temp_ok ? `stayed under ${od.temp_limit}°C (peak ${od.peak_temp})`
+        : `hit ${od.peak_temp}°C — over the ${od.temp_limit} limit`, od.temp_ok, od.violation === "overtemp") +
+      row("bunkers", od.bunker_ok ? `within capacity (peak ${od.peak_bunker} / ${od.bunker_cap} t)`
+        : `overfilled (peak ${od.peak_bunker} / ${od.bunker_cap} t)`, od.bunker_ok, od.violation === "overflow") +
+      (!od.safety_ok
+        ? row("safety", `directive floor not met (margin ${od.safety_margin})`, false,
+          od.violation === "directive_safety_floor") : "") +
+    `</div>` +
+    `<div style="margin-top:7px;color:var(--ink-3);font-size:11px">escalations ${s.escalations}` +
+      (rp ? ` · world winnable by <b style="color:var(--ink-1)">${rp.teachers_won}/3 teachers</b>` +
+        (rp.teachers_won === 0 ? ` <span style="color:var(--s-violet);font-weight:700">${s.success ? "— Ammonix won it anyway" : "— nobody landed this one"}</span>` : "") : "") +
+    `</div>`;
+  renderMix(s);
+  resetChat();
+  render();
+}
+
+function renderMix(s) {
+  const parts = [["m1", s.executed], ["controller", s.controller],
+    ["intake", s.intake], ["guard", s.guard], ["landing", s.landing],
+    ["ladder", s.ladder],
+    ["fallback_hold", s.fallback_hold]].filter(([, v]) => v > 0);
+  const total = parts.reduce((a, [, v]) => a + v, 0) || 1;
+  $("mix").innerHTML = parts.map(([k, v]) =>
+    `<span class="seg" style="width:${(100 * v / total).toFixed(1)}%;background:${LAYERS[k].color}" title="${LAYERS[k].name}: ${v}"></span>`).join("");
+  $("mixlegend").innerHTML = parts.map(([k, v]) =>
+    `<span><i style="background:${LAYERS[k].color}"></i>${LAYERS[k].name} ${v}</span>`).join("");
+}
+
+function scrollFeed() {
+  const cur = document.querySelector(".tickrow.current");
+  if (cur) cur.scrollIntoView({ block: "nearest" });
+}
+
+function render() {
+  if (!shift) return;
+  const ticks = shift.ticks, tk = ticks[t], n = ticks.length;
+  $("tlabel").textContent = `tick ${tk.tick} / 23`;
+  $("scrub").value = t;
+  renderPlant(tk);
+  renderCharts(ticks, t);
+  renderFeed(ticks, t);
+  scrollFeed();
+  chatTickLabel();
+}
+
+function renderPlant(tk) {
+  const o = tk.obs, W = 460;
+  let s = "";
+  if (o.obs_grid_alert) s +=
+    `<rect x="0" y="0" width="${W}" height="18" fill="#351616"/>` +
+    `<text x="${W/2}" y="13" fill="#e66767" font-size="11" text-anchor="middle" font-weight="bold">⚡ GRID EMERGENCY — contract uplifted</text>`;
+  s += `<text x="14" y="40" fill="#8a897f" font-size="10">QUEUE (${o.obs_queue_len})</text>`;
+  if (o.obs_queue_head_present) {
+    const rogue = (o.obs_queue_head_supplier || "").startsWith("X");
+    s += `<rect x="10" y="46" width="96" height="64" rx="7" fill="#232322" stroke="${rogue ? "#e66767" : "#34342f"}"/>` +
+      `<text x="18" y="62" fill="#ffffff" font-size="11" font-weight="bold">🚚 ${esc(o.obs_queue_head_supplier)}</text>` +
+      `<text x="18" y="76" fill="#c3c2b7" font-size="10">${esc(o.obs_queue_head_class)} · ${Math.round(o.obs_queue_head_tonnage)} t</text>` +
+      `<text x="18" y="89" fill="#8a897f" font-size="9">decl CV ${o.obs_queue_head_declared_cv} · c ${o.obs_queue_head_declared_contam}</text>` +
+      `<text x="18" y="102" fill="${o.obs_queue_head_lab_status === "known" ? "#7ed67e" : o.obs_queue_head_lab_status === "pending" ? "#c98500" : "#8a897f"}" font-size="9">lab: ${o.obs_queue_head_lab_status}</text>`;
+  } else {
+    s += `<rect x="10" y="46" width="96" height="64" rx="7" fill="none" stroke="#34342f" stroke-dasharray="4 3"/>` +
+      `<text x="58" y="82" fill="#55544c" font-size="10" text-anchor="middle">no truck</text>`;
+  }
+  tk.bunkers.forEach((b, i) => {
+    const x = 140 + i * 74, cap = 120, h = 120, fillH = Math.min(1, b.mass / cap) * h;
+    s += `<rect x="${x}" y="46" width="54" height="${h}" rx="6" fill="#232322" stroke="#34342f"/>` +
+      `<rect x="${x}" y="${46 + h - fillH}" width="54" height="${fillH}" rx="5" fill="${contamColor(b.contam)}"/>` +
+      `<text x="${x + 27}" y="${46 + h + 14}" fill="#c3c2b7" font-size="10" text-anchor="middle">B${i} · ${Math.round(b.mass)}t</text>`;
+  });
+  const temp = o.trace_temp_c || 850, glow = Math.max(0, Math.min(1, (temp - 800) / 300));
+  const em = o.trace_emissions || 0, emFrac = Math.min(1, em / 28);
+  s += `<rect x="150" y="222" width="170" height="60" rx="9" fill="#232322" stroke="#34342f"/>` +
+    `<circle cx="180" cy="252" r="17" fill="hsl(${30 - 25 * glow} 85% ${30 + 25 * glow}%)"/>` +
+    `<text x="210" y="246" fill="#ffffff" font-size="11">FURNACE ${Math.round(temp)}°C</text>` +
+    `<text x="210" y="260" fill="#8a897f" font-size="9">feed ${o.obs_feed_tph} t/h · fouling ${(o.obs_fouling * 100).toFixed(0)}%</text>` +
+    `<rect x="210" y="266" width="90" height="6" rx="3" fill="#121211"/>` +
+    `<rect x="210" y="266" width="${90 * Math.min(1, o.obs_fouling)}" height="6" rx="3" fill="#d95926"/>`;
+  if (o.obs_line_down_ticks > 0) s +=
+    `<text x="235" y="230" fill="#c98500" font-size="10" font-weight="bold" text-anchor="middle">🔧 CLEANING — down ${o.obs_line_down_ticks} ticks</text>`;
+  if (o.obs_escalate_hold > 0) s +=
+    `<rect x="150" y="196" width="170" height="20" rx="6" fill="#241f2e" stroke="#9085e9"/>` +
+    `<text x="235" y="210" fill="#9085e9" font-size="10" text-anchor="middle" font-weight="bold">SUPERVISOR ON THE FLOOR</text>`;
+  s += `<text x="360" y="60" fill="#8a897f" font-size="10">EMISSIONS</text>` +
+    `<rect x="360" y="66" width="18" height="110" rx="4" fill="#232322" stroke="#34342f"/>` +
+    `<rect x="360" y="${66 + 110 * (1 - emFrac)}" width="18" height="${110 * emFrac}" rx="4" fill="${emFrac > 0.8 ? "#e66767" : emFrac > 0.6 ? "#c98500" : "#199e70"}"/>` +
+    `<line x1="356" y1="66" x2="382" y2="66" stroke="#e66767" stroke-width="2"/>` +
+    `<text x="388" y="${70 + 110 * (1 - emFrac)}" fill="#c3c2b7" font-size="9">${em.toFixed(1)}</text>` +
+    `<text x="360" y="192" fill="#55544c" font-size="9">limit 28</text>`;
+  $("plant").innerHTML = s;
+}
+
+function line(points, color, dash) {
+  return `<polyline points="${points}" fill="none" stroke="${color}" stroke-width="2" ${dash ? 'stroke-dasharray="4 3"' : ""} stroke-linejoin="round"/>`;
+}
+
+function renderCharts(ticks, upto) {
+  const n = ticks.length, W = 210, H = 92, px = i => 8 + i * (W - 16) / Math.max(1, n - 1);
+  const contract = ticks[ticks.length - 1].obs.obs_contract_mwh;
+  const maxY = contract * 1.2;
+  const py = v => H - 10 - Math.min(1, v / maxY) * (H - 20);
+  let del = "", pace = "";
+  for (let i = 0; i <= upto; i++)
+    del += `${px(i)},${py(ticks[i].obs.obs_delivered_mwh)} `;
+  for (let i = 0; i < n; i++)
+    pace += `${px(i)},${py(ticks[i].obs.obs_contract_mwh * (i / Math.max(1, n - 1)))} `;
+  $("chartOut").innerHTML =
+    `<line x1="8" y1="${H-10}" x2="${W-8}" y2="${H-10}" stroke="#34342f"/>` +
+    `<line x1="8" y1="${py(contract)}" x2="${W-8}" y2="${py(contract)}" stroke="#55544c" stroke-dasharray="2 3"/>` +
+    line(pace.trim(), "var(--ink-3)", true) + line(del.trim(), "#3987e5") +
+    `<circle cx="${px(upto)}" cy="${py(ticks[upto].obs.obs_delivered_mwh)}" r="3.5" fill="#3987e5" stroke="#1a1a19" stroke-width="2"/>`;
+  renderBudget(ticks, upto);
+}
+
+// cumulative net cost AFTER each tick's action settles, vs the directive's
+// budget cap. The settled cost after tick i is the cost observed at the start
+// of tick i+1; the final tick settles to the shift's outcome net cost (the
+// value that actually breaches the cap). The line turns red once it crosses.
+function renderBudget(ticks, upto) {
+  const n = ticks.length, W = 210, H = 92, px = i => 8 + i * (W - 16) / Math.max(1, n - 1);
+  const budget = ticks[n - 1].obs.obs_budget || 10000;
+  const finalCost = (shift && shift.summary && shift.summary.net_cost != null)
+    ? shift.summary.net_cost : (ticks[n - 1].obs.obs_net_cost || 0);
+  const settled = i => (i < n - 1) ? (ticks[i + 1].obs.obs_net_cost || 0) : finalCost;
+  const costs = ticks.map((_, i) => settled(i));
+  const lo = Math.min(0, ...costs), hi = Math.max(budget, ...costs);
+  const span = (hi - lo) || 1;
+  const py = v => H - 8 - (v - lo) / span * (H - 16);
+  const over = costs[upto] > budget;
+  let cost = "";
+  for (let i = 0; i <= upto; i++) cost += `${px(i)},${py(costs[i]).toFixed(1)} `;
+  const zeroY = py(0);
+  $("chartBudget").innerHTML =
+    (lo < 0 ? `<line x1="8" y1="${zeroY.toFixed(1)}" x2="${W-8}" y2="${zeroY.toFixed(1)}" stroke="#34342f"/>` : "") +
+    `<line x1="8" y1="${py(budget).toFixed(1)}" x2="${W-8}" y2="${py(budget).toFixed(1)}" stroke="var(--s-red)" stroke-dasharray="2 3"/>` +
+    `<text x="${W-8}" y="${(py(budget)-2).toFixed(1)}" fill="var(--s-red)" font-size="8" text-anchor="end">cap ${Math.round(budget)}</text>` +
+    line(cost.trim(), over ? "var(--s-red)" : "var(--s-yellow)") +
+    `<circle cx="${px(upto)}" cy="${py(costs[upto]).toFixed(1)}" r="3.5" fill="${over ? "var(--s-red)" : "var(--s-yellow)"}" stroke="#1a1a19" stroke-width="2"/>` +
+    `<text x="10" y="12" fill="var(--ink-2)" font-size="9">${Math.round(costs[upto])} / ${Math.round(budget)}</text>`;
+}
+
+function supportText(k) {
+  if (!k.support_counts) return "";
+  const parts = Object.entries(k.support_counts)
+    .sort((a, b) => b[1] - a[1]).slice(0, 3)
+    .map(([a, v]) => `${a.replace("_delivery", "").replace("request_lab_analysis", "lab test")} ${v}`);
+  return `similar shifts took: ${parts.join(", ")}`;
+}
+
+function renderFeed(ticks, upto) {
+  let html = "";
+  for (let i = 0; i <= upto; i++) {
+    const k = ticks[i];
+    if (k.obs.radio_text) html += `<div class="radio">${esc(k.obs.radio_text)}</div>`;
+    if (k.obs.obs_grid_alert && (i === 0 || !ticks[i-1].obs.obs_grid_alert))
+      html += `<div class="event">⚡ GRID EMERGENCY DECLARED</div>`;
+    if (k.executed === "escalate_to_supervisor")
+      html += `<div class="event" style="border-color:var(--s-violet);color:var(--s-violet);background:#241f2e">📞 ESCALATED TO THE SUPERVISOR</div>`;
+    const L = LAYERS[k.path] || LAYERS.m1;
+    const skill = k.skill_id || "";
+    let why = "";
+    if (k.path === "m1") {
+      why = `platform recommended <b>${esc(k.recommended)}</b>; M1 computed the payload, M2 verified it`;
+      if (k.m1_action && k.m1_action !== k.recommended)
+        why = `platform routed via skill to <b>${esc(k.m1_action)}</b>; M2 verified it`;
+    } else if (k.reason) {
+      why = esc(reasonText(k.reason));
+    }
+    const sup = supportText(k);
+    html += `<div class="tickrow L-${k.path} ${i === upto ? "current" : ""}">` +
+      `<div class="rowtop"><span class="tno">t${String(k.tick).padStart(2, "0")}</span>` +
+      `<span class="layer ${k.path}">${L.name}</span>` +
+      `<span class="act"${skill ? ` title="skill ${esc(skill)}"` : ""}>${esc(k.executed)}</span>` +
+      (skill.startsWith("escalate_") ? `<span class="badge escalate">escalate region</span>` : "") +
+      (k.escalate_suppressed ? `<span class="badge">escalation cooling down</span>` : "") +
+      (k.gate_standdown ? `<span class="badge" style="border-color:var(--s-orange);color:var(--s-orange)">gate stood down: contamination</span>` : "") +
+      `</div>` +
+      (why ? `<div class="reason">${why}</div>` : "") +
+      (k.gate_standdown ? `<div class="reason" style="color:var(--s-orange)">` +
+        `escalation-suppression gate stood down — ` +
+        (k.gate_standdown.startsWith("spill:")
+          ? `unresolved radio spill on ${esc(k.gate_standdown.slice(6))}`
+          : `believed yard dirty in the mean (contamination suspicion)`) +
+        `; escalation stays permitted for belief correction even though the plant is pace-safe</div>` : "") +
+      (k.m1_vetoed ? `<div class="reason">M1's first choice vetoed: ${esc(k.m1_vetoed)}</div>` : "") +
+      (sup ? `<div class="why">${esc(sup)}</div>` : "") +
+      (k.payload && Object.keys(k.payload).length
+        ? `<div class="payload">${esc(JSON.stringify(k.payload))}</div>` : "") +
+      `</div>`;
+  }
+  // a hard violation (emissions / overtemp / overflow) fails the shift
+  // IMMEDIATELY -- the engine ends the episode there, so the trace holds
+  // fewer than the full 24 ticks. Say so, or a short feed reads as a bug.
+  const viol = shift && shift.summary && shift.summary.violation;
+  if (ticks.length && ticks.length < 24 && viol) {
+    const lastT = ticks[ticks.length - 1].tick;
+    html += `<div class="event">⛔ SHIFT TERMINATED at t${String(lastT).padStart(2, "0")}` +
+      ` — hard violation (${esc(viol)}): the engine fails the shift` +
+      ` immediately; no further ticks exist</div>`;
+  }
+  $("feed").innerHTML = html;
+}
+
+// ---- operator dialog: questions are anchored to the tick on screen
+let chatHistory = [], asking = false;
+
+function resetChat() {
+  chatHistory = [];
+  $("chatlog").innerHTML =
+    `<div class="msg a">Scrub to any tick and ask why Ammonix acted as it` +
+    ` did — I answer from that tick's recorded decision and plant state.</div>`;
+}
+
+function chatTickLabel() {
+  if (!shift) return;
+  const tk = shift.ticks[t];
+  $("chattick").textContent = `tick ${tk.tick} — ${tk.executed}`;
+}
+
+async function sendChat() {
+  const q = $("chatq").value.trim();
+  if (!q || asking || !shift) return;
+  asking = true; $("chatsend").disabled = true; $("chatq").value = "";
+  const tick = shift.ticks[t].tick, sIdx = shift.summary.shift_index;
+  $("chatlog").insertAdjacentHTML("beforeend",
+    `<div class="msg q"><span class="tickchip">t${String(tick).padStart(2, "0")}</span>${esc(q)}</div>` +
+    `<div class="msg a pending">${esc(META.explainer_model || "the model")} is reading the trace…</div>`);
+  $("chatlog").lastElementChild.scrollIntoView({ block: "nearest" });
+  let text;
+  try {
+    const res = await fetch("/ammonix/ask", {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ shift_index: sIdx, tick, question: q,
+                             history: chatHistory.slice(-2) }),
+    });
+    const data = await res.json();
+    text = res.ok ? data.answer : (data.detail || "request failed");
+    // say where the answer came from: the replay ledger answers plain
+    // status questions without a model call; everything else is the model
+    if (res.ok && data.source === "recorded_delivery_lifecycle")
+      text += "  [answered from the replay ledger, no model call]";
+    if (res.ok) chatHistory.push([q, data.answer]);
+  } catch (e) { text = "could not reach the theatre server"; }
+  const pending = $("chatlog").querySelector(".msg.pending");
+  pending.classList.remove("pending");
+  pending.textContent = text;
+  pending.scrollIntoView({ block: "nearest" });
+  asking = false; $("chatsend").disabled = false; $("chatq").focus();
+}
+$("chatsend").onclick = sendChat;
+$("chatq").addEventListener("keydown", e => { if (e.key === "Enter") sendChat(); });
+
+function stop() { if (timer) { clearInterval(timer); timer = null; $("play").textContent = "▶ play"; } }
+$("play").onclick = () => {
+  if (timer) { stop(); return; }
+  $("play").textContent = "⏸ pause";
+  timer = setInterval(() => {
+    if (!shift || t >= shift.ticks.length - 1) { stop(); return; }
+    t++; render();
+  }, +$("speed").value);
+};
+$("scrub").oninput = e => { stop(); t = +e.target.value; render(); };
+// open the 3D universe explorer (same server, /universe/) on this shift's trajectory, focused
+// on the current state. The theatre projects every tick into the universe's
+// coordinates; the path is passed in the URL so no cross-origin fetch.
+$("locate").onclick = async () => {
+  if (!shift) return;
+  const btn = $("locate"), orig = "🔭 locate in universe";
+  btn.textContent = "🔭 locating…"; btn.disabled = true;
+  try {
+    const idx = shift.summary.shift_index;
+    const d = await (await fetch(`/ammonix/universe3d/shift/${idx}`)).json();
+    const pts = (d.path || []).filter(p => "idx" in p);
+    if (!pts.length) throw new Error("no projection");
+    const trajStr = pts.map(p => p.idx).join(",");
+    const ticksStr = pts.map(p => p.tick).join(",");
+    // exact parametric t-SNE 1/p coords, present only when the openTSNE
+    // embedding is built; lets the explorer place markers exactly there
+    const hasTinv = pts.every(p => Array.isArray(p.tinv));
+    const tinvStr = hasTinv ? pts.map(p => p.tinv.join(",")).join(";") : "";
+    const curTick = shift.ticks[t] ? shift.ticks[t].tick : t;
+    let fi = pts.findIndex(p => p.tick === curTick);
+    if (fi < 0) fi = 0;
+    const universe = META.universe_url || "/universe/";
+    let url = universe + "?traj=" + trajStr + "&ticks=" + ticksStr +
+      "&ftick=" + fi + "&shift=" + idx;
+    if (tinvStr) url += "&tinv=" + encodeURIComponent(tinvStr);
+    window.open(url, "_blank");
+    btn.textContent = orig;
+  } catch (e) {
+    btn.textContent = e.message === "no projection" ? "⚠ no projection" : "⚠ explorer unavailable";
+    setTimeout(() => { btn.textContent = orig; }, 3000);
+  } finally { btn.disabled = false; }
+};
+// ---- welcome overlay: shown on every visit until the visitor ticks "don't
+// show this again" (an explicit opt-out, never the default). ?welcome=1 and the
+// "? about" button always show it. The opt-out is stored in this browser only;
+// nothing is sent anywhere.
+const WELCOME_KEY = "icra_welcome_optout_v1";
+function showWelcome() {
+  $("welcome").hidden = false;
+  $("welcome-go").focus();
+}
+function hideWelcome() {
+  $("welcome").hidden = true;
+  if ($("welcome-skip").checked) {
+    try { localStorage.setItem(WELCOME_KEY, "1"); } catch (e) { /* private mode */ }
+  }
+}
+$("welcome-go").onclick = hideWelcome;
+$("about").onclick = showWelcome;
+$("welcome").addEventListener("click", e => { if (e.target === $("welcome")) hideWelcome(); });
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape" && !$("welcome").hidden) hideWelcome();
+});
+(() => {
+  let optedOut = false;
+  try { optedOut = localStorage.getItem(WELCOME_KEY) === "1"; } catch (e) { /* private mode */ }
+  // ?welcome=1 always shows it; ?welcome=0 skips it for this load (embeds, screenshots)
+  const param = new URLSearchParams(location.search).get("welcome");
+  if (param === "1" || (param !== "0" && !optedOut)) showWelcome();
+})();
+boot();
+</script>
+</body>
+</html>

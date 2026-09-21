@@ -1,0 +1,39 @@
+{
+ "seed": 99944001,
+ "id_prefix": "g",
+ "n_shifts": 200,
+ "method": "best-of-expert-family: 3 personas x 30 decision seeds on the identical world (try 0 = spec persona_seed; k>=1 -> random.Random(f'{seed}-{shift_index}-{persona}-{k}') .getrandbits(48)); world stream untouched",
+ "sanity_bar": {
+  "try0_rates": {
+   "cautious": 0.85,
+   "aggressive": 0.815,
+   "sloppy": 0.795
+  },
+  "sealed_baselines": {
+   "cautious": 0.85,
+   "aggressive": 0.815,
+   "sloppy": 0.795
+  },
+  "passed": true
+ },
+ "winnable": 197,
+ "winnable_rate": 0.985,
+ "unwinnable_shifts": [
+  17,
+  57,
+  97
+ ],
+ "under_10pct_win_rate": [
+  16,
+  36,
+  56,
+  96,
+  116,
+  176,
+  177,
+  197
+ ],
+ "mean_expert_win_rate": 0.8328,
+ "mean_best_score": 0.7376,
+ "minutes": 0.5
+}

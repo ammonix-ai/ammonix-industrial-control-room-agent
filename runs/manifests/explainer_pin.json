@@ -1,0 +1,9 @@
+{
+ "explainer_model": "Qwen3.8-27B",
+ "role": "the explainer / operator dialog (the chat widget): answers why the agent acted as it did at the tick on screen, from the recorded decision and plant state; it never operates the plant",
+ "backend": "any OpenAI-compatible chat-completions endpoint serving stock Qwen: DEMO_DIALOG_BASE (default http://127.0.0.1:8001/v1), DEMO_DIALOG_MODEL (model id, default this label), DEMO_DIALOG_KEY (bearer), DEMO_DIALOG_EXTRA (JSON merged into the request body)",
+ "decoding": "temperature 0, seed 0, max_tokens 320, chat_template_kwargs.enable_thinking=false where the server honours it; a </think> block is stripped from the reply",
+ "grounding": "the request carries the recorded decision, reasons, neighbour support, plant observation, bunker rankings and the delivery lifecycle from the replay ledger; delivery-status questions are answered from the ledger without a model call",
+ "disclosure": "GET /ammonix/llm_health reports {available, remote, model}; the page tells the visitor when live answers come from a hosted stock model",
+ "during_the_build": "the local explainer was the pinned Qwen3.6-27B-AWQ-INT4 (config.json sha256 dbba70e4e164f6f28941adf003e14a97026415a573ec175d2fd1378ea0bbc12b) on the build machine's vLLM; the public demo serves stock Qwen3.8-27B through a hosted API because a personal fine-tuned model cannot be served from a website"
+}

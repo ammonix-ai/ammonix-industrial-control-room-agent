@@ -1,0 +1,4658 @@
+{
+  "ask_adjust_load-t1": {
+    "skill_id": "ask_adjust_load-t1",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "adjust_load-t1"
+    },
+    "kind": "ask_before_deciding",
+    "context_schema": {
+      "type": "object",
+      "properties": {
+        "question_answer": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ]
+        }
+      }
+    },
+    "context_sources": [
+      {
+        "field": "question_answer",
+        "source": "user_input",
+        "locator": "console"
+      }
+    ],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "target_output": {
+            "type": "number"
+          },
+          "ramp_ticks": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "required": [
+          "target_output",
+          "ramp_ticks"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": {
+      "text_template": "The candidate decisions here are nearly tied. Is the crane crew available for a bunker transfer this tick?",
+      "answer_schema": {
+        "type": "string",
+        "enum": [
+          "yes",
+          "no"
+        ]
+      },
+      "branches": {
+        "yes": "adjust_load",
+        "no": "hold"
+      },
+      "on_unavailable": "escalate"
+    }
+  },
+  "ask_adjust_load-t4": {
+    "skill_id": "ask_adjust_load-t4",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "adjust_load-t4"
+    },
+    "kind": "ask_before_deciding",
+    "context_schema": {
+      "type": "object",
+      "properties": {
+        "question_answer": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ]
+        }
+      }
+    },
+    "context_sources": [
+      {
+        "field": "question_answer",
+        "source": "user_input",
+        "locator": "console"
+      }
+    ],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "target_output": {
+            "type": "number"
+          },
+          "ramp_ticks": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "required": [
+          "target_output",
+          "ramp_ticks"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": {
+      "text_template": "The candidate decisions here are nearly tied. Is the crane crew available for a bunker transfer this tick?",
+      "answer_schema": {
+        "type": "string",
+        "enum": [
+          "yes",
+          "no"
+        ]
+      },
+      "branches": {
+        "yes": "adjust_load",
+        "no": "hold"
+      },
+      "on_unavailable": "escalate"
+    }
+  },
+  "ask_adjust_load-t6": {
+    "skill_id": "ask_adjust_load-t6",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "adjust_load-t6"
+    },
+    "kind": "ask_before_deciding",
+    "context_schema": {
+      "type": "object",
+      "properties": {
+        "question_answer": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ]
+        }
+      }
+    },
+    "context_sources": [
+      {
+        "field": "question_answer",
+        "source": "user_input",
+        "locator": "console"
+      }
+    ],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "target_output": {
+            "type": "number"
+          },
+          "ramp_ticks": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "required": [
+          "target_output",
+          "ramp_ticks"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": {
+      "text_template": "The candidate decisions here are nearly tied. Is the crane crew available for a bunker transfer this tick?",
+      "answer_schema": {
+        "type": "string",
+        "enum": [
+          "yes",
+          "no"
+        ]
+      },
+      "branches": {
+        "yes": "adjust_load",
+        "no": "hold"
+      },
+      "on_unavailable": "escalate"
+    }
+  },
+  "ask_adjust_load-t7": {
+    "skill_id": "ask_adjust_load-t7",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "adjust_load-t7"
+    },
+    "kind": "ask_before_deciding",
+    "context_schema": {
+      "type": "object",
+      "properties": {
+        "question_answer": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ]
+        }
+      }
+    },
+    "context_sources": [
+      {
+        "field": "question_answer",
+        "source": "user_input",
+        "locator": "console"
+      }
+    ],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "target_output": {
+            "type": "number"
+          },
+          "ramp_ticks": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "required": [
+          "target_output",
+          "ramp_ticks"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": {
+      "text_template": "The candidate decisions here are nearly tied. Is the crane crew available for a bunker transfer this tick?",
+      "answer_schema": {
+        "type": "string",
+        "enum": [
+          "yes",
+          "no"
+        ]
+      },
+      "branches": {
+        "yes": "adjust_load",
+        "no": "hold"
+      },
+      "on_unavailable": "escalate"
+    }
+  },
+  "ask_adjust_load-t9": {
+    "skill_id": "ask_adjust_load-t9",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "adjust_load-t9"
+    },
+    "kind": "ask_before_deciding",
+    "context_schema": {
+      "type": "object",
+      "properties": {
+        "question_answer": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ]
+        }
+      }
+    },
+    "context_sources": [
+      {
+        "field": "question_answer",
+        "source": "user_input",
+        "locator": "console"
+      }
+    ],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "target_output": {
+            "type": "number"
+          },
+          "ramp_ticks": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "required": [
+          "target_output",
+          "ramp_ticks"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": {
+      "text_template": "The candidate decisions here are nearly tied. Is the crane crew available for a bunker transfer this tick?",
+      "answer_schema": {
+        "type": "string",
+        "enum": [
+          "yes",
+          "no"
+        ]
+      },
+      "branches": {
+        "yes": "adjust_load",
+        "no": "hold"
+      },
+      "on_unavailable": "escalate"
+    }
+  },
+  "ask_buy_cover-t3": {
+    "skill_id": "ask_buy_cover-t3",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "buy_cover-t3"
+    },
+    "kind": "ask_before_deciding",
+    "context_schema": {
+      "type": "object",
+      "properties": {
+        "question_answer": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ]
+        }
+      }
+    },
+    "context_sources": [
+      {
+        "field": "question_answer",
+        "source": "user_input",
+        "locator": "console"
+      }
+    ],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "quantity": {
+            "type": "number"
+          },
+          "limit_price": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "quantity",
+          "limit_price"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": {
+      "text_template": "The candidate decisions here are nearly tied. Is the crane crew available for a bunker transfer this tick?",
+      "answer_schema": {
+        "type": "string",
+        "enum": [
+          "yes",
+          "no"
+        ]
+      },
+      "branches": {
+        "yes": "buy_cover",
+        "no": "hold"
+      },
+      "on_unavailable": "escalate"
+    }
+  },
+  "ask_buy_cover-t9": {
+    "skill_id": "ask_buy_cover-t9",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "buy_cover-t9"
+    },
+    "kind": "ask_before_deciding",
+    "context_schema": {
+      "type": "object",
+      "properties": {
+        "question_answer": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ]
+        }
+      }
+    },
+    "context_sources": [
+      {
+        "field": "question_answer",
+        "source": "user_input",
+        "locator": "console"
+      }
+    ],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "quantity": {
+            "type": "number"
+          },
+          "limit_price": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "quantity",
+          "limit_price"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": {
+      "text_template": "The candidate decisions here are nearly tied. Is the crane crew available for a bunker transfer this tick?",
+      "answer_schema": {
+        "type": "string",
+        "enum": [
+          "yes",
+          "no"
+        ]
+      },
+      "branches": {
+        "yes": "buy_cover",
+        "no": "hold"
+      },
+      "on_unavailable": "escalate"
+    }
+  },
+  "ask_defer_cleaning-t1": {
+    "skill_id": "ask_defer_cleaning-t1",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "defer_cleaning-t1"
+    },
+    "kind": "ask_before_deciding",
+    "context_schema": {
+      "type": "object",
+      "properties": {
+        "question_answer": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ]
+        }
+      }
+    },
+    "context_sources": [
+      {
+        "field": "question_answer",
+        "source": "user_input",
+        "locator": "console"
+      }
+    ],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": {
+      "text_template": "The candidate decisions here are nearly tied. Is the crane crew available for a bunker transfer this tick?",
+      "answer_schema": {
+        "type": "string",
+        "enum": [
+          "yes",
+          "no"
+        ]
+      },
+      "branches": {
+        "yes": "defer_cleaning",
+        "no": "hold"
+      },
+      "on_unavailable": "escalate"
+    }
+  },
+  "ask_defer_cleaning-t3": {
+    "skill_id": "ask_defer_cleaning-t3",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "defer_cleaning-t3"
+    },
+    "kind": "ask_before_deciding",
+    "context_schema": {
+      "type": "object",
+      "properties": {
+        "question_answer": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ]
+        }
+      }
+    },
+    "context_sources": [
+      {
+        "field": "question_answer",
+        "source": "user_input",
+        "locator": "console"
+      }
+    ],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": {
+      "text_template": "The candidate decisions here are nearly tied. Is the crane crew available for a bunker transfer this tick?",
+      "answer_schema": {
+        "type": "string",
+        "enum": [
+          "yes",
+          "no"
+        ]
+      },
+      "branches": {
+        "yes": "defer_cleaning",
+        "no": "hold"
+      },
+      "on_unavailable": "escalate"
+    }
+  },
+  "ask_defer_cleaning-t4": {
+    "skill_id": "ask_defer_cleaning-t4",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "defer_cleaning-t4"
+    },
+    "kind": "ask_before_deciding",
+    "context_schema": {
+      "type": "object",
+      "properties": {
+        "question_answer": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ]
+        }
+      }
+    },
+    "context_sources": [
+      {
+        "field": "question_answer",
+        "source": "user_input",
+        "locator": "console"
+      }
+    ],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": {
+      "text_template": "The candidate decisions here are nearly tied. Is the crane crew available for a bunker transfer this tick?",
+      "answer_schema": {
+        "type": "string",
+        "enum": [
+          "yes",
+          "no"
+        ]
+      },
+      "branches": {
+        "yes": "defer_cleaning",
+        "no": "hold"
+      },
+      "on_unavailable": "escalate"
+    }
+  },
+  "ask_defer_cleaning-t8": {
+    "skill_id": "ask_defer_cleaning-t8",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "defer_cleaning-t8"
+    },
+    "kind": "ask_before_deciding",
+    "context_schema": {
+      "type": "object",
+      "properties": {
+        "question_answer": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ]
+        }
+      }
+    },
+    "context_sources": [
+      {
+        "field": "question_answer",
+        "source": "user_input",
+        "locator": "console"
+      }
+    ],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": {
+      "text_template": "The candidate decisions here are nearly tied. Is the crane crew available for a bunker transfer this tick?",
+      "answer_schema": {
+        "type": "string",
+        "enum": [
+          "yes",
+          "no"
+        ]
+      },
+      "branches": {
+        "yes": "defer_cleaning",
+        "no": "hold"
+      },
+      "on_unavailable": "escalate"
+    }
+  },
+  "ask_defer_cleaning-t9": {
+    "skill_id": "ask_defer_cleaning-t9",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "defer_cleaning-t9"
+    },
+    "kind": "ask_before_deciding",
+    "context_schema": {
+      "type": "object",
+      "properties": {
+        "question_answer": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ]
+        }
+      }
+    },
+    "context_sources": [
+      {
+        "field": "question_answer",
+        "source": "user_input",
+        "locator": "console"
+      }
+    ],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": {
+      "text_template": "The candidate decisions here are nearly tied. Is the crane crew available for a bunker transfer this tick?",
+      "answer_schema": {
+        "type": "string",
+        "enum": [
+          "yes",
+          "no"
+        ]
+      },
+      "branches": {
+        "yes": "defer_cleaning",
+        "no": "hold"
+      },
+      "on_unavailable": "escalate"
+    }
+  },
+  "ask_hold-t10": {
+    "skill_id": "ask_hold-t10",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "hold-t10"
+    },
+    "kind": "ask_before_deciding",
+    "context_schema": {
+      "type": "object",
+      "properties": {
+        "question_answer": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ]
+        }
+      }
+    },
+    "context_sources": [
+      {
+        "field": "question_answer",
+        "source": "user_input",
+        "locator": "console"
+      }
+    ],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": {
+      "text_template": "The candidate decisions here are nearly tied. Is the crane crew available for a bunker transfer this tick?",
+      "answer_schema": {
+        "type": "string",
+        "enum": [
+          "yes",
+          "no"
+        ]
+      },
+      "branches": {
+        "yes": "hold",
+        "no": "hold"
+      },
+      "on_unavailable": "escalate"
+    }
+  },
+  "ask_hold-t3": {
+    "skill_id": "ask_hold-t3",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "hold-t3"
+    },
+    "kind": "ask_before_deciding",
+    "context_schema": {
+      "type": "object",
+      "properties": {
+        "question_answer": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ]
+        }
+      }
+    },
+    "context_sources": [
+      {
+        "field": "question_answer",
+        "source": "user_input",
+        "locator": "console"
+      }
+    ],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": {
+      "text_template": "The candidate decisions here are nearly tied. Is the crane crew available for a bunker transfer this tick?",
+      "answer_schema": {
+        "type": "string",
+        "enum": [
+          "yes",
+          "no"
+        ]
+      },
+      "branches": {
+        "yes": "hold",
+        "no": "hold"
+      },
+      "on_unavailable": "escalate"
+    }
+  },
+  "ask_hold-t6": {
+    "skill_id": "ask_hold-t6",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "hold-t6"
+    },
+    "kind": "ask_before_deciding",
+    "context_schema": {
+      "type": "object",
+      "properties": {
+        "question_answer": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ]
+        }
+      }
+    },
+    "context_sources": [
+      {
+        "field": "question_answer",
+        "source": "user_input",
+        "locator": "console"
+      }
+    ],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": {
+      "text_template": "The candidate decisions here are nearly tied. Is the crane crew available for a bunker transfer this tick?",
+      "answer_schema": {
+        "type": "string",
+        "enum": [
+          "yes",
+          "no"
+        ]
+      },
+      "branches": {
+        "yes": "hold",
+        "no": "hold"
+      },
+      "on_unavailable": "escalate"
+    }
+  },
+  "ask_hold-t8": {
+    "skill_id": "ask_hold-t8",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "hold-t8"
+    },
+    "kind": "ask_before_deciding",
+    "context_schema": {
+      "type": "object",
+      "properties": {
+        "question_answer": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ]
+        }
+      }
+    },
+    "context_sources": [
+      {
+        "field": "question_answer",
+        "source": "user_input",
+        "locator": "console"
+      }
+    ],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": {
+      "text_template": "The candidate decisions here are nearly tied. Is the crane crew available for a bunker transfer this tick?",
+      "answer_schema": {
+        "type": "string",
+        "enum": [
+          "yes",
+          "no"
+        ]
+      },
+      "branches": {
+        "yes": "hold",
+        "no": "hold"
+      },
+      "on_unavailable": "escalate"
+    }
+  },
+  "ask_hold-t9": {
+    "skill_id": "ask_hold-t9",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "hold-t9"
+    },
+    "kind": "ask_before_deciding",
+    "context_schema": {
+      "type": "object",
+      "properties": {
+        "question_answer": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ]
+        }
+      }
+    },
+    "context_sources": [
+      {
+        "field": "question_answer",
+        "source": "user_input",
+        "locator": "console"
+      }
+    ],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": {
+      "text_template": "The candidate decisions here are nearly tied. Is the crane crew available for a bunker transfer this tick?",
+      "answer_schema": {
+        "type": "string",
+        "enum": [
+          "yes",
+          "no"
+        ]
+      },
+      "branches": {
+        "yes": "hold",
+        "no": "hold"
+      },
+      "on_unavailable": "escalate"
+    }
+  },
+  "ask_reject_delivery-t0": {
+    "skill_id": "ask_reject_delivery-t0",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "reject_delivery-t0"
+    },
+    "kind": "ask_before_deciding",
+    "context_schema": {
+      "type": "object",
+      "properties": {
+        "question_answer": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ]
+        }
+      }
+    },
+    "context_sources": [
+      {
+        "field": "question_answer",
+        "source": "user_input",
+        "locator": "console"
+      }
+    ],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "delivery_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "delivery_id"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": {
+      "text_template": "The candidate decisions here are nearly tied. Is the crane crew available for a bunker transfer this tick?",
+      "answer_schema": {
+        "type": "string",
+        "enum": [
+          "yes",
+          "no"
+        ]
+      },
+      "branches": {
+        "yes": "reject_delivery",
+        "no": "hold"
+      },
+      "on_unavailable": "escalate"
+    }
+  },
+  "ask_reject_delivery-t1": {
+    "skill_id": "ask_reject_delivery-t1",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "reject_delivery-t1"
+    },
+    "kind": "ask_before_deciding",
+    "context_schema": {
+      "type": "object",
+      "properties": {
+        "question_answer": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ]
+        }
+      }
+    },
+    "context_sources": [
+      {
+        "field": "question_answer",
+        "source": "user_input",
+        "locator": "console"
+      }
+    ],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "delivery_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "delivery_id"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": {
+      "text_template": "The candidate decisions here are nearly tied. Is the crane crew available for a bunker transfer this tick?",
+      "answer_schema": {
+        "type": "string",
+        "enum": [
+          "yes",
+          "no"
+        ]
+      },
+      "branches": {
+        "yes": "reject_delivery",
+        "no": "hold"
+      },
+      "on_unavailable": "escalate"
+    }
+  },
+  "ask_reject_delivery-t10": {
+    "skill_id": "ask_reject_delivery-t10",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "reject_delivery-t10"
+    },
+    "kind": "ask_before_deciding",
+    "context_schema": {
+      "type": "object",
+      "properties": {
+        "question_answer": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ]
+        }
+      }
+    },
+    "context_sources": [
+      {
+        "field": "question_answer",
+        "source": "user_input",
+        "locator": "console"
+      }
+    ],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "delivery_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "delivery_id"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": {
+      "text_template": "The candidate decisions here are nearly tied. Is the crane crew available for a bunker transfer this tick?",
+      "answer_schema": {
+        "type": "string",
+        "enum": [
+          "yes",
+          "no"
+        ]
+      },
+      "branches": {
+        "yes": "reject_delivery",
+        "no": "hold"
+      },
+      "on_unavailable": "escalate"
+    }
+  },
+  "ask_reject_delivery-t11": {
+    "skill_id": "ask_reject_delivery-t11",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "reject_delivery-t11"
+    },
+    "kind": "ask_before_deciding",
+    "context_schema": {
+      "type": "object",
+      "properties": {
+        "question_answer": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ]
+        }
+      }
+    },
+    "context_sources": [
+      {
+        "field": "question_answer",
+        "source": "user_input",
+        "locator": "console"
+      }
+    ],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "delivery_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "delivery_id"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": {
+      "text_template": "The candidate decisions here are nearly tied. Is the crane crew available for a bunker transfer this tick?",
+      "answer_schema": {
+        "type": "string",
+        "enum": [
+          "yes",
+          "no"
+        ]
+      },
+      "branches": {
+        "yes": "reject_delivery",
+        "no": "hold"
+      },
+      "on_unavailable": "escalate"
+    }
+  },
+  "ask_reject_delivery-t3": {
+    "skill_id": "ask_reject_delivery-t3",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "reject_delivery-t3"
+    },
+    "kind": "ask_before_deciding",
+    "context_schema": {
+      "type": "object",
+      "properties": {
+        "question_answer": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ]
+        }
+      }
+    },
+    "context_sources": [
+      {
+        "field": "question_answer",
+        "source": "user_input",
+        "locator": "console"
+      }
+    ],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "delivery_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "delivery_id"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": {
+      "text_template": "The candidate decisions here are nearly tied. Is the crane crew available for a bunker transfer this tick?",
+      "answer_schema": {
+        "type": "string",
+        "enum": [
+          "yes",
+          "no"
+        ]
+      },
+      "branches": {
+        "yes": "reject_delivery",
+        "no": "hold"
+      },
+      "on_unavailable": "escalate"
+    }
+  },
+  "ask_reject_delivery-t4": {
+    "skill_id": "ask_reject_delivery-t4",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "reject_delivery-t4"
+    },
+    "kind": "ask_before_deciding",
+    "context_schema": {
+      "type": "object",
+      "properties": {
+        "question_answer": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ]
+        }
+      }
+    },
+    "context_sources": [
+      {
+        "field": "question_answer",
+        "source": "user_input",
+        "locator": "console"
+      }
+    ],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "delivery_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "delivery_id"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": {
+      "text_template": "The candidate decisions here are nearly tied. Is the crane crew available for a bunker transfer this tick?",
+      "answer_schema": {
+        "type": "string",
+        "enum": [
+          "yes",
+          "no"
+        ]
+      },
+      "branches": {
+        "yes": "reject_delivery",
+        "no": "hold"
+      },
+      "on_unavailable": "escalate"
+    }
+  },
+  "ask_reject_delivery-t6": {
+    "skill_id": "ask_reject_delivery-t6",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "reject_delivery-t6"
+    },
+    "kind": "ask_before_deciding",
+    "context_schema": {
+      "type": "object",
+      "properties": {
+        "question_answer": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ]
+        }
+      }
+    },
+    "context_sources": [
+      {
+        "field": "question_answer",
+        "source": "user_input",
+        "locator": "console"
+      }
+    ],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "delivery_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "delivery_id"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": {
+      "text_template": "The candidate decisions here are nearly tied. Is the crane crew available for a bunker transfer this tick?",
+      "answer_schema": {
+        "type": "string",
+        "enum": [
+          "yes",
+          "no"
+        ]
+      },
+      "branches": {
+        "yes": "reject_delivery",
+        "no": "hold"
+      },
+      "on_unavailable": "escalate"
+    }
+  },
+  "ask_request_lab_analysis-t0": {
+    "skill_id": "ask_request_lab_analysis-t0",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "request_lab_analysis-t0"
+    },
+    "kind": "ask_before_deciding",
+    "context_schema": {
+      "type": "object",
+      "properties": {
+        "question_answer": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ]
+        }
+      }
+    },
+    "context_sources": [
+      {
+        "field": "question_answer",
+        "source": "user_input",
+        "locator": "console"
+      }
+    ],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "delivery_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "delivery_id"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": {
+      "text_template": "The candidate decisions here are nearly tied. Is the crane crew available for a bunker transfer this tick?",
+      "answer_schema": {
+        "type": "string",
+        "enum": [
+          "yes",
+          "no"
+        ]
+      },
+      "branches": {
+        "yes": "request_lab_analysis",
+        "no": "hold"
+      },
+      "on_unavailable": "escalate"
+    }
+  },
+  "ask_request_lab_analysis-t1": {
+    "skill_id": "ask_request_lab_analysis-t1",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "request_lab_analysis-t1"
+    },
+    "kind": "ask_before_deciding",
+    "context_schema": {
+      "type": "object",
+      "properties": {
+        "question_answer": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ]
+        }
+      }
+    },
+    "context_sources": [
+      {
+        "field": "question_answer",
+        "source": "user_input",
+        "locator": "console"
+      }
+    ],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "delivery_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "delivery_id"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": {
+      "text_template": "The candidate decisions here are nearly tied. Is the crane crew available for a bunker transfer this tick?",
+      "answer_schema": {
+        "type": "string",
+        "enum": [
+          "yes",
+          "no"
+        ]
+      },
+      "branches": {
+        "yes": "request_lab_analysis",
+        "no": "hold"
+      },
+      "on_unavailable": "escalate"
+    }
+  },
+  "ask_request_lab_analysis-t11": {
+    "skill_id": "ask_request_lab_analysis-t11",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "request_lab_analysis-t11"
+    },
+    "kind": "ask_before_deciding",
+    "context_schema": {
+      "type": "object",
+      "properties": {
+        "question_answer": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ]
+        }
+      }
+    },
+    "context_sources": [
+      {
+        "field": "question_answer",
+        "source": "user_input",
+        "locator": "console"
+      }
+    ],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "delivery_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "delivery_id"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": {
+      "text_template": "The candidate decisions here are nearly tied. Is the crane crew available for a bunker transfer this tick?",
+      "answer_schema": {
+        "type": "string",
+        "enum": [
+          "yes",
+          "no"
+        ]
+      },
+      "branches": {
+        "yes": "request_lab_analysis",
+        "no": "hold"
+      },
+      "on_unavailable": "escalate"
+    }
+  },
+  "ask_request_lab_analysis-t2": {
+    "skill_id": "ask_request_lab_analysis-t2",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "request_lab_analysis-t2"
+    },
+    "kind": "ask_before_deciding",
+    "context_schema": {
+      "type": "object",
+      "properties": {
+        "question_answer": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ]
+        }
+      }
+    },
+    "context_sources": [
+      {
+        "field": "question_answer",
+        "source": "user_input",
+        "locator": "console"
+      }
+    ],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "delivery_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "delivery_id"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": {
+      "text_template": "The candidate decisions here are nearly tied. Is the crane crew available for a bunker transfer this tick?",
+      "answer_schema": {
+        "type": "string",
+        "enum": [
+          "yes",
+          "no"
+        ]
+      },
+      "branches": {
+        "yes": "request_lab_analysis",
+        "no": "hold"
+      },
+      "on_unavailable": "escalate"
+    }
+  },
+  "ask_request_lab_analysis-t4": {
+    "skill_id": "ask_request_lab_analysis-t4",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "request_lab_analysis-t4"
+    },
+    "kind": "ask_before_deciding",
+    "context_schema": {
+      "type": "object",
+      "properties": {
+        "question_answer": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ]
+        }
+      }
+    },
+    "context_sources": [
+      {
+        "field": "question_answer",
+        "source": "user_input",
+        "locator": "console"
+      }
+    ],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "delivery_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "delivery_id"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": {
+      "text_template": "The candidate decisions here are nearly tied. Is the crane crew available for a bunker transfer this tick?",
+      "answer_schema": {
+        "type": "string",
+        "enum": [
+          "yes",
+          "no"
+        ]
+      },
+      "branches": {
+        "yes": "request_lab_analysis",
+        "no": "hold"
+      },
+      "on_unavailable": "escalate"
+    }
+  },
+  "ask_request_lab_analysis-t6": {
+    "skill_id": "ask_request_lab_analysis-t6",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "request_lab_analysis-t6"
+    },
+    "kind": "ask_before_deciding",
+    "context_schema": {
+      "type": "object",
+      "properties": {
+        "question_answer": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ]
+        }
+      }
+    },
+    "context_sources": [
+      {
+        "field": "question_answer",
+        "source": "user_input",
+        "locator": "console"
+      }
+    ],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "delivery_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "delivery_id"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": {
+      "text_template": "The candidate decisions here are nearly tied. Is the crane crew available for a bunker transfer this tick?",
+      "answer_schema": {
+        "type": "string",
+        "enum": [
+          "yes",
+          "no"
+        ]
+      },
+      "branches": {
+        "yes": "request_lab_analysis",
+        "no": "hold"
+      },
+      "on_unavailable": "escalate"
+    }
+  },
+  "ask_request_lab_analysis-t8": {
+    "skill_id": "ask_request_lab_analysis-t8",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "request_lab_analysis-t8"
+    },
+    "kind": "ask_before_deciding",
+    "context_schema": {
+      "type": "object",
+      "properties": {
+        "question_answer": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ]
+        }
+      }
+    },
+    "context_sources": [
+      {
+        "field": "question_answer",
+        "source": "user_input",
+        "locator": "console"
+      }
+    ],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "delivery_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "delivery_id"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": {
+      "text_template": "The candidate decisions here are nearly tied. Is the crane crew available for a bunker transfer this tick?",
+      "answer_schema": {
+        "type": "string",
+        "enum": [
+          "yes",
+          "no"
+        ]
+      },
+      "branches": {
+        "yes": "request_lab_analysis",
+        "no": "hold"
+      },
+      "on_unavailable": "escalate"
+    }
+  },
+  "ask_route_delivery-t0": {
+    "skill_id": "ask_route_delivery-t0",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "route_delivery-t0"
+    },
+    "kind": "ask_before_deciding",
+    "context_schema": {
+      "type": "object",
+      "properties": {
+        "question_answer": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ]
+        }
+      }
+    },
+    "context_sources": [
+      {
+        "field": "question_answer",
+        "source": "user_input",
+        "locator": "console"
+      }
+    ],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "delivery_id": {
+            "type": "string"
+          },
+          "target_bunker": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 2
+          }
+        },
+        "required": [
+          "delivery_id",
+          "target_bunker"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": {
+      "text_template": "The candidate decisions here are nearly tied. Is the crane crew available for a bunker transfer this tick?",
+      "answer_schema": {
+        "type": "string",
+        "enum": [
+          "yes",
+          "no"
+        ]
+      },
+      "branches": {
+        "yes": "route_delivery",
+        "no": "hold"
+      },
+      "on_unavailable": "escalate"
+    }
+  },
+  "ask_route_delivery-t1": {
+    "skill_id": "ask_route_delivery-t1",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "route_delivery-t1"
+    },
+    "kind": "ask_before_deciding",
+    "context_schema": {
+      "type": "object",
+      "properties": {
+        "question_answer": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ]
+        }
+      }
+    },
+    "context_sources": [
+      {
+        "field": "question_answer",
+        "source": "user_input",
+        "locator": "console"
+      }
+    ],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "delivery_id": {
+            "type": "string"
+          },
+          "target_bunker": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 2
+          }
+        },
+        "required": [
+          "delivery_id",
+          "target_bunker"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": {
+      "text_template": "The candidate decisions here are nearly tied. Is the crane crew available for a bunker transfer this tick?",
+      "answer_schema": {
+        "type": "string",
+        "enum": [
+          "yes",
+          "no"
+        ]
+      },
+      "branches": {
+        "yes": "route_delivery",
+        "no": "hold"
+      },
+      "on_unavailable": "escalate"
+    }
+  },
+  "ask_route_delivery-t10": {
+    "skill_id": "ask_route_delivery-t10",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "route_delivery-t10"
+    },
+    "kind": "ask_before_deciding",
+    "context_schema": {
+      "type": "object",
+      "properties": {
+        "question_answer": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ]
+        }
+      }
+    },
+    "context_sources": [
+      {
+        "field": "question_answer",
+        "source": "user_input",
+        "locator": "console"
+      }
+    ],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "delivery_id": {
+            "type": "string"
+          },
+          "target_bunker": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 2
+          }
+        },
+        "required": [
+          "delivery_id",
+          "target_bunker"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": {
+      "text_template": "The candidate decisions here are nearly tied. Is the crane crew available for a bunker transfer this tick?",
+      "answer_schema": {
+        "type": "string",
+        "enum": [
+          "yes",
+          "no"
+        ]
+      },
+      "branches": {
+        "yes": "route_delivery",
+        "no": "hold"
+      },
+      "on_unavailable": "escalate"
+    }
+  },
+  "ask_route_delivery-t3": {
+    "skill_id": "ask_route_delivery-t3",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "route_delivery-t3"
+    },
+    "kind": "ask_before_deciding",
+    "context_schema": {
+      "type": "object",
+      "properties": {
+        "question_answer": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ]
+        }
+      }
+    },
+    "context_sources": [
+      {
+        "field": "question_answer",
+        "source": "user_input",
+        "locator": "console"
+      }
+    ],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "delivery_id": {
+            "type": "string"
+          },
+          "target_bunker": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 2
+          }
+        },
+        "required": [
+          "delivery_id",
+          "target_bunker"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": {
+      "text_template": "The candidate decisions here are nearly tied. Is the crane crew available for a bunker transfer this tick?",
+      "answer_schema": {
+        "type": "string",
+        "enum": [
+          "yes",
+          "no"
+        ]
+      },
+      "branches": {
+        "yes": "route_delivery",
+        "no": "hold"
+      },
+      "on_unavailable": "escalate"
+    }
+  },
+  "ask_route_delivery-t4": {
+    "skill_id": "ask_route_delivery-t4",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "route_delivery-t4"
+    },
+    "kind": "ask_before_deciding",
+    "context_schema": {
+      "type": "object",
+      "properties": {
+        "question_answer": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ]
+        }
+      }
+    },
+    "context_sources": [
+      {
+        "field": "question_answer",
+        "source": "user_input",
+        "locator": "console"
+      }
+    ],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "delivery_id": {
+            "type": "string"
+          },
+          "target_bunker": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 2
+          }
+        },
+        "required": [
+          "delivery_id",
+          "target_bunker"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": {
+      "text_template": "The candidate decisions here are nearly tied. Is the crane crew available for a bunker transfer this tick?",
+      "answer_schema": {
+        "type": "string",
+        "enum": [
+          "yes",
+          "no"
+        ]
+      },
+      "branches": {
+        "yes": "route_delivery",
+        "no": "hold"
+      },
+      "on_unavailable": "escalate"
+    }
+  },
+  "ask_route_delivery-t5": {
+    "skill_id": "ask_route_delivery-t5",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "route_delivery-t5"
+    },
+    "kind": "ask_before_deciding",
+    "context_schema": {
+      "type": "object",
+      "properties": {
+        "question_answer": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ]
+        }
+      }
+    },
+    "context_sources": [
+      {
+        "field": "question_answer",
+        "source": "user_input",
+        "locator": "console"
+      }
+    ],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "delivery_id": {
+            "type": "string"
+          },
+          "target_bunker": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 2
+          }
+        },
+        "required": [
+          "delivery_id",
+          "target_bunker"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": {
+      "text_template": "The candidate decisions here are nearly tied. Is the crane crew available for a bunker transfer this tick?",
+      "answer_schema": {
+        "type": "string",
+        "enum": [
+          "yes",
+          "no"
+        ]
+      },
+      "branches": {
+        "yes": "route_delivery",
+        "no": "hold"
+      },
+      "on_unavailable": "escalate"
+    }
+  },
+  "ask_route_delivery-t6": {
+    "skill_id": "ask_route_delivery-t6",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "route_delivery-t6"
+    },
+    "kind": "ask_before_deciding",
+    "context_schema": {
+      "type": "object",
+      "properties": {
+        "question_answer": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ]
+        }
+      }
+    },
+    "context_sources": [
+      {
+        "field": "question_answer",
+        "source": "user_input",
+        "locator": "console"
+      }
+    ],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "delivery_id": {
+            "type": "string"
+          },
+          "target_bunker": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 2
+          }
+        },
+        "required": [
+          "delivery_id",
+          "target_bunker"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": {
+      "text_template": "The candidate decisions here are nearly tied. Is the crane crew available for a bunker transfer this tick?",
+      "answer_schema": {
+        "type": "string",
+        "enum": [
+          "yes",
+          "no"
+        ]
+      },
+      "branches": {
+        "yes": "route_delivery",
+        "no": "hold"
+      },
+      "on_unavailable": "escalate"
+    }
+  },
+  "ask_route_delivery-t7": {
+    "skill_id": "ask_route_delivery-t7",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "route_delivery-t7"
+    },
+    "kind": "ask_before_deciding",
+    "context_schema": {
+      "type": "object",
+      "properties": {
+        "question_answer": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ]
+        }
+      }
+    },
+    "context_sources": [
+      {
+        "field": "question_answer",
+        "source": "user_input",
+        "locator": "console"
+      }
+    ],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "delivery_id": {
+            "type": "string"
+          },
+          "target_bunker": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 2
+          }
+        },
+        "required": [
+          "delivery_id",
+          "target_bunker"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": {
+      "text_template": "The candidate decisions here are nearly tied. Is the crane crew available for a bunker transfer this tick?",
+      "answer_schema": {
+        "type": "string",
+        "enum": [
+          "yes",
+          "no"
+        ]
+      },
+      "branches": {
+        "yes": "route_delivery",
+        "no": "hold"
+      },
+      "on_unavailable": "escalate"
+    }
+  },
+  "ask_schedule_cleaning-t11": {
+    "skill_id": "ask_schedule_cleaning-t11",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "schedule_cleaning-t11"
+    },
+    "kind": "ask_before_deciding",
+    "context_schema": {
+      "type": "object",
+      "properties": {
+        "question_answer": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ]
+        }
+      }
+    },
+    "context_sources": [
+      {
+        "field": "question_answer",
+        "source": "user_input",
+        "locator": "console"
+      }
+    ],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": {
+      "text_template": "The candidate decisions here are nearly tied. Is the crane crew available for a bunker transfer this tick?",
+      "answer_schema": {
+        "type": "string",
+        "enum": [
+          "yes",
+          "no"
+        ]
+      },
+      "branches": {
+        "yes": "schedule_cleaning",
+        "no": "hold"
+      },
+      "on_unavailable": "escalate"
+    }
+  },
+  "ask_schedule_cleaning-t3": {
+    "skill_id": "ask_schedule_cleaning-t3",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "schedule_cleaning-t3"
+    },
+    "kind": "ask_before_deciding",
+    "context_schema": {
+      "type": "object",
+      "properties": {
+        "question_answer": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ]
+        }
+      }
+    },
+    "context_sources": [
+      {
+        "field": "question_answer",
+        "source": "user_input",
+        "locator": "console"
+      }
+    ],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": {
+      "text_template": "The candidate decisions here are nearly tied. Is the crane crew available for a bunker transfer this tick?",
+      "answer_schema": {
+        "type": "string",
+        "enum": [
+          "yes",
+          "no"
+        ]
+      },
+      "branches": {
+        "yes": "schedule_cleaning",
+        "no": "hold"
+      },
+      "on_unavailable": "escalate"
+    }
+  },
+  "ask_schedule_cleaning-t4": {
+    "skill_id": "ask_schedule_cleaning-t4",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "schedule_cleaning-t4"
+    },
+    "kind": "ask_before_deciding",
+    "context_schema": {
+      "type": "object",
+      "properties": {
+        "question_answer": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ]
+        }
+      }
+    },
+    "context_sources": [
+      {
+        "field": "question_answer",
+        "source": "user_input",
+        "locator": "console"
+      }
+    ],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": {
+      "text_template": "The candidate decisions here are nearly tied. Is the crane crew available for a bunker transfer this tick?",
+      "answer_schema": {
+        "type": "string",
+        "enum": [
+          "yes",
+          "no"
+        ]
+      },
+      "branches": {
+        "yes": "schedule_cleaning",
+        "no": "hold"
+      },
+      "on_unavailable": "escalate"
+    }
+  },
+  "ask_schedule_cleaning-t5": {
+    "skill_id": "ask_schedule_cleaning-t5",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "schedule_cleaning-t5"
+    },
+    "kind": "ask_before_deciding",
+    "context_schema": {
+      "type": "object",
+      "properties": {
+        "question_answer": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ]
+        }
+      }
+    },
+    "context_sources": [
+      {
+        "field": "question_answer",
+        "source": "user_input",
+        "locator": "console"
+      }
+    ],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": {
+      "text_template": "The candidate decisions here are nearly tied. Is the crane crew available for a bunker transfer this tick?",
+      "answer_schema": {
+        "type": "string",
+        "enum": [
+          "yes",
+          "no"
+        ]
+      },
+      "branches": {
+        "yes": "schedule_cleaning",
+        "no": "hold"
+      },
+      "on_unavailable": "escalate"
+    }
+  },
+  "ask_schedule_cleaning-t8": {
+    "skill_id": "ask_schedule_cleaning-t8",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "schedule_cleaning-t8"
+    },
+    "kind": "ask_before_deciding",
+    "context_schema": {
+      "type": "object",
+      "properties": {
+        "question_answer": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ]
+        }
+      }
+    },
+    "context_sources": [
+      {
+        "field": "question_answer",
+        "source": "user_input",
+        "locator": "console"
+      }
+    ],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": {
+      "text_template": "The candidate decisions here are nearly tied. Is the crane crew available for a bunker transfer this tick?",
+      "answer_schema": {
+        "type": "string",
+        "enum": [
+          "yes",
+          "no"
+        ]
+      },
+      "branches": {
+        "yes": "schedule_cleaning",
+        "no": "hold"
+      },
+      "on_unavailable": "escalate"
+    }
+  },
+  "ask_sell_spot-t0": {
+    "skill_id": "ask_sell_spot-t0",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "sell_spot-t0"
+    },
+    "kind": "ask_before_deciding",
+    "context_schema": {
+      "type": "object",
+      "properties": {
+        "question_answer": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ]
+        }
+      }
+    },
+    "context_sources": [
+      {
+        "field": "question_answer",
+        "source": "user_input",
+        "locator": "console"
+      }
+    ],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "quantity": {
+            "type": "number"
+          },
+          "limit_price": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "quantity",
+          "limit_price"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": {
+      "text_template": "The candidate decisions here are nearly tied. Is the crane crew available for a bunker transfer this tick?",
+      "answer_schema": {
+        "type": "string",
+        "enum": [
+          "yes",
+          "no"
+        ]
+      },
+      "branches": {
+        "yes": "sell_spot",
+        "no": "hold"
+      },
+      "on_unavailable": "escalate"
+    }
+  },
+  "ask_sell_spot-t1": {
+    "skill_id": "ask_sell_spot-t1",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "sell_spot-t1"
+    },
+    "kind": "ask_before_deciding",
+    "context_schema": {
+      "type": "object",
+      "properties": {
+        "question_answer": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ]
+        }
+      }
+    },
+    "context_sources": [
+      {
+        "field": "question_answer",
+        "source": "user_input",
+        "locator": "console"
+      }
+    ],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "quantity": {
+            "type": "number"
+          },
+          "limit_price": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "quantity",
+          "limit_price"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": {
+      "text_template": "The candidate decisions here are nearly tied. Is the crane crew available for a bunker transfer this tick?",
+      "answer_schema": {
+        "type": "string",
+        "enum": [
+          "yes",
+          "no"
+        ]
+      },
+      "branches": {
+        "yes": "sell_spot",
+        "no": "hold"
+      },
+      "on_unavailable": "escalate"
+    }
+  },
+  "ask_sell_spot-t10": {
+    "skill_id": "ask_sell_spot-t10",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "sell_spot-t10"
+    },
+    "kind": "ask_before_deciding",
+    "context_schema": {
+      "type": "object",
+      "properties": {
+        "question_answer": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ]
+        }
+      }
+    },
+    "context_sources": [
+      {
+        "field": "question_answer",
+        "source": "user_input",
+        "locator": "console"
+      }
+    ],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "quantity": {
+            "type": "number"
+          },
+          "limit_price": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "quantity",
+          "limit_price"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": {
+      "text_template": "The candidate decisions here are nearly tied. Is the crane crew available for a bunker transfer this tick?",
+      "answer_schema": {
+        "type": "string",
+        "enum": [
+          "yes",
+          "no"
+        ]
+      },
+      "branches": {
+        "yes": "sell_spot",
+        "no": "hold"
+      },
+      "on_unavailable": "escalate"
+    }
+  },
+  "ask_sell_spot-t11": {
+    "skill_id": "ask_sell_spot-t11",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "sell_spot-t11"
+    },
+    "kind": "ask_before_deciding",
+    "context_schema": {
+      "type": "object",
+      "properties": {
+        "question_answer": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ]
+        }
+      }
+    },
+    "context_sources": [
+      {
+        "field": "question_answer",
+        "source": "user_input",
+        "locator": "console"
+      }
+    ],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "quantity": {
+            "type": "number"
+          },
+          "limit_price": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "quantity",
+          "limit_price"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": {
+      "text_template": "The candidate decisions here are nearly tied. Is the crane crew available for a bunker transfer this tick?",
+      "answer_schema": {
+        "type": "string",
+        "enum": [
+          "yes",
+          "no"
+        ]
+      },
+      "branches": {
+        "yes": "sell_spot",
+        "no": "hold"
+      },
+      "on_unavailable": "escalate"
+    }
+  },
+  "ask_sell_spot-t2": {
+    "skill_id": "ask_sell_spot-t2",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "sell_spot-t2"
+    },
+    "kind": "ask_before_deciding",
+    "context_schema": {
+      "type": "object",
+      "properties": {
+        "question_answer": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ]
+        }
+      }
+    },
+    "context_sources": [
+      {
+        "field": "question_answer",
+        "source": "user_input",
+        "locator": "console"
+      }
+    ],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "quantity": {
+            "type": "number"
+          },
+          "limit_price": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "quantity",
+          "limit_price"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": {
+      "text_template": "The candidate decisions here are nearly tied. Is the crane crew available for a bunker transfer this tick?",
+      "answer_schema": {
+        "type": "string",
+        "enum": [
+          "yes",
+          "no"
+        ]
+      },
+      "branches": {
+        "yes": "sell_spot",
+        "no": "hold"
+      },
+      "on_unavailable": "escalate"
+    }
+  },
+  "ask_sell_spot-t3": {
+    "skill_id": "ask_sell_spot-t3",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "sell_spot-t3"
+    },
+    "kind": "ask_before_deciding",
+    "context_schema": {
+      "type": "object",
+      "properties": {
+        "question_answer": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ]
+        }
+      }
+    },
+    "context_sources": [
+      {
+        "field": "question_answer",
+        "source": "user_input",
+        "locator": "console"
+      }
+    ],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "quantity": {
+            "type": "number"
+          },
+          "limit_price": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "quantity",
+          "limit_price"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": {
+      "text_template": "The candidate decisions here are nearly tied. Is the crane crew available for a bunker transfer this tick?",
+      "answer_schema": {
+        "type": "string",
+        "enum": [
+          "yes",
+          "no"
+        ]
+      },
+      "branches": {
+        "yes": "sell_spot",
+        "no": "hold"
+      },
+      "on_unavailable": "escalate"
+    }
+  },
+  "ask_sell_spot-t4": {
+    "skill_id": "ask_sell_spot-t4",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "sell_spot-t4"
+    },
+    "kind": "ask_before_deciding",
+    "context_schema": {
+      "type": "object",
+      "properties": {
+        "question_answer": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ]
+        }
+      }
+    },
+    "context_sources": [
+      {
+        "field": "question_answer",
+        "source": "user_input",
+        "locator": "console"
+      }
+    ],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "quantity": {
+            "type": "number"
+          },
+          "limit_price": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "quantity",
+          "limit_price"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": {
+      "text_template": "The candidate decisions here are nearly tied. Is the crane crew available for a bunker transfer this tick?",
+      "answer_schema": {
+        "type": "string",
+        "enum": [
+          "yes",
+          "no"
+        ]
+      },
+      "branches": {
+        "yes": "sell_spot",
+        "no": "hold"
+      },
+      "on_unavailable": "escalate"
+    }
+  },
+  "ask_sell_spot-t5": {
+    "skill_id": "ask_sell_spot-t5",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "sell_spot-t5"
+    },
+    "kind": "ask_before_deciding",
+    "context_schema": {
+      "type": "object",
+      "properties": {
+        "question_answer": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ]
+        }
+      }
+    },
+    "context_sources": [
+      {
+        "field": "question_answer",
+        "source": "user_input",
+        "locator": "console"
+      }
+    ],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "quantity": {
+            "type": "number"
+          },
+          "limit_price": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "quantity",
+          "limit_price"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": {
+      "text_template": "The candidate decisions here are nearly tied. Is the crane crew available for a bunker transfer this tick?",
+      "answer_schema": {
+        "type": "string",
+        "enum": [
+          "yes",
+          "no"
+        ]
+      },
+      "branches": {
+        "yes": "sell_spot",
+        "no": "hold"
+      },
+      "on_unavailable": "escalate"
+    }
+  },
+  "ask_sell_spot-t6": {
+    "skill_id": "ask_sell_spot-t6",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "sell_spot-t6"
+    },
+    "kind": "ask_before_deciding",
+    "context_schema": {
+      "type": "object",
+      "properties": {
+        "question_answer": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ]
+        }
+      }
+    },
+    "context_sources": [
+      {
+        "field": "question_answer",
+        "source": "user_input",
+        "locator": "console"
+      }
+    ],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "quantity": {
+            "type": "number"
+          },
+          "limit_price": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "quantity",
+          "limit_price"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": {
+      "text_template": "The candidate decisions here are nearly tied. Is the crane crew available for a bunker transfer this tick?",
+      "answer_schema": {
+        "type": "string",
+        "enum": [
+          "yes",
+          "no"
+        ]
+      },
+      "branches": {
+        "yes": "sell_spot",
+        "no": "hold"
+      },
+      "on_unavailable": "escalate"
+    }
+  },
+  "ask_sell_spot-t7": {
+    "skill_id": "ask_sell_spot-t7",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "sell_spot-t7"
+    },
+    "kind": "ask_before_deciding",
+    "context_schema": {
+      "type": "object",
+      "properties": {
+        "question_answer": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ]
+        }
+      }
+    },
+    "context_sources": [
+      {
+        "field": "question_answer",
+        "source": "user_input",
+        "locator": "console"
+      }
+    ],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "quantity": {
+            "type": "number"
+          },
+          "limit_price": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "quantity",
+          "limit_price"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": {
+      "text_template": "The candidate decisions here are nearly tied. Is the crane crew available for a bunker transfer this tick?",
+      "answer_schema": {
+        "type": "string",
+        "enum": [
+          "yes",
+          "no"
+        ]
+      },
+      "branches": {
+        "yes": "sell_spot",
+        "no": "hold"
+      },
+      "on_unavailable": "escalate"
+    }
+  },
+  "ask_sell_spot-t8": {
+    "skill_id": "ask_sell_spot-t8",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "sell_spot-t8"
+    },
+    "kind": "ask_before_deciding",
+    "context_schema": {
+      "type": "object",
+      "properties": {
+        "question_answer": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ]
+        }
+      }
+    },
+    "context_sources": [
+      {
+        "field": "question_answer",
+        "source": "user_input",
+        "locator": "console"
+      }
+    ],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "quantity": {
+            "type": "number"
+          },
+          "limit_price": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "quantity",
+          "limit_price"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": {
+      "text_template": "The candidate decisions here are nearly tied. Is the crane crew available for a bunker transfer this tick?",
+      "answer_schema": {
+        "type": "string",
+        "enum": [
+          "yes",
+          "no"
+        ]
+      },
+      "branches": {
+        "yes": "sell_spot",
+        "no": "hold"
+      },
+      "on_unavailable": "escalate"
+    }
+  },
+  "ask_sell_spot-t9": {
+    "skill_id": "ask_sell_spot-t9",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "sell_spot-t9"
+    },
+    "kind": "ask_before_deciding",
+    "context_schema": {
+      "type": "object",
+      "properties": {
+        "question_answer": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ]
+        }
+      }
+    },
+    "context_sources": [
+      {
+        "field": "question_answer",
+        "source": "user_input",
+        "locator": "console"
+      }
+    ],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "quantity": {
+            "type": "number"
+          },
+          "limit_price": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "quantity",
+          "limit_price"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": {
+      "text_template": "The candidate decisions here are nearly tied. Is the crane crew available for a bunker transfer this tick?",
+      "answer_schema": {
+        "type": "string",
+        "enum": [
+          "yes",
+          "no"
+        ]
+      },
+      "branches": {
+        "yes": "sell_spot",
+        "no": "hold"
+      },
+      "on_unavailable": "escalate"
+    }
+  },
+  "ask_set_blend-t0": {
+    "skill_id": "ask_set_blend-t0",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "set_blend-t0"
+    },
+    "kind": "ask_before_deciding",
+    "context_schema": {
+      "type": "object",
+      "properties": {
+        "question_answer": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ]
+        }
+      }
+    },
+    "context_sources": [
+      {
+        "field": "question_answer",
+        "source": "user_input",
+        "locator": "console"
+      }
+    ],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "ratios": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            },
+            "minItems": 3,
+            "maxItems": 3
+          },
+          "feed_rate": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "ratios",
+          "feed_rate"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": {
+      "text_template": "The candidate decisions here are nearly tied. Is the crane crew available for a bunker transfer this tick?",
+      "answer_schema": {
+        "type": "string",
+        "enum": [
+          "yes",
+          "no"
+        ]
+      },
+      "branches": {
+        "yes": "set_blend",
+        "no": "hold"
+      },
+      "on_unavailable": "escalate"
+    }
+  },
+  "ask_set_blend-t2": {
+    "skill_id": "ask_set_blend-t2",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "set_blend-t2"
+    },
+    "kind": "ask_before_deciding",
+    "context_schema": {
+      "type": "object",
+      "properties": {
+        "question_answer": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ]
+        }
+      }
+    },
+    "context_sources": [
+      {
+        "field": "question_answer",
+        "source": "user_input",
+        "locator": "console"
+      }
+    ],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "ratios": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            },
+            "minItems": 3,
+            "maxItems": 3
+          },
+          "feed_rate": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "ratios",
+          "feed_rate"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": {
+      "text_template": "The candidate decisions here are nearly tied. Is the crane crew available for a bunker transfer this tick?",
+      "answer_schema": {
+        "type": "string",
+        "enum": [
+          "yes",
+          "no"
+        ]
+      },
+      "branches": {
+        "yes": "set_blend",
+        "no": "hold"
+      },
+      "on_unavailable": "escalate"
+    }
+  },
+  "ask_set_blend-t3": {
+    "skill_id": "ask_set_blend-t3",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "set_blend-t3"
+    },
+    "kind": "ask_before_deciding",
+    "context_schema": {
+      "type": "object",
+      "properties": {
+        "question_answer": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ]
+        }
+      }
+    },
+    "context_sources": [
+      {
+        "field": "question_answer",
+        "source": "user_input",
+        "locator": "console"
+      }
+    ],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "ratios": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            },
+            "minItems": 3,
+            "maxItems": 3
+          },
+          "feed_rate": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "ratios",
+          "feed_rate"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": {
+      "text_template": "The candidate decisions here are nearly tied. Is the crane crew available for a bunker transfer this tick?",
+      "answer_schema": {
+        "type": "string",
+        "enum": [
+          "yes",
+          "no"
+        ]
+      },
+      "branches": {
+        "yes": "set_blend",
+        "no": "hold"
+      },
+      "on_unavailable": "escalate"
+    }
+  },
+  "ask_set_blend-t8": {
+    "skill_id": "ask_set_blend-t8",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "set_blend-t8"
+    },
+    "kind": "ask_before_deciding",
+    "context_schema": {
+      "type": "object",
+      "properties": {
+        "question_answer": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ]
+        }
+      }
+    },
+    "context_sources": [
+      {
+        "field": "question_answer",
+        "source": "user_input",
+        "locator": "console"
+      }
+    ],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "ratios": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            },
+            "minItems": 3,
+            "maxItems": 3
+          },
+          "feed_rate": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "ratios",
+          "feed_rate"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": {
+      "text_template": "The candidate decisions here are nearly tied. Is the crane crew available for a bunker transfer this tick?",
+      "answer_schema": {
+        "type": "string",
+        "enum": [
+          "yes",
+          "no"
+        ]
+      },
+      "branches": {
+        "yes": "set_blend",
+        "no": "hold"
+      },
+      "on_unavailable": "escalate"
+    }
+  },
+  "ask_set_blend-t9": {
+    "skill_id": "ask_set_blend-t9",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "set_blend-t9"
+    },
+    "kind": "ask_before_deciding",
+    "context_schema": {
+      "type": "object",
+      "properties": {
+        "question_answer": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ]
+        }
+      }
+    },
+    "context_sources": [
+      {
+        "field": "question_answer",
+        "source": "user_input",
+        "locator": "console"
+      }
+    ],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "ratios": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            },
+            "minItems": 3,
+            "maxItems": 3
+          },
+          "feed_rate": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "ratios",
+          "feed_rate"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": {
+      "text_template": "The candidate decisions here are nearly tied. Is the crane crew available for a bunker transfer this tick?",
+      "answer_schema": {
+        "type": "string",
+        "enum": [
+          "yes",
+          "no"
+        ]
+      },
+      "branches": {
+        "yes": "set_blend",
+        "no": "hold"
+      },
+      "on_unavailable": "escalate"
+    }
+  },
+  "escalate_adjust_load-t0": {
+    "skill_id": "escalate_adjust_load-t0",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "adjust_load-t0"
+    },
+    "kind": "escalate",
+    "context_schema": {
+      "type": "object",
+      "properties": {}
+    },
+    "context_sources": [],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "reason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "reason"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": null
+  },
+  "escalate_adjust_load-t3": {
+    "skill_id": "escalate_adjust_load-t3",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "adjust_load-t3"
+    },
+    "kind": "escalate",
+    "context_schema": {
+      "type": "object",
+      "properties": {}
+    },
+    "context_sources": [],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "reason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "reason"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": null
+  },
+  "escalate_adjust_load-t8": {
+    "skill_id": "escalate_adjust_load-t8",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "adjust_load-t8"
+    },
+    "kind": "escalate",
+    "context_schema": {
+      "type": "object",
+      "properties": {}
+    },
+    "context_sources": [],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "reason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "reason"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": null
+  },
+  "escalate_buy_cover-t4": {
+    "skill_id": "escalate_buy_cover-t4",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "buy_cover-t4"
+    },
+    "kind": "escalate",
+    "context_schema": {
+      "type": "object",
+      "properties": {}
+    },
+    "context_sources": [],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "reason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "reason"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": null
+  },
+  "escalate_defer_cleaning-t0": {
+    "skill_id": "escalate_defer_cleaning-t0",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "defer_cleaning-t0"
+    },
+    "kind": "escalate",
+    "context_schema": {
+      "type": "object",
+      "properties": {}
+    },
+    "context_sources": [],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "reason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "reason"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": null
+  },
+  "escalate_defer_cleaning-t2": {
+    "skill_id": "escalate_defer_cleaning-t2",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "defer_cleaning-t2"
+    },
+    "kind": "escalate",
+    "context_schema": {
+      "type": "object",
+      "properties": {}
+    },
+    "context_sources": [],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "reason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "reason"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": null
+  },
+  "escalate_defer_cleaning-t6": {
+    "skill_id": "escalate_defer_cleaning-t6",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "defer_cleaning-t6"
+    },
+    "kind": "escalate",
+    "context_schema": {
+      "type": "object",
+      "properties": {}
+    },
+    "context_sources": [],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "reason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "reason"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": null
+  },
+  "escalate_hold-t11": {
+    "skill_id": "escalate_hold-t11",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "hold-t11"
+    },
+    "kind": "escalate",
+    "context_schema": {
+      "type": "object",
+      "properties": {}
+    },
+    "context_sources": [],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "reason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "reason"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": null
+  },
+  "escalate_hold-t4": {
+    "skill_id": "escalate_hold-t4",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "hold-t4"
+    },
+    "kind": "escalate",
+    "context_schema": {
+      "type": "object",
+      "properties": {}
+    },
+    "context_sources": [],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "reason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "reason"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": null
+  },
+  "escalate_reject_delivery-t5": {
+    "skill_id": "escalate_reject_delivery-t5",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "reject_delivery-t5"
+    },
+    "kind": "escalate",
+    "context_schema": {
+      "type": "object",
+      "properties": {}
+    },
+    "context_sources": [],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "reason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "reason"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": null
+  },
+  "escalate_reject_delivery-t7": {
+    "skill_id": "escalate_reject_delivery-t7",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "reject_delivery-t7"
+    },
+    "kind": "escalate",
+    "context_schema": {
+      "type": "object",
+      "properties": {}
+    },
+    "context_sources": [],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "reason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "reason"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": null
+  },
+  "escalate_reject_delivery-t8": {
+    "skill_id": "escalate_reject_delivery-t8",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "reject_delivery-t8"
+    },
+    "kind": "escalate",
+    "context_schema": {
+      "type": "object",
+      "properties": {}
+    },
+    "context_sources": [],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "reason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "reason"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": null
+  },
+  "escalate_request_lab_analysis-t5": {
+    "skill_id": "escalate_request_lab_analysis-t5",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "request_lab_analysis-t5"
+    },
+    "kind": "escalate",
+    "context_schema": {
+      "type": "object",
+      "properties": {}
+    },
+    "context_sources": [],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "reason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "reason"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": null
+  },
+  "escalate_request_lab_analysis-t7": {
+    "skill_id": "escalate_request_lab_analysis-t7",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "request_lab_analysis-t7"
+    },
+    "kind": "escalate",
+    "context_schema": {
+      "type": "object",
+      "properties": {}
+    },
+    "context_sources": [],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "reason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "reason"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": null
+  },
+  "escalate_route_delivery-t2": {
+    "skill_id": "escalate_route_delivery-t2",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "route_delivery-t2"
+    },
+    "kind": "escalate",
+    "context_schema": {
+      "type": "object",
+      "properties": {}
+    },
+    "context_sources": [],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "reason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "reason"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": null
+  },
+  "escalate_route_delivery-t9": {
+    "skill_id": "escalate_route_delivery-t9",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "route_delivery-t9"
+    },
+    "kind": "escalate",
+    "context_schema": {
+      "type": "object",
+      "properties": {}
+    },
+    "context_sources": [],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "reason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "reason"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": null
+  },
+  "escalate_schedule_cleaning-t0": {
+    "skill_id": "escalate_schedule_cleaning-t0",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "schedule_cleaning-t0"
+    },
+    "kind": "escalate",
+    "context_schema": {
+      "type": "object",
+      "properties": {}
+    },
+    "context_sources": [],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "reason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "reason"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": null
+  },
+  "escalate_schedule_cleaning-t1": {
+    "skill_id": "escalate_schedule_cleaning-t1",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "schedule_cleaning-t1"
+    },
+    "kind": "escalate",
+    "context_schema": {
+      "type": "object",
+      "properties": {}
+    },
+    "context_sources": [],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "reason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "reason"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": null
+  },
+  "escalate_schedule_cleaning-t10": {
+    "skill_id": "escalate_schedule_cleaning-t10",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "schedule_cleaning-t10"
+    },
+    "kind": "escalate",
+    "context_schema": {
+      "type": "object",
+      "properties": {}
+    },
+    "context_sources": [],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "reason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "reason"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": null
+  },
+  "escalate_schedule_cleaning-t2": {
+    "skill_id": "escalate_schedule_cleaning-t2",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "schedule_cleaning-t2"
+    },
+    "kind": "escalate",
+    "context_schema": {
+      "type": "object",
+      "properties": {}
+    },
+    "context_sources": [],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "reason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "reason"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": null
+  },
+  "escalate_schedule_cleaning-t7": {
+    "skill_id": "escalate_schedule_cleaning-t7",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "schedule_cleaning-t7"
+    },
+    "kind": "escalate",
+    "context_schema": {
+      "type": "object",
+      "properties": {}
+    },
+    "context_sources": [],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "reason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "reason"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": null
+  },
+  "escalate_set_blend-t4": {
+    "skill_id": "escalate_set_blend-t4",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "set_blend-t4"
+    },
+    "kind": "escalate",
+    "context_schema": {
+      "type": "object",
+      "properties": {}
+    },
+    "context_sources": [],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "reason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "reason"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": null
+  },
+  "escalate_set_blend-t5": {
+    "skill_id": "escalate_set_blend-t5",
+    "version": "0.1.0",
+    "scope": {
+      "level": "tribe",
+      "ref": "set_blend-t5"
+    },
+    "kind": "escalate",
+    "context_schema": {
+      "type": "object",
+      "properties": {}
+    },
+    "context_sources": [],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": {
+        "type": "object",
+        "properties": {
+          "reason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "reason"
+        ],
+        "additionalProperties": false
+      },
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": null
+  },
+  "oven_execute_default": {
+    "skill_id": "oven_execute_default",
+    "version": "0.1.0",
+    "scope": {
+      "level": "default",
+      "ref": null
+    },
+    "kind": "execute",
+    "context_schema": {
+      "type": "object",
+      "properties": {}
+    },
+    "context_sources": [],
+    "m1_prompt_ref": "m1_oven_v1",
+    "expected_result": {
+      "kind": "schema",
+      "payload_schema": null,
+      "rules": null,
+      "exemplar_from_neighbours": false,
+      "tolerance": {}
+    },
+    "question": null
+  }
+}

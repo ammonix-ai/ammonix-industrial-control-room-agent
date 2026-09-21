@@ -1,0 +1,35 @@
+{
+ "writer_model": "Ornith-1.5-9B-wte-r2",
+ "role": "the writer (M1): fills the action payloads of the learned-judgment layer; the only model that operated the recorded shifts",
+ "internal_id": "ornith-r2payloadpilotfast-h0",
+ "base": "ornith-ai/Ornith-1.5-9B (bf16 safetensors; config.json sha256 2e112fe8b3bf546b833a36bf4ca56839b340a702bbd6894fa5b174fc6ad0af6e)",
+ "adapter": {
+  "kind": "LoRA (QLoRA fine-tune, served as a vLLM LoRA module on the pinned base)",
+  "round": "r2_payload_pilot",
+  "train_pairs": 160,
+  "actions": "all 5 payload actions",
+  "reward": "v2 reward: closed-loop payload rollouts, noise-floor/dedup/symmetric-confirmation registry",
+  "adapter_model_safetensors_sha256": "a76494a5ffad8887323d49bead723048397e9b86c5c055516945dc16f8edb967"
+ },
+ "serving": "vLLM, temperature 0, JSON-schema-constrained decoding, thinking disabled, max_model_len 4096",
+ "prompt": "harness/prompts/m1_oven_v6_clean.txt (sha256 aa4ab48c5c0c2437e2d989c2bfdf789f62c3d8e6fc0d14815b13d421936aff9d)",
+ "sealed_run": {
+  "report": "runs/reports/r2_sealed_g.json",
+  "traces": "runs/loops/r2_sealed_g/shift_000.jsonl .. shift_199.jsonl",
+  "checkpoint": "runs/loops/r2_sealed_g_checkpoint.jsonl",
+  "cohort": "seed 99944001, namespace g, shifts 0..199, world v0.4, contract tolerance 0.15",
+  "result": "178/200 successes (89.0%), 0 hard-safety violations, mean score 0.5109"
+ },
+ "on_this_server": "replays from the shipped traces; no model call is made to browse the 200 shifts",
+ "weights_availability": "Hugging Face: Ammonix/AmmonixWtE-Writer-9B. The adapter/ folder holds the sealed LoRA adapter (hash above); the repository root holds the adapter merged into the base weights for direct serving",
+ "huggingface": "Ammonix/AmmonixWtE-Writer-9B",
+ "merged_weights": {
+  "note": "bf16 merge of the sealed adapter into the pinned base; close to, not identical with, base + adapter: same next token at 10/10 generation positions and 97.4% of all positions on 10 real writer prompts, identical greedy payload on 9/10. Use the adapter to reproduce the paper",
+  "shard_sha256": {
+   "model-00001-of-00004.safetensors": "9fa685e6ad0867217e554c670feb58c73213f7afc57ec86b266b5647fdfadea3",
+   "model-00002-of-00004.safetensors": "d5647b5a96e958928d8fe23c8b42b3d1f7d3dde4f74041502fcf370b5bf4d306",
+   "model-00003-of-00004.safetensors": "c70bb7b2cf9e7bd3d4b898e2204624bb1ad663895ed6dc15a8f485b6d3d694ee",
+   "model-00004-of-00004.safetensors": "843e730d51e6b66109226bcc05082a5486c10e03323cc655ac8557bcd00dd570"
+  }
+ }
+}
