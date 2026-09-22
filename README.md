@@ -6,6 +6,8 @@ complete, replayable audit trail.** Source-available research software from Ammo
 
 ![The shift theatre: a sealed shift replayed tick by tick](docs/figures/shift_theatre.png)
 
+**Community:** questions and discussion on the [Ammonix Discord](https://discord.gg/gXbBFNttTq). Security issues: contact@ammonix.ai.
+
 ## What this is
 
 The agent runs a simulated waste-to-energy plant one 24-tick shift at a time. It routes or
