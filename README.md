@@ -31,9 +31,8 @@ persona lands 85.0% with 5 hard violations, and the oracle ceiling of the cohort
 
 ## The Ammonix family
 This repo accompanies *The Ammonix Industrial Control Room Agent: Learning to Operate
-Industrial Plants from Logged Experience* (https://doi.org/10.5281/zenodo.22871228). Siblings:
-[ammonix-rcm-agent](https://github.com/ammonix-ai/ammonix-rcm-agent) ·
-[ammonix-ecg-agent](https://github.com/ammonix-ai/ammonix-ecg-agent)
+Industrial Plants from Logged Experience* (https://doi.org/10.5281/zenodo.22871228). Sibling:
+[ammonix-rcm-agent](https://github.com/ammonix-ai/ammonix-rcm-agent)
 — see the Foundation paper (https://doi.org/10.5281/zenodo.22859098).
 
 ## License
