@@ -21,8 +21,8 @@ authors:
   - family-names: Stingele
     given-names: Francesca
     affiliation: Ammonix
-version: "1.1.0"
-date-released: "2026-09-28"
+version: "1.2.0"
+date-released: "2026-09-30"
 url: "https://github.com/ammonix-ai/ammonix-industrial-control-room-agent"
 license-url: "https://github.com/ammonix-ai/ammonix-industrial-control-room-agent/blob/main/LICENSE.md"
 preferred-citation:
