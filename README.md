@@ -30,11 +30,19 @@ lands **178 successes (89.0%) with 0 hard-safety violations**; the best rule-bas
 persona lands 85.0% with 5 hard violations, and the oracle ceiling of the cohort is 98.5%.
 
 ## The Ammonix family
-This repo accompanies *The Ammonix Industrial Control Room Agent: Learning to Operate
-Industrial Plants from Logged Experience* (https://doi.org/10.5281/zenodo.22871228). Siblings:
-[ammonix-rcm-agent](https://github.com/ammonix-ai/ammonix-rcm-agent) ·
-[ammonix-ecg-agent](https://github.com/ammonix-ai/ammonix-ecg-agent)
-— see the Foundation paper (https://doi.org/10.5281/zenodo.22859098).
+
+This is one of the companion releases of the Ammonix research program:
+
+| | |
+|---|---|
+| Foundation paper | https://doi.org/10.5281/zenodo.22859098 — the Ammonix method: retrospective harness optimization with verifiable rewards |
+| ECG agent | https://github.com/ammonix-ai/ammonix-ecg-agent · https://doi.org/10.5281/zenodo.22871232 |
+| RCM agent | https://github.com/ammonix-ai/ammonix-rcm-agent · https://doi.org/10.5281/zenodo.23078509 |
+| **Control-room agent (this repo)** | https://doi.org/10.5281/zenodo.22871228 — *The Ammonix Industrial Control Room Agent: Learning to Operate Industrial Plants from Logged Experience* |
+| Rocket launch agent | https://github.com/ammonix-ai/ammonix-rocket-launch |
+| Wild Departures | https://github.com/ammonix-ai/ammonix-wild-departures |
+| Ask Ammonix | coming later — a local application that answers questions about the architecture, its evidence and its limits, from authored, source-linked text |
+| Ammonix**Code** | coming later — our architecture-native coding agent, purpose-built to create systems based on the Ammonix architecture |
 
 ## License
 Released under the Ammonix Research License (`LICENSE.md`): research, educational, and
